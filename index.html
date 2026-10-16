@@ -809,7 +809,7 @@ body {
 .chat-channel-cover img{display:block;width:100%;height:100%;object-fit:cover;opacity:.94}
 .chat-channel-cover .no-cover{height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.22);font-size:30px}
 .chat-live-pill{position:absolute;top:9px;right:9px;display:inline-flex;align-items:center;gap:6px;border-radius:6px;padding:4px 7px;font-size:9px;font-weight:900;letter-spacing:.2px;color:#fff;background:rgba(45,52,48,.85);border:1px solid rgba(255,255,255,.12)}
-.chat-live-pill.on{background:rgba(180,15,42,.91);border-color:rgba(255,117,139,.45)}
+.chat-live-pill.on{background:rgba(0,190,85,.18);border-color:rgba(0,235,112,.65);color:#86ffc0}.chat-live-pill:not(.on){background:rgba(220,40,55,.18);border-color:rgba(255,80,90,.5);color:#ff9299}.chat-live-pill.on .live-dot{background:#22f58b;box-shadow:0 0 7px rgba(34,245,139,.8)}.chat-live-pill:not(.on) .live-dot{background:#ff4353;box-shadow:0 0 7px rgba(255,67,83,.7)}
 .chat-live-pill .live-dot{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.8)}
 .chat-channel-card-body{padding:10px 11px 11px}
 .chat-channel-name-row{display:flex;gap:9px;align-items:center;min-width:0}
@@ -837,6 +837,7 @@ body {
 .chat-room-extra .room-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
 .chat-room-extra .room-tag{border:1px solid rgba(83,252,24,.18);background:rgba(83,252,24,.04);color:#bdd8b6;border-radius:6px;padding:2px 6px;font-size:9px}
 .chat-room-header-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.chat-points-status{display:inline-flex;align-items:center;gap:5px;color:#f1cc70;font-size:10px;border:1px dashed rgba(241,204,112,.3);border-radius:7px;padding:4px 6px;white-space:nowrap}
 .chat-room-header-actions .btn{padding:8px 10px;font-size:11px}
 .chat-legend{display:flex;gap:8px;flex-wrap:wrap;padding:9px 13px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.12)}
 .chat-legend-item{display:inline-flex;align-items:center;gap:5px;font-size:9px;color:var(--muted);padding:5px 7px;border-radius:7px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08)}
@@ -888,7 +889,7 @@ body {
 #chatOAuthBtn{padding:8px 10px;font-size:10px;white-space:nowrap}
 @media(max-width:900px){.app-container.chat-wide{padding:12px 8px 30px}.chat-layout{grid-template-columns:minmax(230px,290px) minmax(0,1fr);gap:9px}.chat-library{padding:10px}.chat-room-header{padding:10px}.chat-message-area{padding:10px}.chat-room-header-actions .btn{padding:7px 8px}}
 @media(max-width:690px){.chat-layout{grid-template-columns:minmax(0,1fr)}.chat-library{min-height:auto}.chat-channel-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-height:380px;min-height:0}.chat-workspace{min-height:570px}.chat-message-area{height:52vh;max-height:none;min-height:330px}.chat-page-header-actions{width:100%;margin-right:0}.chat-online-indicator{flex:1}.chat-room-header{align-items:flex-start}.chat-room-header-actions{flex-direction:column}.chat-room-header-actions .btn{width:100%}}
-@media(max-width:430px){.app-container.chat-wide{padding:10px 5px 25px}.chat-channel-list{grid-template-columns:minmax(0,1fr)}.chat-add-channel{padding:8px}.chat-add-channel .btn{padding:10px 11px;font-size:11px}.chat-page-header .back-btn{padding:8px 10px}.chat-page-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.chat-stat{justify-content:space-between;min-width:0;padding:8px}.chat-room-avatar{width:40px;height:40px}.chat-room-title{font-size:13px}.chat-room-header-actions{display:none}.chat-composer{padding:9px}.chat-account-select{min-width:130px}.chat-send-btn{min-width:76px;padding:9px 10px;font-size:11px}.chat-composer-main textarea{min-height:42px}}
+@media(max-width:430px){.app-container.chat-wide{padding:10px 5px 25px}.chat-channel-list{grid-template-columns:minmax(0,1fr)}.chat-add-channel{padding:8px}.chat-add-channel .btn{padding:10px 11px;font-size:11px}.chat-page-header .back-btn{padding:8px 10px}.chat-page-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.chat-stat{justify-content:space-between;min-width:0;padding:8px}.chat-room-avatar{width:40px;height:40px}.chat-room-title{font-size:13px}.chat-room-header-actions{display:flex;flex-direction:column;gap:4px;align-items:stretch}.chat-room-header-actions .btn{white-space:nowrap}.chat-composer{padding:9px}.chat-account-select{min-width:130px}.chat-send-btn{min-width:76px;padding:9px 10px;font-size:11px}.chat-composer-main textarea{min-height:42px}}
 @media(prefers-reduced-motion:reduce){.chat-message{animation:none}}
 
     </style>
@@ -980,7 +981,7 @@ body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
   .app-container.chat-wide .chat-room-title{font-size:12px}
   .app-container.chat-wide .chat-room-subtitle{font-size:10px;line-height:1.4}
   .app-container.chat-wide .chat-room-details{gap:4px 8px;margin-top:3px;font-size:9px}
-  .app-container.chat-wide .chat-room-header-actions{display:none}
+  .app-container.chat-wide .chat-room-header-actions{display:flex;flex-direction:column;gap:4px;align-items:stretch}.chat-room-header-actions .btn{white-space:nowrap}
   .app-container.chat-wide .chat-player-panel{margin:4px 5px 5px}
   .app-container.chat-wide .chat-player-toolbar{padding:5px;gap:4px}
   .app-container.chat-wide .chat-player-title{width:100%;font-size:10px;margin-bottom:0}
@@ -1071,7 +1072,7 @@ body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
         <!-- ✅ الوضع العادي: بوتات محددة + رسالة واحدة -->
         <div id="qsNormalMode">
             <div class="modal-field">
-                <label><i class="fas fa-robot"></i> اختر البوتات</label>
+                <label><i class="fas fa-user-group"></i> اختر الحسابات</label>
                 <div class="quick-list" id="qsBotList" style="max-height:280px"></div>
             </div>
 
@@ -1558,7 +1559,7 @@ body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
             <div class="logo-img" style="background:url('./RedKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png') center/cover no-repeat;border-radius:50%;outline:none;border:2px solid #000;box-shadow:0 0 0 2px #000,0 0 8px rgba(83,252,24,.05)"></div>
             <div style="flex:1">
                 <div class="app-name">BadBoy Kick</div>
-                <div class="app-tagline">البوتات</div>
+                <div class="app-tagline">قائمة الحسابات</div>
             </div>
             <button class="btn btn-ghost btn-xs" onclick="openTransferModal()" title="نقل البيانات بين الأجهزة" style="flex-shrink:0"><i class="fas fa-share-nodes"></i></button>
             <button class="btn btn-ghost btn-xs token-check-btn" onclick="openTokenCheck()" title="فحص حالة التوكنات" aria-label="فحص حالة التوكنات" style="flex-shrink:0"><i class="fas fa-magnifying-glass"></i></button>
@@ -1603,13 +1604,14 @@ body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
             <button class="back-btn" onclick="closeChatPage()" title="العودة إلى الحسابات"><i class="fas fa-arrow-right"></i><span>رجوع</span></button>
             <div style="min-width:160px;flex:1">
                 <div class="chat-page-title">البثوث والشات المباشر</div>
-                <div class="chat-page-subtitle">قنواتك المضافة، معلومات البث الحالية، ورسائل حية من اتصال Kick الفعلي.</div>
+                <div class="chat-page-subtitle">قنواتك المضافة، معلومات البث الحالية، والمحادثات السابقة والجديدة.</div>
             </div>
             <div class="chat-page-header-actions">
-                <span class="chat-online-indicator" id="chatNetworkState"><span class="dot"></span><span id="chatNetworkLabel">غير متصل بالشات</span></span>
+                <span class="chat-online-indicator" id="chatNetworkState"><span class="dot"></span><span id="chatNetworkLabel">جاهز للاتصال</span></span>
                 <button class="btn btn-ghost btn-sm chat-mobile-picker-btn" onclick="chatToggleChannelPicker()" title="فتح قائمة القنوات"><i class="fas fa-list"></i> القنوات</button>
                 <button class="btn btn-ghost btn-sm" onclick="chatRefreshCatalog()" title="تحديث معلومات القنوات"><i class="fas fa-rotate"></i> تحديث القنوات</button>
-                <button class="btn btn-fire btn-sm" id="chatOAuthBtn" onclick="chatConnectOAuth()" title="تسجيل الدخول الرسمي من خلال OAuth آمن"><i class="fas fa-link"></i> <span id="chatOAuthBtnLabel">اتصال Kick الرسمي</span></button>
+                <button class="btn btn-ghost btn-sm" id="kickAccountsButton" onclick="kickOpenAccountsPanel()" title="إدارة الحسابات والبحث عن أي ملف Kick"><i class="fas fa-users"></i> <span>الحسابات والملفات <b id="kickAccountsCount">0</b></span></button>
+                <button class="btn btn-fire btn-sm" id="chatOAuthBtn" onclick="chatConnectOAuth()" title="إضافة حساب آخر"><i class="fas fa-user-plus"></i> <span id="chatOAuthBtnLabel">إضافة حساب Kick</span></button>
             </div>
         </div>
 
@@ -1660,12 +1662,14 @@ body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
                         <button type="button" class="btn btn-ghost btn-xs" onclick="chatCaptureScreenshot()" title="التقاط لقطة شاشة من تبويب المتصفح الذي يعرض البث"><i class="fas fa-camera"></i> لقطة شاشة</button>
                         <button type="button" class="btn btn-ghost btn-xs" onclick="chatReloadPlayer()" title="إعادة تحميل مشغل Kick"><i class="fas fa-rotate"></i> تحديث المشغل</button>
                         <button type="button" class="btn btn-ghost btn-xs" onclick="chatOpenPlayerTab()" title="فتح المشغل في تبويب مستقل"><i class="fas fa-arrow-up-right-from-square"></i> فتح مستقل</button>
+                        <label class="bbk-quality-control" id="bbkQualityControl" style="display:none"><span>الجودة</span><select id="chatHlsQuality" aria-label="جودة البث"><option value="-1">تلقائي</option></select></label>
                     </div>
                     <div class="chat-player-frame-wrap" id="chatPlayerFrameWrap">
                         <div class="chat-player-placeholder" id="chatPlayerPlaceholder"><i class="fas fa-tower-broadcast"></i><span>اختار قناة علشان يظهر مشغل Kick الحقيقي هنا.</span></div>
+                        <video id="chatHlsVideo" controls playsinline preload="none" style="display:none;width:100%;height:100%;aspect-ratio:16/9;background:#000" aria-label="مشغل البث المباشر"></video>
                         <iframe id="chatStreamPlayer" title="مشغل بث Kick" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="display:none"></iframe>
                     </div>
-                    <div class="chat-player-help">الجودة والصوت وملء الشاشة وأي تحكم زمني يتيحه البث يتم من عناصر المشغّل الرسمي نفسه. لا يتيح Kick للصفحة الخارجية التحكّم البرمجي في كل أزرار المشغّل عبر iframe.</div>
+                    <div class="chat-player-help">استخدم أدوات المشغّل المتاحة للتحكم في البث حسب ما يتيحه Kick.</div>
                 </section>
                 <div class="chat-legend" aria-label="دليل تمييز الرسائل">
                     <span class="chat-legend-item"><span class="chat-legend-dot own"></span>رسالة من حساب مضاف عندك</span>
@@ -1689,7 +1693,11 @@ body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
                 <form class="chat-composer" id="chatComposer" onsubmit="event.preventDefault(); chatSendComposer();">
                     <div class="chat-composer-top">
                         <label for="chatSendAccount"><i class="fas fa-user-shield"></i> الإرسال باسم</label>
-                        <select id="chatSendAccount" class="chat-account-select" aria-label="الحساب المستخدم للإرسال"></select>
+                        <select id="chatSendAccount" class="chat-account-select chat-account-select-native" aria-label="الحساب المستخدم للإرسال"></select>
+                        <div class="chat-account-picker" id="chatAccountPicker">
+                          <button class="chat-account-picker-button" type="button" id="chatAccountPickerButton" aria-haspopup="listbox" aria-expanded="false" onclick="chatToggleAccountPicker()"><span id="chatAccountPickerAvatar" class="chat-picker-avatar fallback"><i class="fas fa-user"></i></span><span class="chat-picker-selected-label" id="chatAccountPickerLabel">اختار حسابًا للإرسال</span><i class="fas fa-chevron-down chat-picker-chevron"></i></button>
+                          <div class="chat-account-picker-menu" id="chatAccountPickerMenu" role="listbox" aria-label="حسابات الإرسال"></div>
+                        </div>
                         <span class="chat-auth-state" id="chatAuthState"><i class="fas fa-circle-info"></i> اختر حسابًا للإرسال</span>
                         <button class="btn btn-ghost btn-xs" id="chatCopyTokenBtn" type="button" onclick="kickCopyOfficialToken()" style="display:none" title="نسخ توكن الوصول لحسابك الرسمي إلى الحافظة"><i class="fas fa-copy"></i> نسخ التوكن</button>
                     </div>
@@ -1697,11 +1705,11 @@ body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
                         <textarea id="chatComposerInput" maxlength="500" rows="1" placeholder="اكتب رسالتك للشات…" aria-label="نص رسالة الشات"></textarea>
                         <button class="btn btn-fire chat-send-btn" type="submit" id="chatSendBtn"><i class="fas fa-paper-plane"></i> إرسال</button>
                     </div>
-                    <div class="chat-composer-footer"><span>الرسالة تُرسل إلى قناة الشات المحددة فقط. الرد الحقيقي يتطلب توكن OAuth رسميًا بصلاحية <b>chat:write</b>.</span><span id="chatCharCount">0 / 500</span></div>
+                    <div class="chat-composer-footer"><span>اكتب رسالتك أو ردّ على رسالة من المحادثة.</span><span id="chatCharCount">0 / 500</span></div>
                 </form>
             </section>
         </div>
-        <div class="chat-page-note"><i class="fas fa-circle-info"></i>الجزء السابق يجمع سجل Kick المتاح والأرشيف المحلي الذي يحفظه التطبيق أثناء استخدامك. اسحب لأعلى لتحميل الأقدم. Kick لا يوفّر في الـAPI الرسمي أرشيفًا كاملًا لكل رسائل القناة عبر تاريخها؛ لذلك لن تظهر رسائل لم يوفّرها Kick ولم يكن التطبيق قد حفظها سابقًا. جودة البث والتحكم الزمني يعتمدان على مشغّل Kick وإتاحة البث لهذه الخيارات.</div>
+        <div class="chat-page-note"><i class="fas fa-circle-info"></i>اسحب لأعلى لمراجعة الرسائل السابقة المتاحة، والرسائل الجديدة هتظهر هنا تلقائيًا.</div>
     </div>
 
 </div>
@@ -2230,7 +2238,14 @@ async function verifyChannelComprehensive(slug, bot) {
 // ═══════════════════════════════════════
 //  إرسال رسالة
 // ═══════════════════════════════════════
+function setLegacyTokenSendState(token, state, error){
+    try { var b=Array.isArray(accounts)?accounts.find(function(x){return x&&x.token===token;}):null; if(!b)return;
+      b.activityState=state==='sending'?'sending':state==='error'?'error':'idle'; b.lastError=state==='error'?String(error||'فشل الإرسال'):''; b.activityUpdatedAt=Date.now();
+      if(typeof persist==='function')persist(); if(typeof renderBotList==='function')renderBotList(); if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();
+    } catch(e) {}
+}
 async function sendMessage(chatroomId, content, token, preferredProxy) {
+    setLegacyTokenSendState(token,'sending','');
     // ✅ الإصلاح: جرّب كل البروكسيات على كل الـ endpoints قبل إعلان أي فشل
     // المشكلة القديمة: البروكسي نفسه يردّ 403/429 والكود يفهمها كخطأ من كيك
     // (لا صلاحية / حظر) فيوقف الإرسال غلط — رغم إن الرسالة ممكن تبعت عادي
@@ -2254,7 +2269,7 @@ async function sendMessage(chatroomId, content, token, preferredProxy) {
                     method:'POST', token:token, timeout:10000,
                     preferredProxy:p, body:ep.body
                 });
-                if (r.res.ok) { return { success:true, proxyUsed:r.proxyUsed }; }
+                if (r.res.ok) { setLegacyTokenSendState(token, 'idle', ''); return { success:true, proxyUsed:r.proxyUsed }; }
                 var st = r.res.status;
                 if (st === 419) { await refreshXsrf(); continue; } // إعادة تحديث CSRF ومحاولة بروكسي آخر
                 // سجّل الحالة وجرّب بروكسي تاني — الردود دي ممكن تكون من البروكسي نفسه مش من كيك
@@ -2269,10 +2284,11 @@ async function sendMessage(chatroomId, content, token, preferredProxy) {
     }
 
     // ✅ خطأ حقيقي من كيك فقط لو أكد بروكسيان مختلفان على الأقل نفس الحالة
-    if (statusCounts[429] >= 2) throw new Error('حظر مؤقت');
-    if (statusCounts[403] >= 2) throw new Error('لا صلاحية');
-    if (statusCounts[401] >= 2) throw new Error('توكن منتهي');
-    if (lastErr instanceof TypeError || (lastErr && lastErr.message && lastErr.message.indexOf('Failed to fetch')>=0)) throw new Error('خطأ اتصال');
+    if (statusCounts[429] >= 2) { setLegacyTokenSendState(token,'error','حظر مؤقت / حد الإرسال'); throw new Error('حظر مؤقت'); }
+    if (statusCounts[403] >= 2) { setLegacyTokenSendState(token,'error','لا توجد صلاحية إرسال'); throw new Error('لا صلاحية'); }
+    if (statusCounts[401] >= 2) { setLegacyTokenSendState(token,'error','التوكن منتهي أو غير صالح'); throw new Error('توكن منتهي'); }
+    if (lastErr instanceof TypeError || (lastErr && lastErr.message && lastErr.message.indexOf('Failed to fetch')>=0)) { setLegacyTokenSendState(token,'error','خطأ اتصال'); throw new Error('خطأ اتصال'); }
+    setLegacyTokenSendState(token,'error',lastErr&&lastErr.message||'فشل الإرسال');
     throw lastErr || new Error('فشل الإرسال');
 }
 
@@ -3872,6 +3888,9 @@ async function verifyAndAdd() {
         }
 
         var bot = makeBot(token, displayName);
+        bot.profile_picture = data.profile_picture || data.profile_pic || (data.user && (data.user.profile_picture || data.user.profile_pic)) || '';
+        bot.user_id = data.user_id || data.id || (data.user && (data.user.user_id || data.user.id)) || null;
+        bot.lastError = ''; bot.activityState = 'idle';
         bot.workingProxy = pr.proxyUsed;
         accounts.push(bot);
         persist();
@@ -4188,7 +4207,7 @@ function updateBulkUI() {
             }
         }
     }
-    $('selectionInfo').innerHTML = 'المحدد: <span class="count">' + count + '</span> بوت' + (readyCount > 0 ? ' ('+readyCount+' جاهز)' : '');
+    $('selectionInfo').innerHTML = 'المحدد: <span class="count">' + count + '</span> حساب' + (readyCount > 0 ? ' ('+readyCount+' جاهز)' : '');
     var btnStart = $('btnBulkStart');
     if (_bulkRunActive) {
         btnStart.disabled = false;
@@ -6004,30 +6023,50 @@ setInterval(() => {
 
 
 <script>
-/* Kick OAuth 2.1 + PKCE. Client Secret exchange is handled by the local server, never by this HTML. */
+/* Kick  + PKCE. Client Secret exchange is handled by the local server, never by this HTML. */
 let KICK_REDIRECT_URI = location.origin + '/';
 let KICK_CLIENT_ID = '';
 let kickOAuthConfigLoaded = false;
+const KICK_OAUTH_ACCOUNTS_KEY = 'badboykick_oauth_accounts_v2';
+const KICK_ACTIVE_ACCOUNT_KEY = 'badboykick_active_oauth_account_v2';
+function kickReadOAuthAccounts(){try{const a=JSON.parse(sessionStorage.getItem(KICK_OAUTH_ACCOUNTS_KEY)||'[]');return Array.isArray(a)?a.filter(x=>x&&x.id&&x.access_token):[];}catch(e){return [];}}
+function kickWriteOAuthAccounts(list){sessionStorage.setItem(KICK_OAUTH_ACCOUNTS_KEY,JSON.stringify(list));}
+function kickActiveOAuthId(){return sessionStorage.getItem(KICK_ACTIVE_ACCOUNT_KEY)||'';}
+function kickGetOAuthAccount(id){const a=kickReadOAuthAccounts();return a.find(x=>String(x.id)===String(id||kickActiveOAuthId()))||null;}
+function kickSyncLegacyKeys(account){if(account){sessionStorage.setItem('kick_active_account_id',String(account.id));sessionStorage.setItem('kick_access_token',account.access_token||'');if(account.refresh_token)sessionStorage.setItem('kick_refresh_token',account.refresh_token);else sessionStorage.removeItem('kick_refresh_token');if(account.expires_at)sessionStorage.setItem('kick_token_expires_at',String(account.expires_at));else sessionStorage.removeItem('kick_token_expires_at');if(account.username)sessionStorage.setItem('kick_username',account.username);else sessionStorage.removeItem('kick_username');}else{['kick_active_account_id','kick_access_token','kick_refresh_token','kick_token_expires_at','kick_username'].forEach(k=>sessionStorage.removeItem(k));}}
+function kickActivateOAuthAccount(id){const a=kickGetOAuthAccount(id);if(!a)return false;sessionStorage.setItem(KICK_ACTIVE_ACCOUNT_KEY,String(a.id));kickSyncLegacyKeys(a);if(typeof chatRenderAccountOptions==='function'){chatRenderAccountOptions();const sel=document.getElementById('chatSendAccount');if(sel&&Array.from(sel.options).some(o=>o.value==='oauth:'+String(a.id)))sel.value='oauth:'+String(a.id);}if(typeof kickRenderAccountsPanel==='function')kickRenderAccountsPanel();if(typeof kickShowCopyTokenButton==='function')kickShowCopyTokenButton();return true;}
+function kickUpsertOAuthAccount(tokenData,user){const list=kickReadOAuthAccounts(),u=user||{},uid=String(u.user_id||u.id||u.streamer_id||u.username||('account-'+Date.now()));const account={id:uid, user_id:u.user_id||u.id||u.streamer_id||null, username:String(u.username||u.slug||u.name||'حساب Kick'), slug:String(u.username||u.slug||u.channel_slug||''), profile_picture:String(u.profile_picture||u.profile_pic||u.avatar||''), access_token:String(tokenData.access_token||''), refresh_token:String(tokenData.refresh_token||''), expires_at:tokenData.expires_in?Date.now()+Number(tokenData.expires_in)*1000:0, scope:String(tokenData.scope||''), saved_at:Date.now()};const idx=list.findIndex(x=>String(x.id)===uid);if(idx>=0)list[idx]={...list[idx],...account};else list.push(account);kickWriteOAuthAccounts(list);sessionStorage.setItem(KICK_ACTIVE_ACCOUNT_KEY,uid);kickSyncLegacyKeys(list.find(x=>String(x.id)===uid));return list.find(x=>String(x.id)===uid);}
+async function kickFetchUserForToken(token){const r=await fetch('/api/kick/me',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store'});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.message||'تم تسجيل الدخول لكن تعذر جلب بيانات الحساب.');return Array.isArray(d.data)?(d.data[0]||{}):(d.data||d.user||d||{});}
+async function kickEnrichUserForToken(token,user){let u=Object.assign({},user||{});try{const r=await fetch('/api/kick/profile',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store'});const d=await r.json().catch(()=>({}));if(r.ok){const c=d.channel||{},apiUser=d.user||{};const name=c.slug||c.username||apiUser.username||apiUser.slug||u.username||u.slug||u.name||'';u=Object.assign({},u,apiUser,{username:name||u.username||u.name||'',slug:c.slug||name||u.slug||'',channel_slug:c.slug||name||u.channel_slug||'',profile_picture:u.profile_picture||apiUser.profile_picture||c.profile_picture||(c.user&&c.user.profile_picture)||'',banner_picture:c.banner_picture||c.banner_image||'',channel_description:c.channel_description||'',broadcaster_user_id:c.broadcaster_user_id||u.user_id||apiUser.user_id||null});}}catch(e){console.warn('Could not enrich Kick account profile:',e);}return u;}
+async function kickEnsureAccountStore(){let list=kickReadOAuthAccounts();const old=sessionStorage.getItem('kick_access_token');if(!list.length&&old){try{const u=await kickFetchUserForToken(old);const a=kickUpsertOAuthAccount({access_token:old,refresh_token:sessionStorage.getItem('kick_refresh_token')||'',expires_in:Math.max(0,(Number(sessionStorage.getItem('kick_token_expires_at')||0)-Date.now())/1000)},u);list=kickReadOAuthAccounts();}catch(e){}}
+if(list.length&&!kickGetOAuthAccount(kickActiveOAuthId())){kickActivateOAuthAccount(list[0].id);}return list;}
+async function kickGetTokenForAccount(id,forceRefresh){let a=kickGetOAuthAccount(id);if(!a){await kickEnsureAccountStore();a=kickGetOAuthAccount(id);}if(!a){if(!id&&sessionStorage.getItem('kick_access_token'))return kickRefreshOfficialToken(false);throw new Error('اختار حساب Kick متصلًا أو أضف حسابًا جديدًا.');}const exp=Number(a.expires_at||0);if(!forceRefresh&&(!a.refresh_token||!exp||Date.now()<exp-60000))return a.access_token;if(!a.refresh_token)throw new Error('انتهت جلسة الحساب. سجّل الدخول مرة أخرى.');const r=await fetch('/api/kick/oauth/refresh',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({refresh_token:a.refresh_token})});const d=await r.json().catch(()=>({}));if(!r.ok||!d.access_token)throw new Error(d.error_description||d.message||'تعذّر تجديد جلسة Kick. سجّل الدخول مرة أخرى.');a.access_token=d.access_token;if(d.refresh_token)a.refresh_token=d.refresh_token;if(d.expires_in)a.expires_at=Date.now()+Number(d.expires_in)*1000;const list=kickReadOAuthAccounts();const ix=list.findIndex(x=>String(x.id)===String(a.id));if(ix>=0){list[ix]=a;kickWriteOAuthAccounts(list);}if(String(a.id)===String(kickActiveOAuthId()))kickSyncLegacyKeys(a);return a.access_token;}
+function kickRemoveOAuthAccount(id){const list=kickReadOAuthAccounts().filter(x=>String(x.id)!==String(id));kickWriteOAuthAccounts(list);if(String(id)===String(kickActiveOAuthId())){if(list.length){sessionStorage.setItem(KICK_ACTIVE_ACCOUNT_KEY,String(list[0].id));kickSyncLegacyKeys(list[0]);}else{sessionStorage.removeItem(KICK_ACTIVE_ACCOUNT_KEY);kickSyncLegacyKeys(null);}}if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();if(typeof kickRenderAccountsPanel==='function')kickRenderAccountsPanel();}
+
 function kickRandomString(bytes){const a=new Uint8Array(bytes);crypto.getRandomValues(a);return Array.from(a,x=>x.toString(16).padStart(2,'0')).join('');}
 function kickB64(buffer){let s='';for(const b of new Uint8Array(buffer))s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
 async function kickChallenge(v){return kickB64(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)));}
 function kickAuthMessage(message, kind){if(typeof toast==='function')toast(message,kind||'i');else alert(message);}
 async function kickLoadOAuthConfig(){
-  try{const r=await fetch('/api/kick/config',{cache:'no-store'});if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.message||'Vercel API is not configured');}const d=await r.json();KICK_CLIENT_ID=String(d.client_id||'');KICK_REDIRECT_URI=String(d.redirect_uri|| (location.origin+'/'));kickOAuthConfigLoaded=!!KICK_CLIENT_ID&&!!KICK_REDIRECT_URI;return kickOAuthConfigLoaded;}
+  try{const r=await fetch('/api/kick/config',{cache:'no-store'});if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.message||'تعذر بدء تسجيل الدخول.');}const d=await r.json();KICK_CLIENT_ID=String(d.client_id||'');KICK_REDIRECT_URI=String(d.redirect_uri|| (location.origin+'/'));kickOAuthConfigLoaded=!!KICK_CLIENT_ID&&!!KICK_REDIRECT_URI;return kickOAuthConfigLoaded;}
   catch(e){kickOAuthConfigLoaded=false;return false;}
 }
-async function kickOfficialLogin(){
+async function kickOfficialLogin(forceAdd){
+  if(forceAdd && kickReadOAuthAccounts().length>0){
+    var ready=confirm('لإضافة حساب Kick مختلف، افتح kick.com في تبويب آخر وسجّل الخروج من الحساب الحالي أو بدّل للحساب المطلوب، ثم ارجع هنا. الحسابات المضافة بالفعل ستبقى في قائمة التطبيق خلال جلسة المتصفح. هل جهّزت حساب Kick المطلوب؟');
+    if(!ready)return;
+  }
   if(location.protocol==='file:' || location.origin==='null'){
-    kickAuthMessage('افتح التطبيق من رابط Vercel المنشور، وليس كملف HTML محلي.', 'e');return;
+    kickAuthMessage('افتح التطبيق من رابط الموقع وجرّب مرة أخرى.', 'e');return;
   }
   if(!kickOAuthConfigLoaded)await kickLoadOAuthConfig();
-  if(!KICK_CLIENT_ID){kickAuthMessage('خادم Vercel غير مُعدّ بعد. أضف KICK_CLIENT_ID وKICK_CLIENT_SECRET وKICK_REDIRECT_URI في Environment Variables ثم أعد النشر.', 'e');return;}
+  if(!KICK_CLIENT_ID){kickAuthMessage('تعذر بدء تسجيل الدخول الآن. حاول مرة أخرى لاحقًا.', 'e');return;}
   let configuredOrigin='';
   try{configuredOrigin=new URL(KICK_REDIRECT_URI).origin;}catch(e){kickAuthMessage('رابط إعادة التوجيه في إعدادات Vercel غير صالح.','e');return;}
-  if(configuredOrigin!==location.origin){kickAuthMessage('رابط إعادة التوجيه لا يطابق نطاق التطبيق الحالي. اضبط KICK_REDIRECT_URI ليطابق رابط Vercel الحالي بالكامل، ثم أعد النشر.', 'e');return;}
+  if(configuredOrigin!==location.origin){kickAuthMessage('تعذر بدء تسجيل الدخول من هذا الرابط. افتح النسخة المنشورة وحاول مرة أخرى.', 'e');return;}
   const state=kickRandomString(24),verifier=kickRandomString(32);
   sessionStorage.setItem('kick_oauth_state',state);sessionStorage.setItem('kick_oauth_verifier',verifier);
-  const p=new URLSearchParams({response_type:'code',client_id:KICK_CLIENT_ID,redirect_uri:KICK_REDIRECT_URI,scope:'user:read channel:read chat:write',state,code_challenge:await kickChallenge(verifier),code_challenge_method:'S256'});
+  const p=new URLSearchParams({response_type:'code',client_id:KICK_CLIENT_ID,redirect_uri:KICK_REDIRECT_URI,scope:'user:read channel:read chat:write moderation:ban moderation:chat_message:manage kicks:read',state,code_challenge:await kickChallenge(verifier),code_challenge_method:'S256'});
   location.href='https://id.kick.com/oauth/authorize?'+p.toString();
 }
 async function kickHandleCallback(){
@@ -6036,17 +6075,29 @@ async function kickHandleCallback(){
   if(!state||state!==saved||!verifier){kickAuthMessage('تعذّر التحقق من طلب تسجيل الدخول. ابدأ الاتصال الرسمي مرة أخرى.','e');return;}
   try{
     if(!kickOAuthConfigLoaded)await kickLoadOAuthConfig();
-    if(!kickOAuthConfigLoaded)throw new Error('خادم Vercel غير مُعدّ لتبادل رمز OAuth بأمان؛ راجع متغيرات البيئة.');
+    if(!kickOAuthConfigLoaded)throw new Error('تعذر الاتصال بخدمة تسجيل الدخول. حاول مرة أخرى.');
     const r=await fetch('/api/kick/oauth/token',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({grant_type:'authorization_code',code:code,client_id:KICK_CLIENT_ID,redirect_uri:KICK_REDIRECT_URI,code_verifier:verifier})});
     const d=await r.json().catch(()=>({}));
-    if(!r.ok||!d.access_token)throw new Error(d.error_description||d.message||d.error||('فشل تبادل رمز OAuth (HTTP '+r.status+'). راجع Client ID وRedirect URL وصلاحيات التطبيق.'));
-    sessionStorage.setItem('kick_access_token',d.access_token);if(d.refresh_token)sessionStorage.setItem('kick_refresh_token',d.refresh_token);
-    if(d.expires_in)sessionStorage.setItem('kick_token_expires_at',String(Date.now()+Number(d.expires_in)*1000));
+    if(!r.ok||!d.access_token)throw new Error(d.error_description||d.message||d.error||('تعذر إكمال تسجيل الدخول. تأكد من إعدادات التطبيق وحاول مرة أخرى.'));
+    let verifiedUser={};try{verifiedUser=await kickFetchUserForToken(d.access_token);}catch(profileError){console.warn('OAuth user profile was not returned:',profileError);}
+    const savedAccount=kickUpsertOAuthAccount(d,verifiedUser);
+    // Enrich the visible account card in the background so slow profile endpoints don't delay OAuth success.
+    kickEnrichUserForToken(d.access_token,verifiedUser).then(function(enriched){
+      const list=kickReadOAuthAccounts(),at=list.findIndex(function(a){return String(a.id)===String(savedAccount.id);});
+      if(at<0)return;list[at].username=enriched.username||list[at].username;list[at].slug=enriched.slug||enriched.channel_slug||list[at].slug;
+      list[at].profile_picture=enriched.profile_picture||list[at].profile_picture;list[at].user_id=enriched.user_id||enriched.broadcaster_user_id||list[at].user_id;
+      list[at].banner_picture=enriched.banner_picture||list[at].banner_picture;list[at].channel_description=enriched.channel_description||list[at].channel_description;
+      kickWriteOAuthAccounts(list);if(String(savedAccount.id)===String(kickActiveOAuthId()))kickSyncLegacyKeys(list[at]);
+      if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();if(typeof kickRenderAccountsPanel==='function')kickRenderAccountsPanel();
+    }).catch(function(){ });
     sessionStorage.removeItem('kick_oauth_state');sessionStorage.removeItem('kick_oauth_verifier');
-    history.replaceState({},document.title,KICK_REDIRECT_URI);kickAuthMessage('تم تسجيل الدخول الرسمي من Kick بنجاح.','s');
-  }catch(e){console.error('Kick OAuth callback:',e);kickAuthMessage(String(e&&e.message||'تعذّر إكمال تسجيل الدخول الرسمي.'),'e');}
+    history.replaceState({},document.title,KICK_REDIRECT_URI);kickAuthMessage('تمت إضافة حساب Kick '+(savedAccount.username||'')+' بنجاح. تقدر تضيف حسابات أخرى من زر «حساباتي».','s');
+    if(typeof chatRenderAccountOptions==='function'){chatRenderAccountOptions();const accountSelect=document.getElementById('chatSendAccount');if(accountSelect&&Array.from(accountSelect.options).some(function(o){return o.value==='oauth:'+String(savedAccount.id);}))accountSelect.value='oauth:'+String(savedAccount.id);}if(typeof kickRenderAccountsPanel==='function')kickRenderAccountsPanel();
+  }catch(e){console.error('Kick OAuth callback:',e);kickAuthMessage('تعذر إكمال تسجيل الدخول. حاول مرة أخرى.','e');}
 }
-async function kickRefreshOfficialToken(force){
+async function kickRefreshOfficialToken(force, accountId){
+  const account=kickGetOAuthAccount(accountId||kickActiveOAuthId());
+  if(account)return await kickGetTokenForAccount(account.id,!!force);
   let token=sessionStorage.getItem('kick_access_token');
   const refresh=sessionStorage.getItem('kick_refresh_token');
   const expires=Number(sessionStorage.getItem('kick_token_expires_at')||0);
@@ -6059,15 +6110,30 @@ async function kickRefreshOfficialToken(force){
   if(d.expires_in)sessionStorage.setItem('kick_token_expires_at',String(Date.now()+Number(d.expires_in)*1000));
   return token;
 }
-function kickShowCopyTokenButton(){const b=document.getElementById('chatCopyTokenBtn');if(b)b.style.display=sessionStorage.getItem('kick_access_token')?'inline-flex':'none';}
-async function kickCopyOfficialToken(){
-  const token=sessionStorage.getItem('kick_access_token');if(!token){kickAuthMessage('سجّل الدخول الرسمي أولًا.','i');return;}
-  try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(token);}else{window.prompt('انسخ توكن الوصول بنفسك. لا تشاركه مع أي شخص:',token);return;}kickAuthMessage('تم نسخ توكن الوصول الرسمي. خليه خاص وما تبعتوش لأي حد.','s');}
-  catch(e){window.prompt('تعذّر النسخ التلقائي. انسخ التوكن يدويًا واحفظه بأمان:',token);}
+function kickShowCopyTokenButton(){
+  const b=document.getElementById('chatCopyTokenBtn');if(!b)return;
+  const select=document.getElementById('chatSendAccount'),value=select?String(select.value||''):'';
+  const selectedId=value.indexOf('oauth:')===0?value.slice(6):(value==='oauth'?kickActiveOAuthId():'');
+  const available=!!(selectedId?kickGetOAuthAccount(selectedId):sessionStorage.getItem('kick_access_token'));
+  b.style.display=available?'inline-flex':'none';
 }
+async function kickCopyOfficialToken(){
+  const select=document.getElementById('chatSendAccount'),value=select?String(select.value||''):'';
+  const selectedId=value.indexOf('oauth:')===0?value.slice(6):(value==='oauth'?kickActiveOAuthId():'');
+  let token='';
+  try{token=selectedId?await kickGetTokenForAccount(selectedId,false):(!value?sessionStorage.getItem('kick_access_token')||'':'');}
+  catch(e){kickAuthMessage('تعذر تجهيز التوكن. أعد تسجيل الدخول إلى الحساب المحدد.','e');return;}
+  if(!token){kickAuthMessage('اختار حساب Kick متصلًا أولًا.','i');return;}
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(token);kickAuthMessage('تم نسخ توكن الحساب المحدد. احتفظ به لنفسك.','s');}
+    else{window.prompt('انسخ التوكن يدويًا واحتفظ به في مكان آمن:',token);}
+  }catch(e){window.prompt('تعذّر النسخ التلقائي. انسخ التوكن يدويًا:',token);}
+}
+
 async function kickOfficialRefreshStatus(){
+  await kickEnsureAccountStore();
   let token=sessionStorage.getItem('kick_access_token');
-  if(!token){const b=document.getElementById('chatOAuthBtnLabel');if(b)b.textContent='اتصال Kick الرسمي';kickShowCopyTokenButton();return;}
+  if(!token){const b=document.getElementById('chatOAuthBtnLabel');if(b)b.textContent='اتصال Kick';kickShowCopyTokenButton();return;}
   try{
     token=await kickRefreshOfficialToken(false);
     let r=await fetch('/api/kick/me',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store'});
@@ -6076,12 +6142,13 @@ async function kickOfficialRefreshStatus(){
     if(!r.ok){if(r.status===401||r.status===403){sessionStorage.removeItem('kick_access_token');sessionStorage.removeItem('kick_refresh_token');sessionStorage.removeItem('kick_token_expires_at');}throw new Error(d.message||'تعذر التحقق من الجلسة الرسمية.');}
     const u=Array.isArray(d.data)?d.data[0]:(d.data||d.user||d);const username=u&&(u.username||u.name||u.slug);
     if(username&&typeof window.chatRememberOAuthUser==='function')window.chatRememberOAuthUser(username);
+    const active=kickGetOAuthAccount(kickActiveOAuthId());if(active){active.username=String(username||active.username||'Kick');active.user_id=u.user_id||u.id||u.streamer_id||active.user_id;active.slug=String(u.username||u.slug||active.slug||'');active.profile_picture=String(u.profile_picture||u.profile_pic||active.profile_picture||'');const all=kickReadOAuthAccounts();const ai=all.findIndex(x=>String(x.id)===String(active.id));if(ai>=0){all[ai]=active;kickWriteOAuthAccounts(all);kickSyncLegacyKeys(active);}}
     const label=document.getElementById('chatOAuthBtnLabel');if(label)label.textContent='متصل: '+String(username||'Kick');
-    const state=document.getElementById('chatAuthState');if(state){state.classList.add('ready');state.innerHTML='<i class="fas fa-circle-check"></i> حساب Kick الرسمي متصل';}
+    const state=document.getElementById('chatAuthState');if(state){state.classList.add('ready');state.innerHTML='<i class="fas fa-circle-check"></i> حساب Kick متصل متصل';}
     if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();kickShowCopyTokenButton();
   }catch(e){console.warn('Kick auth status:',e);kickShowCopyTokenButton();}
 }
-async function kickOfficialLogout(){sessionStorage.removeItem('kick_access_token');sessionStorage.removeItem('kick_refresh_token');sessionStorage.removeItem('kick_token_expires_at');sessionStorage.removeItem('kick_username');kickAuthMessage('تم فصل جلسة Kick المحلية.','i');kickShowCopyTokenButton();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();}
+async function kickOfficialLogout(){const id=kickActiveOAuthId();if(id)kickRemoveOAuthAccount(id);else kickSyncLegacyKeys(null);kickAuthMessage('تم فصل الحساب المحدد من هذه الجلسة.','i');kickShowCopyTokenButton();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();}
 document.addEventListener('DOMContentLoaded',async()=>{await kickLoadOAuthConfig();await kickHandleCallback();await kickOfficialRefreshStatus();});
 </script>
 
@@ -6389,7 +6456,6 @@ async function runTokenCheck(){
    - عرض القنوات من حسابات التطبيق + القنوات المضافة يدويًا.
    - قراءة الأحداث الحية من اتصال WebSocket إلى Pusher الخاص بـ Kick.
    - الإرسال العادي يستخدم منطق الإرسال الموجود بالتطبيق.
-   - الردود الحقيقية تستخدم Kick Public API مع chat:write و reply_to_message_id.
    ============================================================ */
 (function(){
   'use strict';
@@ -6410,6 +6476,7 @@ async function runTokenCheck(){
   var chatConnectGeneration = 0;
   var chatMessageItems = [];
   var chatSeenIds = new Set();
+  var chatRoomProbeKeys = new Set();
   var chatReplyTarget = null;
   var chatManualBusy = false;
   var chatRefreshBusy = false;
@@ -6417,6 +6484,7 @@ async function runTokenCheck(){
   var chatMessageCount = 0;
   var chatHistoryChannelId = null;
   var chatHistoryCursor = null;
+  var chatHistorySource = 'auto';
   var chatHistoryLoading = false;
   var chatHistoryStarted = false;
   var chatHistoryCanLoadMore = false;
@@ -6430,6 +6498,10 @@ async function runTokenCheck(){
   var chatArchiveLoadingChannels = new Set();
   var chatPlayerActiveSlug = null;
   var chatPlayerMuted = false;
+  window.chatMessageItemsForProfile = chatMessageItems;
+  Object.defineProperty(window,'__badboyActiveBroadcasterId',{configurable:true,get:function(){return chatActiveMeta&&chatActiveMeta.broadcasterUserId||null;}});
+  Object.defineProperty(window,'__badboyActiveChannelSlug',{configurable:true,get:function(){return chatActiveSlug||null;}});
+  Object.defineProperty(window,'__badboyChatItems',{configurable:true,get:function(){return chatMessageItems;}});
 
   function chatOpenArchiveDB(){
     if(chatArchiveDBPromise) return chatArchiveDBPromise;
@@ -6556,6 +6628,7 @@ async function runTokenCheck(){
       language:String(chatField(live || {},['language','language_code']) || chatField(d,['language','language_code']) || ''),
       tags:(Array.isArray(chatField(live || {},['tags','custom_tags']))?chatField(live || {},['tags','custom_tags']):Array.isArray(d.custom_tags)?d.custom_tags:[]).filter(function(t){return typeof t==='string' && t.trim();}).slice(0,12),
       isMature:!!chatField(live || {},['is_mature','has_mature_content']),
+      playbackUrl:chatImage(chatField(live || {},['playback_url','playbackUrl','stream_url']) || chatField(d,['playback_url','streamer_channel.playback_url','livestream.playback_url','live_stream.playback_url']) || ''),
       streamId:chatField(live || {},['id','livestream_id']) || null, fetchedAt:Date.now()
     };
   }
@@ -6602,13 +6675,14 @@ async function runTokenCheck(){
     var wrap=$('chatNetworkState'), txt=$('chatNetworkLabel'); if(!wrap || !txt) return;
     wrap.classList.remove('live','wait'); if(state==='live') wrap.classList.add('live'); else if(state==='wait') wrap.classList.add('wait');
     txt.textContent=label;
+    if(window.BBKTools)window.BBKTools.track('اتصال الشات',label+' · '+String(chatActiveSlug||''));
   }
   function chatProfileHTML(meta){
-    var url=meta && chatImage(meta.profilePicture);
+    var url=meta && !(window.BBKDataSaver&&window.BBKDataSaver.on('hideUserImages')) && chatImage(meta.profilePicture);
     return url ? '<img class="chat-channel-avatar" loading="lazy" decoding="async" src="'+chatEscAttr(url)+'" alt="" referrerpolicy="no-referrer">' : '<span class="chat-channel-avatar-fallback"><i class="fas fa-user"></i></span>';
   }
   function chatCoverHTML(meta){
-    var url=meta && chatImage(meta.isLive ? meta.thumbnail : (meta.thumbnail || meta.profilePicture));
+    var url=meta && !(window.BBKDataSaver&&window.BBKDataSaver.on('hideChannelImages')) && chatImage(meta.isLive ? meta.thumbnail : (meta.thumbnail || meta.profilePicture));
     return '<div class="chat-channel-cover">'+(url ? '<img loading="lazy" decoding="async" fetchpriority="low" src="'+chatEscAttr(url)+'" alt="" referrerpolicy="no-referrer">' : '<div class="no-cover"><i class="fas fa-tower-broadcast"></i></div>')+'<span class="chat-live-pill '+(meta && meta.isLive?'on':'')+'">'+(meta && meta.isLive?'<span class="live-dot"></span>مباشر':'غير مباشر')+'</span></div>';
   }
   function chatRenderCatalog(){
@@ -6627,7 +6701,7 @@ async function runTokenCheck(){
       var origin=e.manual ? '<span><i class="fas fa-bookmark"></i>مضافة يدويًا</span>' : '<span><i class="fas fa-user-check"></i>من الحسابات</span>';
       html+='<article class="chat-channel-card '+(isActive?'active':'')+'" tabindex="0" role="button" aria-label="فتح شات '+chatEscAttr(e.slug)+'" onclick="openChatChannel(\''+chatEscAttr(e.slug)+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openChatChannel(\''+chatEscAttr(e.slug)+'\')}">';
       html+=chatCoverHTML(m);
-      html+='<div class="chat-channel-card-body"><div class="chat-channel-name-row">'+chatProfileHTML(m)+'<div class="chat-channel-text"><div class="chat-channel-title">'+escH(name)+'</div><div class="chat-channel-slug">@'+escH(e.slug)+'</div></div></div>';
+      html+='<div class="chat-channel-card-body"><div class="chat-channel-name-row">'+chatProfileHTML(m)+'<div class="chat-channel-text"><button type="button" class="chat-channel-title chat-channel-profile-link" onclick="event.stopPropagation();kickViewPublicProfileBySlug(\''+chatEscAttr(e.slug)+'\')" title="عرض الملف الشخصي">'+escH(name)+'</button><div class="chat-channel-slug">@'+escH(e.slug)+'</div></div></div>';
       var language=m.language ? '<span><i class="fas fa-language"></i>'+escH(m.language)+'</span>' : '';
       var mature=m.isMature ? '<span><i class="fas fa-triangle-exclamation"></i>محتوى ناضج</span>' : '';
       var description=m.description ? '<div class="chat-channel-stream-title" style="opacity:.68;font-size:10px;margin-top:5px">'+escH(m.description)+'</div>' : '';
@@ -6637,6 +6711,7 @@ async function runTokenCheck(){
     list.innerHTML=html;
   }
   function chatRenderRoomHeader(){
+    chatUpdateMessageDividers();
     var h=$('chatRoomHeader'); if(!h) return;
     var meta=chatActiveMeta || {}, slug=chatActiveSlug;
     if(!slug){
@@ -6644,50 +6719,88 @@ async function runTokenCheck(){
       var extra=$('chatRoomMoreInfo');if(extra){extra.innerHTML='';extra.style.display='none';}
       return;
     }
-    var profile=chatImage(meta.profilePicture), title=meta.title || (meta.isLive?'بث مباشر':'قناة Kick'), category=meta.category || 'التصنيف غير متاح', viewers=meta.viewerCount!=null?chatFormatNumber(meta.viewerCount):'غير متاح';
+    var profile=!(window.BBKDataSaver&&window.BBKDataSaver.on('hideUserImages'))&&chatImage(meta.profilePicture), title=meta.title || (meta.isLive?'بث مباشر':'قناة Kick'), category=meta.category || 'التصنيف غير متاح', viewers=meta.viewerCount!=null?chatFormatNumber(meta.viewerCount):'غير متاح';
     var img=profile ? '<img class="chat-room-avatar" src="'+chatEscAttr(profile)+'" loading="lazy" decoding="async" alt="" referrerpolicy="no-referrer">' : '<div class="chat-room-avatar" style="display:flex;align-items:center;justify-content:center;color:var(--accent)"><i class="fas fa-user"></i></div>';
-    h.innerHTML=img+'<div class="chat-room-title-wrap"><div class="chat-room-title">'+escH(meta.username || slug)+' <span class="chat-live-pill '+(meta.isLive?'on':'')+'" style="position:static;vertical-align:middle">'+(meta.isLive?'● مباشر':'غير مباشر')+'</span></div><div class="chat-room-subtitle">'+escH(title)+'</div><div class="chat-room-details"><span><i class="fas fa-at"></i>'+escH(slug)+'</span><span><i class="fas fa-gamepad"></i>'+escH(category)+'</span><span><i class="fas fa-eye"></i>'+viewers+' مشاهد</span>'+(meta.language?'<span><i class="fas fa-language"></i>'+escH(meta.language)+'</span>':'')+(meta.startedAt?'<span><i class="fas fa-clock"></i>'+escH(chatFormatTime(meta.startedAt))+'</span>':'')+'</div></div><div class="chat-room-header-actions"><button class="btn btn-ghost" onclick="chatReconnectActive()" title="إعادة اتصال الشات"><i class="fas fa-plug"></i> اتصال</button><button class="btn btn-ghost" onclick="window.open(\'https://kick.com/'+chatEscAttr(slug)+'\',\'_blank\',\'noopener\')" title="فتح القناة على Kick"><i class="fas fa-arrow-up-right-from-square"></i></button></div>';
+    h.innerHTML=img+'<div class="chat-room-title-wrap"><div class="chat-room-title">'+escH(meta.username || slug)+' <span class="chat-live-pill '+(meta.isLive?'on':'')+'" style="position:static;vertical-align:middle">'+(meta.isLive?'● مباشر':'غير مباشر')+'</span></div><div class="chat-room-subtitle">'+escH(title)+'</div><div class="chat-room-details"><span><i class="fas fa-at"></i>'+escH(slug)+'</span><span><i class="fas fa-gamepad"></i>'+escH(category)+'</span><span><i class="fas fa-eye"></i>'+viewers+' مشاهد</span>'+(meta.language?'<span><i class="fas fa-language"></i>'+escH(meta.language)+'</span>':'')+(meta.startedAt?'<span><i class="fas fa-clock"></i>'+escH(chatFormatTime(meta.startedAt))+'</span>':'')+'<span class="chat-points-status" title="رصيد النقاط غير متاح حاليًا"><i class="fas fa-coins"></i> نقاطك: غير متاحة حاليًا</span></div></div><div class="chat-room-header-actions"><button class="btn btn-ghost" onclick="kickOpenActiveChannelProfile()" title="عرض ملف القناة"><i class="fas fa-id-card"></i> الملف</button><button class="btn btn-ghost" onclick="chatReconnectActive()" title="إعادة اتصال الشات"><i class="fas fa-plug"></i> اتصال</button><button class="btn btn-ghost" onclick="window.open(\'https://kick.com/'+chatEscAttr(slug)+'\',\'_blank\',\'noopener\')" title="فتح القناة على Kick"><i class="fas fa-arrow-up-right-from-square"></i></button></div>';
     var extra=$('chatRoomMoreInfo'); if(extra){
       var parts=[]; if(meta.description)parts.push('<div>'+escH(meta.description)+'</div>');
-      if(meta.streamId)parts.push('<div>معرّف البث: '+escH(meta.streamId)+'</div>');
-      if(meta.channelId)parts.push('<div>معرّف القناة: '+escH(meta.channelId)+'</div>');
+      
       if(meta.isMature)parts.push('<div>تنبيه القناة: محتوى ناضج</div>');
       if(Array.isArray(meta.tags)&&meta.tags.length)parts.push('<div class="room-tags">'+meta.tags.map(function(t){return '<span class="room-tag">'+escH(t)+'</span>';}).join('')+'</div>');
       extra.innerHTML=parts.join('');extra.style.display=parts.length?'block':'none';
     }
   }
+  function chatAccountAvatarMarkup(account){
+    var url=!(window.BBKDataSaver&&window.BBKDataSaver.on('hideUserImages'))&&chatImage(account&&(account.profile_picture||account.profilePicture||account.avatar||''));
+    if(url)return '<img class="chat-picker-avatar" src="'+chatEscAttr(url)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">';
+    var initial=String(account&&(account.username||account.slug)||'K').trim().charAt(0).toUpperCase()||'K';
+    return '<span class="chat-picker-avatar fallback">'+escH(initial)+'</span>';
+  }
+  function chatResolveAccountForValue(value){
+    value=String(value||'');
+    if(value.indexOf('oauth:')===0){var id=value.slice(6);return {kind:'oauth',id:id,account:typeof kickGetOAuthAccount==='function'?kickGetOAuthAccount(id):null};}
+    if(value==='oauth'){return {kind:'oauth',id:typeof kickActiveOAuthId==='function'?kickActiveOAuthId():'',account:typeof kickGetOAuthAccount==='function'?kickGetOAuthAccount(kickActiveOAuthId()):null};}
+    if(value.indexOf('account:')===0){var idNum=Number(value.slice(8));return {kind:'token',id:idNum,account:Array.isArray(accounts)?accounts.find(function(a){return a&&Number(a.id)===idNum;}):null};}
+    return null;
+  }
+  function chatUpdateAccountPicker(){
+    var select=$('chatSendAccount'),button=$('chatAccountPickerButton'),label=$('chatAccountPickerLabel'),avatar=$('chatAccountPickerAvatar'),menu=$('chatAccountPickerMenu');
+    if(!select||!button||!label||!avatar||!menu)return;
+    var current=chatResolveAccountForValue(select.value),a=current&&current.account;
+    if(a){label.textContent=String(a.username||a.slug||'حساب Kick')+' — '+(current.kind==='oauth'?'حساب متصل':'حساب مضاف');var avatarMarkup=chatAccountAvatarMarkup(a).replace('class="chat-picker-avatar','id="chatAccountPickerAvatar" class="chat-picker-avatar');avatar.outerHTML=avatarMarkup;}
+    else{label.textContent='اختار حسابًا للإرسال';avatar.className='chat-picker-avatar fallback';avatar.innerHTML='<i class="fas fa-user"></i>';}
+    var items=[];
+    var oas=typeof kickReadOAuthAccounts==='function'?kickReadOAuthAccounts():[];
+    oas.forEach(function(ac){var value='oauth:'+String(ac.id);items.push('<button type="button" role="option" aria-selected="'+(select.value===value)+'" class="chat-account-choice '+(select.value===value?'selected':'')+'" data-account-value="'+chatEscAttr(value)+'">'+chatAccountAvatarMarkup(ac)+'<span class="chat-account-choice-copy"><b>'+escH(ac.username||('حساب '+ac.id))+'</b><small>حساب متصل</small></span><span class="chat-account-choice-status '+(ac.last_error?'failed':ac.activity_state==='sending'?'sending':'idle')+'" title="حالة الحساب"></span></button>');});
+    if(Array.isArray(accounts))accounts.forEach(function(ac){if(!ac||!ac.token)return;var value='account:'+String(ac.id);items.push('<button type="button" role="option" aria-selected="'+(select.value===value)+'" class="chat-account-choice '+(select.value===value?'selected':'')+'" data-account-value="'+chatEscAttr(value)+'">'+chatAccountAvatarMarkup(ac)+'<span class="chat-account-choice-copy"><b>'+escH(ac.username||('حساب '+ac.id))+'</b><small>حساب مضاف</small></span><span class="chat-account-choice-status '+(ac.lastError?'failed':ac.isSending?'sending':'idle')+'" title="حالة الحساب"></span></button>');});
+    menu.innerHTML=items.length?items.join(''):'<div class="chat-account-choice-empty">أضف حسابًا للبدء.</div>';
+    button.setAttribute('aria-expanded',menu.classList.contains('open')?'true':'false');
+  }
+  window.chatToggleAccountPicker=function(){var menu=$('chatAccountPickerMenu'),button=$('chatAccountPickerButton');if(!menu||!button)return;menu.classList.toggle('open');button.setAttribute('aria-expanded',menu.classList.contains('open')?'true':'false');};
+  window.chatChooseSendAccount=function(value){var select=$('chatSendAccount');if(!select)return;if(Array.from(select.options).some(function(o){return o.value===value;})){select.value=value;select.dispatchEvent(new Event('change',{bubbles:true}));}var menu=$('chatAccountPickerMenu'),button=$('chatAccountPickerButton');if(menu)menu.classList.remove('open');if(button)button.setAttribute('aria-expanded','false');chatUpdateAccountPicker();};
   function chatRenderAccountOptions(){
     var select=$('chatSendAccount'); if(!select) return;
-    var old=select.value, oauth=!!sessionStorage.getItem('kick_access_token');
+    var old=select.value, oauthAccounts=typeof kickReadOAuthAccounts==='function'?kickReadOAuthAccounts():[], legacy=!!sessionStorage.getItem('kick_access_token');
     var html='';
-    if(oauth) html+='<option value="oauth">حساب Kick الرسمي (ردود فعلية)</option>';
+    oauthAccounts.forEach(function(a,i){html+='<option value="oauth:'+chatEscAttr(a.id)+'">'+escH(a.username||('حساب '+(i+1)))+' — حساب متصل</option>';});
+    if(!oauthAccounts.length&&legacy) html+='<option value="oauth">حساب Kick متصل</option>';
     if(Array.isArray(accounts)) for(var i=0;i<accounts.length;i++){
       var b=accounts[i]; if(!b || !b.token) continue;
-      html+='<option value="account:'+String(b.id)+'">'+escH(b.username || ('حساب '+(i+1)))+'</option>';
+      html+='<option value="account:'+String(b.id)+'">'+escH(b.username || ('حساب '+(i+1)))+' — حساب مضاف</option>';
     }
     if(!html) html='<option value="">أضف حسابًا أو اتصل بـKick الرسمي</option>';
     select.innerHTML=html;
     if(Array.from(select.options).some(function(o){return o.value===old;})) select.value=old;
-    else if(oauth) select.value='oauth';
-    else if(select.options.length) select.selectedIndex=0;
-    var label=$('chatOAuthBtnLabel'); if(label) label.textContent=oauth?'Kick الرسمي متصل':'اتصال Kick الرسمي';
+    else if(oauthAccounts.length) select.value='oauth:'+String(kickActiveOAuthId()||oauthAccounts[0].id);
+    else if(legacy)select.value='oauth';
+    else if(select.options.length)select.selectedIndex=0;
+    var label=$('chatOAuthBtnLabel'); if(label) label.textContent='إضافة حساب ('+oauthAccounts.length+')';
+    var count=$('kickAccountsCount');if(count)count.textContent=String(oauthAccounts.length+(Array.isArray(accounts)?accounts.length:0));
     var state=$('chatAuthState'); if(state){
-      state.classList.toggle('ready',oauth);
-      state.innerHTML=oauth?'<i class="fas fa-circle-check"></i> الردود الرسمية مفعّلة':'<i class="fas fa-circle-info"></i> الردود الحقيقية تحتاج chat:write';
+      state.classList.toggle('ready',oauthAccounts.length>0||legacy);
+      state.innerHTML=(oauthAccounts.length||legacy)?'<i class="fas fa-circle-check"></i> '+(oauthAccounts.length+(Array.isArray(accounts)?accounts.length:0))+' حساب متاح':'<i class="fas fa-circle-info"></i> أضف حسابًا للبدء في إرسال الرسائل';
     }
+    chatUpdateAccountPicker();
+    if(typeof kickRenderAccountsPanel==='function')kickRenderAccountsPanel();
   }
   function chatUpdateChars(){ var i=$('chatComposerInput'), c=$('chatCharCount'); if(i&&c) c.textContent=Array.from(i.value).length+' / 500'; }
   function chatUpdateStats(){ var e=$('chatStatMessages'); if(e) e.textContent=String(chatMessageCount); }
   function chatResetMessageArea(label){
     var area=$('chatMessages');if(!area)return;
-    area.innerHTML='<div class="chat-archive-block"><div class="chat-archive-divider"><span>رسائل من بثوث / أوقات سابقة</span><span id="chatArchiveCount">0</span></div><div class="chat-archive-empty" id="chatArchiveEmpty">'+chatEscAttr(label||'جاري تحميل الأرشيف المحلي وسجل Kick المتاح…')+'</div><div id="chatArchiveMessages"></div></div><div class="chat-live-divider"><span>رسائل البث الحالي — من بدايته حتى الآن</span></div><div id="chatLiveMessages"></div><div class="chat-message-empty"><i class="fas fa-comments"></i>جاري الاتصال بالشات وانتظار الرسائل الجديدة.</div>';
+    area.innerHTML='<div class="chat-archive-block"><div class="chat-archive-divider"><span>رسائل من أوقات سابقة</span><span id="chatArchiveCount">0</span></div><div class="chat-archive-empty" id="chatArchiveEmpty">'+chatEscAttr(label||'جاري تحميل الرسائل السابقة…')+'</div><div id="chatArchiveMessages"></div></div><div class="chat-live-divider"><span>أحدث الرسائل المتاحة للقناة</span></div><div id="chatLiveMessages"></div><div class="chat-message-empty"><i class="fas fa-comments"></i>جاري تحميل المحادثة…</div>'; 
   }
   function chatRemoveEmptyPlaceholder(){ var area=$('chatMessages'); if(!area) return; area.querySelectorAll('.chat-message-empty').forEach(function(n){n.remove();}); }
   function chatSetEmpty(text){
     var area=$('chatMessages');if(!area)return;
     if(!area.querySelector('#chatArchiveMessages')||!area.querySelector('#chatLiveMessages'))chatResetMessageArea(text);
-    var empty=area.querySelector('.chat-message-empty');if(!empty){empty=document.createElement('div');empty.className='chat-message-empty';area.appendChild(empty);}
+    var existing=area.querySelector('.chat-message-empty');
+    if(area.querySelector('.chat-message')){if(existing)existing.remove();return;}
+    var empty=existing;if(!empty){empty=document.createElement('div');empty.className='chat-message-empty';area.appendChild(empty);}
     empty.textContent=String(text||'');
+  }
+  function chatUpdateMessageDividers(){
+    var current=document.querySelector('.chat-live-divider span');
+    if(current)current.textContent=chatActiveMeta&&chatActiveMeta.isLive?'رسائل البث الحالي — من بدايته حتى الآن':'أحدث الرسائل المتاحة للقناة';
   }
   function chatUpdateMessageScroll(){
     var area=$('chatMessages'); if(!area) return;
@@ -6707,6 +6820,7 @@ async function runTokenCheck(){
     var ownNames=[];
     if(Array.isArray(accounts)) for(var i=0;i<accounts.length;i++) if(accounts[i]&&accounts[i].username) ownNames.push(String(accounts[i].username).toLowerCase());
     var officialName=sessionStorage.getItem('kick_username'); if(officialName) ownNames.push(officialName.toLowerCase());
+    if(typeof kickReadOAuthAccounts==='function')kickReadOAuthAccounts().forEach(function(a){if(a.username)ownNames.push(String(a.username).toLowerCase());});
     var isOwn=ownNames.indexOf(username.toLowerCase())>=0;
     return {sender:sender,identity:identity,username:username,isMod:isMod,isVerified:isVerified,isOwn:isOwn,badges:badges};
   }
@@ -6723,6 +6837,7 @@ async function runTokenCheck(){
     var source=String(text==null?'':text), re=/\[emote:(\d+):([^\]]+)\]/g, last=0, match;
     while((match=re.exec(source))){
       if(match.index>last)target.appendChild(document.createTextNode(source.slice(last,match.index)));
+      if(window.BBKDataSaver&&window.BBKDataSaver.on('hideEmotes')){target.appendChild(document.createTextNode(match[2]));last=re.lastIndex;continue;}
       var img=document.createElement('img');img.className='kick-native-emote';img.loading='lazy';img.decoding='async';img.alt=match[2];img.title=match[2];img.referrerPolicy='no-referrer';img.src='https://files.kick.com/emotes/'+encodeURIComponent(match[1])+'/fullsize';
       img.onerror=function(){var fallback=document.createElement('span');fallback.className='kick-native-emote broken';fallback.textContent=this.alt||'ستيكر';this.replaceWith(fallback);};
       target.appendChild(img);last=re.lastIndex;
@@ -6734,11 +6849,17 @@ async function runTokenCheck(){
     source=source||'live';
     var info=chatRawMessageDetails(raw),data=info.data,id=info.id;
     if(!data||typeof data!=='object')return false;
-    if(id&&chatSeenIds.has(String(id)))return false;
-    if(id)chatSeenIds.add(String(id));
     var role=chatDetectRole(data),text=String(data.content!=null?data.content:(typeof data.message==='string'?data.message:(data.text!=null?data.text:''))),reply=chatGetReplyContext(data);
+    if(id&&chatSeenIds.has(String(id))){
+      var alreadyVisible=Array.from(document.querySelectorAll('.chat-message[data-chat-message-id]')).some(function(n){return String(n.dataset.chatMessageId)===String(id);});
+      if(alreadyVisible)return false;
+      // Repair a stale seen-id from a previously failed DOM insert instead of suppressing a message that is not visible.
+      chatSeenIds.delete(String(id));
+    }
+    // If Kick echoes a message after the POST API accepted it, reconcile the optimistic confirmed row instead of duplicating it.
+    if(id){for(var echoI=chatMessageItems.length-1;echoI>=0;echoI--){var prior=chatMessageItems[echoI];if(prior&&prior.source==='confirmed-send'&&prior.author.toLowerCase()===String(role.username).toLowerCase()&&prior.text===text&&Math.abs((prior.timestamp||0)-(info.timestamp||Date.now()))<30000){var oldId=prior.id;prior.id=String(id);prior.raw=data;prior.source='live';chatSeenIds.delete(String(oldId));chatSeenIds.add(String(id));var existingNode=document.querySelector('[data-chat-message-id=\"'+String(oldId).replace(/\"/g,'')+'\"]');if(existingNode){existingNode.dataset.chatMessageId=String(id);existingNode.classList.remove('is-confirmed-send');existingNode.classList.add('is-live-now');var acceptedBadge=existingNode.querySelector('.chat-role-badge.accepted');if(acceptedBadge)acceptedBadge.remove();}chatPersistRaw(chatActiveSlug,raw);return false;}}}
     var meta=role.identity||{},sender=role.sender||{},color=meta.color||sender.color||'';
-    var pfp=chatImage(sender.profile_picture||sender.profile_pic||sender.avatar||sender.profilePicture||'');
+    var pfp=!(window.BBKDataSaver&&window.BBKDataSaver.on('hideUserImages'))&&chatImage(sender.profile_picture||sender.profile_pic||sender.avatar||sender.profilePicture||'');
     var rawTime=data.created_at||data.timestamp||data.sent_at||data.createdAt||null;
     var messageDate=chatParseDateValue(rawTime)||new Date();
     var time=rawTime?messageDate.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'}):'وقت غير متاح';
@@ -6748,17 +6869,23 @@ async function runTokenCheck(){
     if(source!=='live' && info.timestamp>0 && streamStart && info.timestamp>=streamStart.getTime())source='current-history';
     var ownNames=[];if(Array.isArray(accounts))for(var oi=0;oi<accounts.length;oi++)if(accounts[oi]&&accounts[oi].username)ownNames.push(String(accounts[oi].username).toLowerCase());
     var officialName=sessionStorage.getItem('kick_username');if(officialName)ownNames.push(officialName.toLowerCase());
+    if(typeof kickReadOAuthAccounts==='function')kickReadOAuthAccounts().forEach(function(a){if(a.username)ownNames.push(String(a.username).toLowerCase());});
     var replyToOwn=!!(reply&&reply.sender&&ownNames.indexOf(String(reply.sender).toLowerCase())>=0);
     var msg={id:String(id||('session-'+Date.now()+'-'+chatMessageItems.length)),raw:data,text:text,author:role.username,reply:reply,replyToOwn:replyToOwn,isOwn:role.isOwn,isMod:role.isMod,profile:pfp,time:time,timestamp:messageDate.getTime(),source:source};
-    var index=chatMessageItems.length;chatMessageItems.push(msg);chatMessageCount++;
     var area=$('chatMessages');if(!area)return false;
     if(!area.querySelector('#chatArchiveMessages')||!area.querySelector('#chatLiveMessages'))chatResetMessageArea();
+    var archived=source!=='live'&&source!=='current-history'&&source!=='confirmed-send';
+    var target=$(archived?'chatArchiveMessages':'chatLiveMessages');
+    if(!target){chatResetMessageArea();target=$(archived?'chatArchiveMessages':'chatLiveMessages');}
+    if(!target)return false;
+    var index=chatMessageItems.length;chatMessageItems.push(msg);chatMessageCount++;
+    if(id)chatSeenIds.add(String(id));
     chatRemoveEmptyPlaceholder();
-    var archived=source!=='live'&&source!=='current-history',target=$(archived?'chatArchiveMessages':'chatLiveMessages');if(!target)return false;
-    var el=document.createElement('article');el.dataset.chatTimestamp=String(messageDate.getTime());el.dataset.chatMessageId=msg.id;el.className='chat-message'+(archived?' is-archived':' is-current-stream')+(source==='live'?' is-live-now':'')+(role.isOwn?' is-own':'')+(role.isMod?' is-mod':'')+(reply?' is-reply':'')+(replyToOwn?' is-reply-to-own':'');
+    var el=document.createElement('article');el.dataset.chatTimestamp=String(messageDate.getTime());el.dataset.chatMessageId=msg.id;el.className='chat-message'+(archived?' is-archived':' is-current-stream')+((source==='live'||source==='confirmed-send')?' is-live-now':'')+(source==='confirmed-send'?' is-confirmed-send':'')+(role.isOwn?' is-own':'')+(role.isMod?' is-mod':'')+(reply?' is-reply':'')+(replyToOwn?' is-reply-to-own':'');
     var authorStyle=/^#[0-9a-f]{3,8}$/i.test(color)?' style="color:'+color+'"':'';
-    var nameHTML='<span class="chat-message-author"'+authorStyle+'>'+escH(role.username)+'</span>',badgesHTML='';
-    if(role.isOwn)badgesHTML+='<span class="chat-role-badge own">حسابك / توكن محفوظ</span>';
+    var nameHTML='<button type="button" class="chat-message-author chat-author-profile"'+authorStyle+' onclick="chatOpenUserProfileByIndex('+index+')" title="عرض الملف الشخصي على Kick">'+escH(role.username)+'</button>',badgesHTML='';
+    if(role.isOwn)badgesHTML+='<span class="chat-role-badge own">حسابك / حساب مضاف</span>';
+    if(source==='confirmed-send')badgesHTML+='<span class="chat-role-badge accepted">تم قبول الإرسال — انتظار تأكيد الشات</span>';
     if(role.isMod)badgesHTML+='<span class="chat-role-badge mod"><i class="fas fa-shield-halved"></i> مشرف</span>';
     if(reply)badgesHTML+='<span class="chat-role-badge reply"><i class="fas fa-reply"></i> رد</span>';
     if(replyToOwn)badgesHTML+='<span class="chat-role-badge reply-own"><i class="fas fa-reply-all"></i> رد على توكنك</span>';
@@ -6771,6 +6898,8 @@ async function runTokenCheck(){
     var archiveEmpty=$('chatArchiveEmpty');if(archiveEmpty)archiveEmpty.style.display=area.querySelector('#chatArchiveMessages .chat-message')?'none':'block';
     chatUpdateStats();chatUpdateMessageScroll();
     if(persist!==false&&id)chatPersistRaw(chatActiveSlug,raw);
+    if(window.BBKTools)window.BBKTools.track(source==='live'?'رسالة جديدة':source==='confirmed-send'?'إرسال مقبول':'رسالة تاريخية',String(role.username||'')+' · '+String(chatActiveSlug||''));
+    if(window.BBKTools)window.BBKTools.onMessageAdded();
     return true;
   }
   function chatStopSocket(clearActive){
@@ -6813,61 +6942,102 @@ async function runTokenCheck(){
     var empty=$('chatArchiveEmpty');if(empty)empty.style.display=archive.querySelector('.chat-message')?'none':'block';
   }
   function chatHistoryEnvelope(payload){
-    var root=payload&&payload.data&&typeof payload.data==='object'?payload.data:(payload||{});
-    var messages=Array.isArray(root.messages)?root.messages:(payload&&Array.isArray(payload.messages)?payload.messages:[]);
-    var cursor=root.cursor || root.next_cursor || root.nextCursor || root.pagination&& (root.pagination.cursor || root.pagination.next_cursor) || payload&&payload.cursor || null;
-    var valid=Array.isArray(root.messages) || !!(payload && Array.isArray(payload.messages));
-    return {messages:messages,cursor:cursor,valid:valid};
+    var candidates=[payload,payload&&payload.data,payload&&payload.result,payload&&payload.history,payload&&payload.data&&payload.data.data];
+    var messages=[],cursor=null,valid=false;
+    for(var i=0;i<candidates.length;i++){
+      var root=candidates[i];if(!root)continue;
+      if(Array.isArray(root)){messages=root;valid=true;break;}
+      if(typeof root!=='object')continue;
+      var m=Array.isArray(root.messages)?root.messages:Array.isArray(root.history)?root.history:Array.isArray(root.items)?root.items:Array.isArray(root.data)?root.data:null;
+      if(m){messages=m;valid=true;cursor=root.cursor||root.next_cursor||root.nextCursor||root.pagination&&(root.pagination.cursor||root.pagination.next_cursor)||null;break;}
+      if(root.messages&&Array.isArray(root.messages.data)){messages=root.messages.data;valid=true;cursor=root.messages.cursor||root.messages.next_cursor||null;break;}
+    }
+    if(!cursor&&payload&&typeof payload==='object')cursor=payload.cursor||payload.next_cursor||payload.nextCursor||null;
+    return {messages:messages,cursor:cursor,valid:valid,source:String(payload&&payload.__bbkHistorySource||payload&&payload.history_source||'')};
   }
   async function chatRequestHistory(chatroomId,cursor,quick){
-    var base='https://web.kick.com/api/v1/chat/'+encodeURIComponent(String(chatroomId))+'/history';
-    var query=cursor?'?cursor='+encodeURIComponent(String(cursor)):''; // لا تستخدم وقت الآن كبداية؛ ذلك يستبعد كل الرسائل السابقة.
-    var target=base+query, order=getProxyOrder(), targets=[{url:target,proxy:null}], controllers=[];
-    // شغّل المسار المباشر والوسطاء المتاحين في سباق واحد؛ أول استجابة صحيحة تفوز.
-    var added=0;
-    for(var i=0;i<order.length && added<(quick?1:3);i++){
-      var idx=order[i];if(idx===PROXIES.length-1)continue;
-      var proxyUrl=PROXIES[idx].build(target);
-      if(targets.some(function(t){return t.url===proxyUrl;}))continue;
-      targets.push({url:proxyUrl,proxy:idx});added++;
-    }
-    var timers=[];
-    var tasks=targets.map(function(item){
-      var controller=typeof AbortController!=='undefined'?new AbortController():null;controllers.push(controller);
-      var timeout=controller?3000:3000, timer=null;
-      var promise=fetch(item.url,{method:'GET',cache:'no-store',headers:{Accept:'application/json','Cache-Control':'no-cache'},credentials:'omit',signal:controller?controller.signal:undefined});
-      return Promise.race([promise,new Promise(function(_,reject){timer=setTimeout(function(){if(controller)controller.abort();reject(new Error('timeout'));},timeout);})])
-        .then(function(res){clearTimeout(timer);if(!res.ok)throw new Error('HTTP '+res.status);return res.json();})
-        .then(function(payload){if(!chatHistoryEnvelope(payload).valid)throw new Error('استجابة تاريخ الشات غير معروفة');return {payload:payload,proxy:item.proxy};})
-        .finally(function(){if(timer)clearTimeout(timer);});
-    });
+    var meta=chatActiveMeta||{};
+    var params=new URLSearchParams({chatroom_id:String(chatroomId)});
+    if(meta.channelId)params.set('channel_id',String(meta.channelId));
+    if(chatActiveSlug)params.set('slug',String(chatActiveSlug));
+    if(cursor)params.set('cursor',String(cursor));
+    if(chatHistorySource && chatHistorySource!=='auto')params.set('source',chatHistorySource);
+    var serverUrl='/api/kick/history?'+params.toString();
+    var controller=typeof AbortController!=='undefined'?new AbortController():null;
+    var timer=null;
     try{
-      var winner=await Promise.any(tasks);
-      for(var ci=0;ci<controllers.length;ci++)if(controllers[ci])try{controllers[ci].abort();}catch(e){}
-      if(winner.proxy!==null){_bestProxy=winner.proxy;saveBestProxy();}
-      return winner.payload;
-    }catch(e){
-      for(var cj=0;cj<controllers.length;cj++)if(controllers[cj])try{controllers[cj].abort();}catch(x){}
-      throw e || new Error('تعذر الوصول إلى سجل الشات');
+      var result=await Promise.race([
+        fetch(serverUrl,{method:'GET',cache:'no-store',headers:{Accept:'application/json','Cache-Control':'no-cache'},credentials:'same-origin',signal:controller?controller.signal:undefined}),
+        new Promise(function(_,reject){timer=setTimeout(function(){if(controller)controller.abort();reject(new Error('timeout'));},quick?6500:12000);})
+      ]);
+      if(timer)clearTimeout(timer);
+      if(result.ok){
+        var payload=await result.json(),serverPage=chatHistoryEnvelope(payload);
+        if(serverPage.valid && (serverPage.messages.length || serverPage.cursor || chatHistorySource!=='auto'))return payload;
+        // If the server endpoints returned an empty first page, try the older browser route once too.
+      }
+    }catch(e){if(timer)clearTimeout(timer);if(controller)try{controller.abort()}catch(x){}}
+    // Last resort: retry the legacy browser history endpoint through an available GET proxy.
+    var currentTarget='https://web.kick.com/api/v1/chat/'+encodeURIComponent(String(chatroomId))+'/history'+(cursor?'?cursor='+encodeURIComponent(String(cursor)):'' );
+    var legacyTarget=meta.channelId?'https://kick.com/api/v2/channels/'+encodeURIComponent(String(meta.channelId))+'/messages'+(cursor?'?cursor='+encodeURIComponent(String(cursor)):'' ):'';
+    var targets=[];
+    if(chatHistorySource==='legacy' && legacyTarget)targets.push({url:legacyTarget,kind:'legacy'});
+    else if(chatHistorySource==='current')targets.push({url:currentTarget,kind:'current'});
+    else { if(legacyTarget)targets.push({url:legacyTarget,kind:'legacy'});targets.push({url:currentTarget,kind:'current'}); }
+    var order=getProxyOrder(), baseTargets=targets.slice();
+    // Build proxy alternatives only from the original endpoints. Do not recursively wrap a proxy URL.
+    for(var ti=0;ti<baseTargets.length;ti++){
+      var base=baseTargets[ti].url;
+      for(var oi=0;oi<order.length;oi++){
+        var proxyIndex=order[oi];if(proxyIndex===PROXIES.length-1)continue;
+        var proxyUrl=PROXIES[proxyIndex].build(base);
+        if(targets.some(function(x){return x.url===proxyUrl;}))continue;
+        targets.push({url:proxyUrl,kind:baseTargets[ti].kind,proxy:proxyIndex});
+      }
     }
+    var failures=[];
+    for(var j=0;j<targets.length;j++){
+      var item=targets[j],localController=typeof AbortController!=='undefined'?new AbortController():null,localTimer=null;
+      try{
+        var res=await Promise.race([
+          fetch(item.url,{method:'GET',cache:'no-store',headers:{Accept:'application/json','Cache-Control':'no-cache'},credentials:'omit',signal:localController?localController.signal:undefined}),
+          new Promise(function(_,reject){localTimer=setTimeout(function(){if(localController)localController.abort();reject(new Error('timeout'));},quick?2200:3200);})
+        ]);
+        if(localTimer)clearTimeout(localTimer);
+        if(!res.ok)throw new Error('HTTP '+res.status);
+        var data=await res.json();var parsed=chatHistoryEnvelope(data);
+        if(!parsed.valid)throw new Error('invalid history response');
+        if(parsed.messages.length || parsed.cursor){
+          if(item.proxy!=null){_bestProxy=item.proxy;saveBestProxy();}
+          if(!data.__bbkHistorySource)data.__bbkHistorySource=item.kind;
+          return data;
+        }
+        failures.push('empty');
+      }catch(err){if(localTimer)clearTimeout(localTimer);if(localController)try{localController.abort()}catch(x){}failures.push(String(err&&err.message||err));}
+    }
+    // An empty response is still a valid result; this avoids presenting a fake network error for a genuinely quiet channel.
+    return {messages:[],cursor:null,__bbkHistorySource:chatHistorySource==='auto'?'current':chatHistorySource};
   }
+
   async function chatLoadHistory(reset, requestedChatroomId){
+    if(window.BBKDataSaver&&window.BBKDataSaver.on('pauseHistory')){chatHistoryUI('سجل الرسائل متوقف من إعدادات توفير البيانات.',true,false);return;}
     var chatroomId=requestedChatroomId || (chatActiveMeta&&chatActiveMeta.chatroomId);
-    if(!chatActiveSlug || !chatroomId){chatHistoryUI('سجل الرسائل يحتاج معرّف غرفة الشات؛ جاري محاولة جلبه من Kick.',true,false);return;}
+    if(!chatActiveSlug || !chatroomId){chatHistoryUI('جاري تجهيز المحادثة…',true,false);return;}
     if(chatHistoryLoading && !reset)return;
     if(reset){
-      chatHistoryGeneration++; chatHistoryChannelId=String(chatroomId); chatHistoryCursor=null;
+      chatHistoryGeneration++; chatHistoryChannelId=String(chatroomId); chatHistoryCursor=null; chatHistorySource='auto';
       chatHistoryCanLoadMore=false; chatHistoryLoadedCount=0; chatHistoryStarted=true; chatHistoryAutoLatch=false;
-      chatHistoryFailed=false;chatHistoryUI('جاري جلب سجل Kick الحقيقي…',true,true);
-    }else if(!chatHistoryCanLoadMore || !chatHistoryCursor){chatHistoryUI('لا توجد رسائل أقدم متاحة من مصدر التاريخ.',true,false);return;}
+      chatHistoryFailed=false;chatHistoryUI('جاري تحميل الرسائل السابقة…',true,true);
+    }else if(!chatHistoryCanLoadMore || !chatHistoryCursor){chatHistoryUI('لا توجد رسائل أقدم متاحة من الرسائل السابقة.',true,false);return;}
     var generation=chatHistoryGeneration, thisSlug=chatActiveSlug, fetchCursor=reset?null:chatHistoryCursor;
-    chatHistoryLoading=true;chatHistoryUI(reset?'جاري جلب أحدث سجل متاح…':'جاري تحميل رسائل أقدم…',true,true);
+    chatHistoryLoading=true;chatHistoryUI(reset?'جاري تحميل الرسائل…':'جاري تحميل رسائل أقدم…',true,true);
     var area=$('chatMessages'), oldHeight=area?area.scrollHeight:0, oldTop=area?area.scrollTop:0;
     var wasBottom=area?area.scrollHeight-area.scrollTop-area.clientHeight<90:true;
     try{
       var response=await chatRequestHistory(chatroomId,fetchCursor,false);
       if(generation!==chatHistoryGeneration || thisSlug!==chatActiveSlug || String(chatroomId)!==String(chatHistoryChannelId))return;
       var page=chatHistoryEnvelope(response), messages=page.messages.filter(function(m){return m&&typeof m==='object'&&(m.id||m.message_id||m.content!=null);});
+      if(page.source)chatHistorySource=page.source;
       var added=0;
       // History pages arrive newest-first; append their records oldest-first, then sort if live events arrived in parallel.
       for(var i=messages.length-1;i>=0;i--){if(chatAppendMessage(messages[i],'history',true))added++;}
@@ -6879,12 +7049,14 @@ async function runTokenCheck(){
         if(wasBottom || reset){area.scrollTop=area.scrollHeight;chatAutoScroll=true;}
         else{area.scrollTop=oldTop+Math.max(0,area.scrollHeight-oldHeight);chatAutoScroll=false;}
       }
-      if(added===0 && !chatHistoryCanLoadMore)chatHistoryUI('Kick لم يرجع رسائل أقدم إضافية لهذا البث.',true,false);
-      else chatHistoryUI('تم تحميل '+chatHistoryLoadedCount.toLocaleString('en-US')+' رسالة من سجل Kick المتاح'+(chatHistoryCanLoadMore?' — اسحب لأعلى للمزيد.':' — لا توجد صفحة أقدم متاحة.'),!chatHistoryCanLoadMore,false);
+      if(added===0 && !chatHistoryCanLoadMore)chatHistoryUI('مفيش رسائل أقدم متاحة حاليًا.',true,false);
+      else chatHistoryUI('تم تحميل '+chatHistoryLoadedCount.toLocaleString('en-US')+' رسالة من الرسائل السابقة المتاحة'+(chatHistoryCanLoadMore?' — اسحب لأعلى للمزيد.':' — لا توجد صفحة أقدم متاحة.'),!chatHistoryCanLoadMore,false);
+      if(!area || !area.querySelector('.chat-message'))chatSetEmpty(chatActiveMeta&&chatActiveMeta.isLive?'لسه مفيش رسائل ظاهرة في البث ده.':'مفيش رسائل متاحة للقناة دي حاليًا.');
     }catch(e){
       if(generation!==chatHistoryGeneration || thisSlug!==chatActiveSlug)return;
       chatHistoryFailed=true;
-      chatHistoryUI('تعذر جلب السجل السابق الآن؛ الشات الحي يظل متاحًا. تقدر تعيد المحاولة.',false,false);
+      chatHistoryUI('تعذر تحميل الرسائل الآن. جرّب إعادة المحاولة.',false,false);
+      if(!$('chatMessages')||!$('chatMessages').querySelector('.chat-message'))chatSetEmpty('تعذر تحميل المحادثة الآن. جرّب إعادة المحاولة.');
     }finally{
       if(generation===chatHistoryGeneration){chatHistoryLoading=false;var btn=$('chatHistoryOlderBtn');if(btn)btn.disabled=!chatHistoryCanLoadMore && !chatHistoryFailed && !chatArchiveHasMore;}
     }
@@ -6904,18 +7076,20 @@ async function runTokenCheck(){
       var rows=batch.rows||[],added=0;
       for(var i=0;i<rows.length;i++)if(rows[i]&&rows[i].raw&&chatAppendMessage(rows[i].raw,'archive',false))added++;
       if(rows.length){chatArchiveOldestTs=rows[0].timestamp;chatArchiveHasMore=!!batch.hasMore;}
-      else if(reset){chatArchiveOldestTs=null;chatArchiveHasMore=false;}
+      else if(reset||!batch.hasMore){chatArchiveOldestTs=null;chatArchiveHasMore=false;}
       chatSortMessageNodes();
       var archiveEmpty=$('chatArchiveEmpty');if(archiveEmpty)archiveEmpty.style.display=$('chatArchiveMessages')&&$('chatArchiveMessages').children.length?'none':'block';
-      if(added){chatHistoryUI('تم استرجاع '+added.toLocaleString('en-US')+' رسالة محفوظة محليًا؛ اضغط/اسحب لأعلى لتحميل الأقدم.',false,false);}
-      else if(reset&&!chatHistoryStarted)chatHistoryUI('لا يوجد أرشيف محلي بعد؛ سيحفظ التطبيق الرسائل التي يراها من الآن.',false,false);
-    }catch(e){/* أرشيف محلي اختياري؛ فشل IndexedDB لا يوقف الشات المباشر. */}
+      if(added){chatHistoryUI('تم تحميل '+added.toLocaleString('en-US')+' رسالة سابقة. اسحب لأعلى لتحميل الأقدم.',false,false);}
+      else if(reset&&!chatHistoryStarted)chatHistoryUI('لا توجد رسائل سابقة محفوظة بعد.',false,false);
+      return !!(rows.length||batch.hasMore);
+    }catch(e){/* أرشيف محلي اختياري؛ فشل IndexedDB لا يوقف الشات المباشر. */return false;}
     finally{chatArchiveLoadingChannels.delete(slug);}
   }
   async function chatLoadLocalOlder(){
     if(!chatActiveSlug||chatArchiveLoadingChannels.has(chatActiveSlug)||!chatArchiveHasMore||chatArchiveOldestTs==null)return false;
     var beforeHeight=$('chatMessages')?$('chatMessages').scrollHeight:0,beforeTop=$('chatMessages')?$('chatMessages').scrollTop:0;
-    await chatLoadLocalArchive(chatActiveSlug,false);
+    var loaded=await chatLoadLocalArchive(chatActiveSlug,false);
+    if(!loaded)return false;
     var area=$('chatMessages');if(area)area.scrollTop=beforeTop+Math.max(0,area.scrollHeight-beforeHeight);
     return true;
   }
@@ -6926,28 +7100,31 @@ async function runTokenCheck(){
   }
   function chatStartHistoryPolling(chatroomId,slug,generation){
     chatStopHistoryPolling();if(!chatroomId)return;
+    if(window.BBKDataSaver&&(window.BBKDataSaver.on('pauseChat')||window.BBKDataSaver.on('pauseHistory')))return;
     // Kick's web chat-history endpoint is undocumented; use it as a fallback when the live feed is unavailable.
     chatHistoryPollTimer=setInterval(function(){
       if(generation!==chatConnectGeneration||slug!==chatActiveSlug||chatHistoryPollBusy||!chatroomId)return;
+      if(window.BBKDataSaver&&(window.BBKDataSaver.on('pauseChat')||window.BBKDataSaver.on('pauseHistory')))return;
       if(chatSocket&&chatSocket.readyState===WebSocket.OPEN&&Date.now()-chatLastLiveMessageAt<12000)return;
       chatHistoryPollBusy=true;
       chatRequestHistory(String(chatroomId),null,true).then(function(payload){
         if(generation!==chatConnectGeneration||slug!==chatActiveSlug)return;
         var page=chatHistoryEnvelope(payload),list=page.messages.filter(function(m){return m&&typeof m==='object'&&(m.id||m.message_id||m.content!=null);});
         var added=0;for(var i=list.length-1;i>=0;i--){if(chatAppendMessage(list[i],'history',true))added++;}
-        if(added){chatSortMessageNodes();chatReclassifyStreamMessages();chatUpdateMessageScroll();chatMarkNetwork('live','الشات يتحدّث — اتصال احتياطي من سجل Kick');}
+        if(added){chatSortMessageNodes();chatReclassifyStreamMessages();chatUpdateMessageScroll();chatMarkNetwork('live','المحادثة بتتحدّث');}else if(!$('chatMessages')||!$('chatMessages').querySelector('.chat-message'))chatSetEmpty(chatActiveMeta&&chatActiveMeta.isLive?'لسه مفيش رسائل ظاهرة في البث ده.':'مفيش رسائل متاحة للقناة دي حاليًا.');
       }).catch(function(){
-        if(generation===chatConnectGeneration&&slug===chatActiveSlug&&(!chatSocket||chatSocket.readyState!==WebSocket.OPEN))chatMarkNetwork('wait','تعذّر الوصول للشات الآن — تحقق من الاتصال ثم أعد المحاولة');
+        if(generation===chatConnectGeneration&&slug===chatActiveSlug&&(!chatSocket||chatSocket.readyState!==WebSocket.OPEN))chatMarkNetwork('wait','تعذر الاتصال بالشات دلوقتي. بنحاول تاني.');
       }).finally(function(){chatHistoryPollBusy=false;});
     },4500);
   }
 
   function chatConnectSocket(chatroomId, slug, generation){
     if(generation!==chatConnectGeneration || slug!==chatActiveSlug) return;
-    if(!chatroomId){chatMarkNetwork('error','لم يتم العثور على معرّف غرفة الشات');return;}
-    chatStopSocket(false); chatMarkNetwork('wait','جاري الاتصال بـKick…');
+    if(window.BBKDataSaver&&window.BBKDataSaver.on('pauseChat')){chatStopSocket(false);chatMarkNetwork('wait','تم إيقاف تحديث الشات من إعدادات توفير البيانات.');return;}
+    if(!chatroomId){chatMarkNetwork('error','تعذر فتح المحادثة الآن.');return;}
+    chatStopSocket(false); chatMarkNetwork('wait','جاري الاتصال بالشات…');
     var ws;
-    try{ws=new WebSocket(CHAT_PUSHER_URL);}catch(e){chatMarkNetwork('error','تعذر إنشاء اتصال WebSocket');return;}
+    try{ws=new WebSocket(CHAT_PUSHER_URL);}catch(e){chatMarkNetwork('error','تعذر الاتصال بالشات المباشر.');return;}
     chatSocket=ws;
     ws.onopen=function(){
       if(generation!==chatConnectGeneration)return;
@@ -6958,7 +7135,7 @@ async function runTokenCheck(){
       if(generation!==chatConnectGeneration || slug!==chatActiveSlug)return;
       var packet; try{packet=JSON.parse(ev.data);}catch(e){return;}
       if(packet.event==='pusher:connection_established'){
-        try{ws.send(JSON.stringify({event:'pusher:subscribe',data:{auth:'',channel:'chatrooms.'+chatroomId+'.v2'}}));}catch(e){chatMarkNetwork('error','فشل طلب الاشتراك في غرفة الشات');}
+        try{ws.send(JSON.stringify({event:'pusher:subscribe',data:{auth:'',channel:'chatrooms.'+chatroomId+'.v2'}}));}catch(e){chatMarkNetwork('error','تعذر فتح الشات. بنحاول مرة أخرى.');}
         return;
       }
       if(packet.event==='pusher_internal:subscription_succeeded'||packet.event==='pusher:subscription_succeeded'){
@@ -6972,21 +7149,53 @@ async function runTokenCheck(){
         var detail=packet.data;try{if(typeof detail==='string')detail=JSON.parse(detail);}catch(e){}
         var errCode=detail&&(detail.code||detail.status||detail.error)?' ('+String(detail.code||detail.status||detail.error).slice(0,80)+')':'';
         console.warn('Kick chat subscription rejected:',detail||packet);
-        chatMarkNetwork('wait','اتصال الشات الحي مرفوض'+errCode+' — يجري تجربة سجل الرسائل الاحتياطي');
-        chatSetEmpty('Kick رفض اتصال الشات الحي في هذه المحاولة. التطبيق سيجرّب تحديث سجل الرسائل تلقائيًا؛ لو استمر الرفض، أعد المحاولة أو افتح القناة على Kick.');
+        chatMarkNetwork('wait','تعذر الاتصال بالشات المباشر. بنحاول تحديث المحادثة.');
+        chatSetEmpty('تعذر الاتصال بالشات المباشر. بنحاول تحديث المحادثة.');
+        var probeKey=String(generation)+'|'+String(slug);
+        if(!chatRoomProbeKeys.has(probeKey)){
+          chatRoomProbeKeys.add(probeKey);
+          if(typeof fetchChatroomId==='function'){
+            fetchChatroomId(slug,{workingProxy:_bestProxy}).then(function(freshId){
+              if(generation!==chatConnectGeneration||slug!==chatActiveSlug)return;
+              if(freshId&&String(freshId)!==String(chatroomId)){
+                chatMarkNetwork('wait','جاري تحديث المحادثة…');
+                if(chatSocket===ws)chatSocket=null;
+                ws.onclose=null;ws.onerror=null;try{ws.close(1000,'refresh chatroom id');}catch(closeError){}
+                var refreshed=Object.assign({},chatActiveMeta||{},{chatroomId:String(freshId)});
+                chatActiveMeta=refreshed;chatUpdateCachedData(slug,refreshed);chatRenderRoomHeader();
+                chatConnectSocket(String(freshId),slug,generation);
+                chatLoadHistory(true,String(freshId));chatStartHistoryPolling(String(freshId),slug,generation);
+              }else{
+                chatMarkNetwork('wait','تعذر الاتصال المباشر؛ جاري محاولة تحميل الرسائل المتاحة.');
+                chatStartHistoryPolling(String(chatroomId),slug,generation);
+              }
+            }).catch(function(){if(generation===chatConnectGeneration&&slug===chatActiveSlug){chatMarkNetwork('wait','تعذر الاتصال المباشر؛ جاري محاولة تحميل الرسائل المتاحة.');chatStartHistoryPolling(String(chatroomId),slug,generation);}});
+          }
+        }
         return;
       }
-      if(String(packet.event||'').indexOf('ChatMessage')>=0){
-        try{var payload=typeof packet.data==='string'?JSON.parse(packet.data):packet.data;if(chatAppendMessage(payload,'live',true))chatLastLiveMessageAt=Date.now();}catch(e){console.warn('Unable to parse Kick chat event',e);}
+      if(/ChatMessage|chat\.message\.sent|message\.sent/i.test(String(packet.event||''))){
+        try{
+          var payload=typeof packet.data==='string'?JSON.parse(packet.data):packet.data;
+          for(var depth=0;depth<4&&payload&&typeof payload==='object';depth++){
+            if(Array.isArray(payload)){payload.forEach(function(one){if(chatAppendMessage(one,'live',true))chatLastLiveMessageAt=Date.now();});return;}
+            if(payload.data&&typeof payload.data==='string'){try{payload.data=JSON.parse(payload.data);}catch(e){}}
+            if(payload.message&&typeof payload.message==='object'&&(payload.message.content!=null||payload.message.sender)){payload=payload.message;continue;}
+            if(payload.data&&typeof payload.data==='object'&&(payload.data.content!=null||payload.data.sender||payload.data.message)){payload=payload.data;continue;}
+            break;
+          }
+          if(chatAppendMessage(payload,'live',true))chatLastLiveMessageAt=Date.now();
+        }catch(e){console.warn('Unable to parse Kick chat event',e);}
       }
     };
-    var subscriptionWatch=setTimeout(function(){if(generation===chatConnectGeneration&&slug===chatActiveSlug&&(!chatSocket||chatSocket!==ws||ws.readyState!==WebSocket.OPEN))return;if(generation===chatConnectGeneration&&slug===chatActiveSlug)chatMarkNetwork('wait','الاتصال الحي لم يؤكد الاشتراك؛ يجري تحديث سجل Kick الاحتياطي');},8000);
-    ws.onerror=function(){if(generation===chatConnectGeneration)chatMarkNetwork('wait','مشكلة في اتصال الشات الحي؛ يجري الاعتماد على سجل Kick الاحتياطي');};
+    var subscriptionWatch=setTimeout(function(){if(generation===chatConnectGeneration&&slug===chatActiveSlug&&(!chatSocket||chatSocket!==ws||ws.readyState!==WebSocket.OPEN))return;if(generation===chatConnectGeneration&&slug===chatActiveSlug)chatMarkNetwork('wait','جاري تحديث المحادثة…');},8000);
+    ws.onerror=function(){if(generation===chatConnectGeneration)chatMarkNetwork('wait','تعذر الاتصال بالشات المباشر؛ بنحاول تحميل الرسائل المتاحة.');};
     ws.onclose=function(){clearTimeout(subscriptionWatch);
       if(chatSocket===ws)chatSocket=null;
       if(chatPingTimer){clearInterval(chatPingTimer);chatPingTimer=null;}
       if(generation!==chatConnectGeneration || slug!==chatActiveSlug)return;
-      chatMarkNetwork('wait','الاتصال انقطع؛ إعادة المحاولة…');
+      if(window.BBKDataSaver&&window.BBKDataSaver.on('disableReconnect')){chatMarkNetwork('wait','الاتصال متوقف حتى تعيد تشغيله يدويًا.');return;}
+      chatMarkNetwork('wait','الاتصال انقطع. بنحاول نرجعه…');
       if(chatReconnectTimer)clearTimeout(chatReconnectTimer);
       chatReconnectTimer=setTimeout(function(){if(generation===chatConnectGeneration && chatActiveSlug===slug)chatConnectSocket(chatroomId,slug,generation);},2500);
     };
@@ -6998,7 +7207,8 @@ async function runTokenCheck(){
     var url=KICK_BASE+'/api/v2/channels/'+encodeURIComponent(slug);
     var order=getProxyOrder(), candidates=[], controllers=[];
     if(isDirectMode)candidates.push(PROXIES.length-1);
-    for(var i=0;i<order.length;i++)if(candidates.indexOf(order[i])<0 && candidates.length<4)candidates.push(order[i]);
+    var candidateLimit=(window.BBKDataSaver&&window.BBKDataSaver.on('reduceRequests'))?1:4;
+    for(var i=0;i<order.length;i++)if(candidates.indexOf(order[i])<0 && candidates.length<candidateLimit)candidates.push(order[i]);
     var tasks=candidates.map(function(proxyIndex){
       var controller=typeof AbortController!=='undefined'?new AbortController():null;controllers.push(controller);
       var timer=null;
@@ -7008,16 +7218,40 @@ async function runTokenCheck(){
         .then(function(json){var root=json&&(json.data||json);if(!root || !root.slug)throw new Error('بيانات القناة غير مكتملة');return {data:json,proxy:proxyIndex};})
         .finally(function(){if(timer)clearTimeout(timer);});
     });
+    // Public profile lookup runs through this site's server so it works even when browser CORS blocks Kick.
+    var publicController=typeof AbortController!=='undefined'?new AbortController():null;controllers.push(publicController);
+    var publicTimer=null;
+    var publicTask=Promise.race([
+      fetch('/api/kick/profile?slug='+encodeURIComponent(slug),{method:'GET',headers:{Accept:'application/json'},cache:'no-store',credentials:'same-origin',signal:publicController?publicController.signal:undefined}),
+      new Promise(function(_,reject){publicTimer=setTimeout(function(){if(publicController)publicController.abort();reject(new Error('timeout'));},5200);})
+    ]).then(function(res){clearTimeout(publicTimer);if(!res.ok)throw new Error('تعذر تحميل بيانات القناة');return res.json();})
+      .then(function(json){var root=json&&(json.data||json);if(!root||!(root.slug||root.user||root.channel))throw new Error('بيانات القناة غير مكتملة');return {data:json,proxy:'server'};})
+      .finally(function(){if(publicTimer)clearTimeout(publicTimer);});
+    tasks.unshift(publicTask);
     try{
-      var winner=await Promise.any(tasks);data=winner.data;_bestProxy=winner.proxy;_proxyFailCount[winner.proxy]=0;saveBestProxy();
-      for(var ci=0;ci<controllers.length;ci++)if(ci!==candidates.indexOf(winner.proxy)&&controllers[ci])try{controllers[ci].abort();}catch(e){}
+      var winner=await Promise.any(tasks);data=winner.data;
+      if(typeof winner.proxy==='number'){_bestProxy=winner.proxy;_proxyFailCount[winner.proxy]=0;saveBestProxy();}
+      for(var ci=0;ci<controllers.length;ci++)if(controllers[ci])try{controllers[ci].abort();}catch(e){}
     }catch(e){lastErr=e;for(var cj=0;cj<controllers.length;cj++)if(controllers[cj])try{controllers[cj].abort();}catch(x){}}
     if(!data){
-      // احتفظ بمسار التطبيق القديم كاحتياطي إن كانت كل محاولات السباق غير متاحة.
+      // Try the existing channel source as a final fallback.
       try{data=await fetchChannel(slug,{workingProxy:_bestProxy});}catch(e){lastErr=e;}
     }
     if(!data)throw lastErr || new Error('تعذر جلب بيانات القناة');
     var meta=chatMetaFromPayload(slug,data);
+    if(!meta.chatroomId){
+      try{
+        var roomResponse=await fetch('/api/kick/room?slug='+encodeURIComponent(slug),{method:'GET',headers:{Accept:'application/json'},cache:'no-store',credentials:'same-origin'});
+        var roomData=await roomResponse.json().catch(function(){return {};});
+        if(roomResponse.ok&&roomData.chatroom_id){
+          meta.chatroomId=String(roomData.chatroom_id);
+          if(roomData.is_live===true)meta.isLive=true;
+          if(!meta.startedAt&&roomData.started_at)meta.startedAt=roomData.started_at;
+          if((!meta.title||meta.title==='لا يوجد بث مباشر')&&roomData.title)meta.title=String(roomData.title);
+          if(!meta.profilePicture&&roomData.profile_picture)meta.profilePicture=chatImage(roomData.profile_picture);
+        }
+      }catch(roomError){}
+    }
     chatUpdateCachedData(slug,meta);
     return meta;
   }
@@ -7027,20 +7261,43 @@ async function runTokenCheck(){
     return 'https://player.kick.com/'+encodeURIComponent(String(slug||''))+'?autoplay=false&muted='+String(!!chatPlayerMuted);
   }
   function chatSetPlayer(slug,force){
-    var frame=$('chatStreamPlayer'),placeholder=$('chatPlayerPlaceholder'),title=$('chatPlayerTitle');
+    var frame=$('chatStreamPlayer'),placeholder=$('chatPlayerPlaceholder'),title=$('chatPlayerTitle'),video=$('chatHlsVideo');
     if(!frame)return;
-    if(!slug){frame.style.display='none';frame.removeAttribute('src');if(placeholder)placeholder.style.display='flex';if(title)title.textContent='مشغل البث المباشر';chatPlayerActiveSlug=null;return;}
+    if(!slug){
+      frame.style.display='none';frame.removeAttribute('src');
+      if(video&&window.BBKHlsPlayer)window.BBKHlsPlayer.stop();
+      if(placeholder)placeholder.style.display='flex';if(title)title.textContent='مشغل البث المباشر';chatPlayerActiveSlug=null;return;
+    }
     if(title)title.textContent='بث @'+slug;
-    if(placeholder)placeholder.style.display='none';
-    frame.style.display='block';
+    if(window.BBKDataSaver&&window.BBKDataSaver.on('disableStream')){
+      frame.removeAttribute('src');frame.style.display='none';if(video&&window.BBKHlsPlayer)window.BBKHlsPlayer.stop();if(video)video.style.display='none';
+      if(placeholder){placeholder.style.display='flex';placeholder.querySelector('span').textContent='تم إيقاف تحميل البث من إعدادات توفير البيانات.';}chatPlayerActiveSlug=slug;return;
+    }
+    if(window.BBKDataSaver&&window.BBKDataSaver.on('manualVideo')&&!force){
+      frame.removeAttribute('src');frame.style.display='none';if(video&&window.BBKHlsPlayer)window.BBKHlsPlayer.stop();if(video)video.style.display='none';
+      if(placeholder){placeholder.style.display='flex';placeholder.querySelector('span').textContent='اضغط «تشغيل البث» لتحميل الفيديو عند الطلب.';}chatPlayerActiveSlug=slug;return;
+    }
+    var meta=chatActiveMeta||{},playback=String(meta.playbackUrl||'');
+    if(playback&&window.BBKHlsPlayer){
+      frame.style.display='none';frame.removeAttribute('src');if(placeholder)placeholder.style.display='none';
+      window.BBKHlsPlayer.play(playback).then(function(ok){
+        if(chatPlayerActiveSlug!==slug)return;
+        if(ok){frame.style.display='none';if(video)video.style.display='block';if(placeholder)placeholder.style.display='none';}
+        else{if(video)video.style.display='none';frame.style.display='block';var next=chatBuildPlayerURL(slug);if(force||chatPlayerActiveSlug!==slug||frame.src!==next)frame.src=next;if(placeholder)placeholder.style.display='none';}
+      }).catch(function(){if(video)video.style.display='none';frame.style.display='block';frame.src=chatBuildPlayerURL(slug);if(placeholder)placeholder.style.display='none';});
+      chatPlayerActiveSlug=slug;return;
+    }
+    if(video&&window.BBKHlsPlayer)window.BBKHlsPlayer.stop();if(video)video.style.display='none';
+    if(placeholder)placeholder.style.display='none';frame.style.display='block';
     var next=chatBuildPlayerURL(slug);
     if(force||chatPlayerActiveSlug!==slug||frame.src!==next){frame.src=next;chatPlayerActiveSlug=slug;}
   }
+
   window.chatReloadPlayer=function(){if(!chatActiveSlug){toast('اختار قناة الأول.','i');return;}chatSetPlayer(chatActiveSlug,true);};
   window.chatOpenPlayerTab=function(){if(!chatActiveSlug){toast('اختار قناة الأول.','i');return;}window.open(chatBuildPlayerURL(chatActiveSlug),'_blank','noopener,noreferrer');};
   window.chatFullscreenPlayer=function(){
-    var wrap=$('chatPlayerFrameWrap'),frame=$('chatStreamPlayer');if(!frame||!frame.src){toast('اختار قناة الأول.','i');return;}
-    var target=wrap||frame,request=target.requestFullscreen||target.webkitRequestFullscreen;
+    var wrap=$('chatPlayerFrameWrap'),frame=$('chatStreamPlayer'),video=$('chatHlsVideo');if(!frame||!chatActiveSlug){toast('اختار قناة الأول.','i');return;}
+    var target=video&&video.style.display!=='none'?(wrap||video):(wrap||frame),request=target.requestFullscreen||target.webkitRequestFullscreen;
     if(!request){toast('ملء الشاشة غير مدعوم في المتصفح ده. استخدم زر ملء الشاشة داخل مشغل Kick.','i');return;}
     try{var result=request.call(target);if(result&&result.catch)result.catch(function(){toast('المتصفح رفض ملء الشاشة؛ استخدم زر المشغل الداخلي.','e');});}catch(e){toast('المتصفح رفض ملء الشاشة؛ استخدم زر المشغل الداخلي.','e');}
   };
@@ -7063,11 +7320,17 @@ async function runTokenCheck(){
   };
 
   window.chatToggleChannelPicker=function(){var app=document.querySelector('.app-container');if(!app)return;app.classList.toggle('chat-picker-open');};
+  window.__bbkChatGetState=function(){return {slug:chatActiveSlug,meta:chatActiveMeta,chatroomId:chatActiveMeta&&chatActiveMeta.chatroomId||null};};
+  window.__bbkMarkVirtualTrim=function(oldestTs){chatArchiveHasMore=true;if(Number.isFinite(Number(oldestTs)))chatArchiveOldestTs=Number(oldestTs);chatHistoryAutoLatch=false;};
+  window.__bbkChatSetNetwork=function(on){if(!on){chatStopSocket(false);chatMarkNetwork('wait','تم إيقاف تحديث الشات من إعدادات توفير البيانات.');}else if(chatActiveSlug){openChatChannel(chatActiveSlug);}};
+  window.__bbkChatRefreshPlayer=function(force){if(chatActiveSlug)chatSetPlayer(chatActiveSlug,!!force);};
+  window.__bbkHlsFallbackToEmbed=function(slug){if(!slug||slug!==chatActiveSlug||!chatActiveMeta)return;if(window.BBKDataSaver&&(window.BBKDataSaver.on('disableStream')||window.BBKDataSaver.on('manualVideo')))return;var frame=$('chatStreamPlayer'),video=$('chatHlsVideo'),placeholder=$('chatPlayerPlaceholder');if(window.BBKHlsPlayer)window.BBKHlsPlayer.stop();if(video)video.style.display='none';if(frame){frame.src=chatBuildPlayerURL(slug);frame.style.display='block';}if(placeholder)placeholder.style.display='none';chatPlayerActiveSlug=slug;};
+  window.__bbkChatClearPlayer=function(){chatSetPlayer(null,false);};
   window.openChatPage=function(){
     var app=document.querySelector('.app-container'); if(app){app.classList.add('chat-wide');app.classList.remove('chat-picker-open');if(chatActiveSlug)app.classList.add('has-active-chat-channel');else app.classList.remove('has-active-chat-channel');}
     document.body.classList.add('chat-page-open');
     showPhase('chat'); chatRenderAccountOptions(); chatRenderCatalog();
-    chatRefreshCatalog();
+    if(!(window.BBKDataSaver&&window.BBKDataSaver.on('disableAutoRefresh')))chatRefreshCatalog();
     if(chatActiveSlug && chatSocket && chatSocket.readyState===WebSocket.OPEN) chatMarkNetwork('live','الشات متصل مباشر');
     if($('chatAddSlug')) setTimeout(function(){try{$('chatAddSlug').focus({preventScroll:true});}catch(e){}},50);
   };
@@ -7113,7 +7376,7 @@ async function runTokenCheck(){
     chatStopSocket(true); chatActiveSlug=slug; chatReplyTarget=null; chatMessageItems=[]; chatSeenIds=new Set(); chatMessageCount=0;
     var appContainer=document.querySelector('.app-container');if(appContainer){appContainer.classList.add('has-active-chat-channel');appContainer.classList.remove('chat-picker-open');}
     chatHistoryGeneration++;chatHistoryChannelId=null;chatHistoryCursor=null;chatHistoryLoading=false;chatHistoryStarted=false;chatHistoryCanLoadMore=false;chatHistoryLoadedCount=0;chatHistoryAutoLatch=false;chatHistoryFailed=false;chatArchiveOldestTs=null;chatArchiveHasMore=false;
-    chatResetMessageArea('جاري استرجاع الأرشيف المحلي وسجل Kick المتاح…');chatAutoScroll=true;
+    chatResetMessageArea('جاري تحميل الرسائل السابقة…');chatAutoScroll=true;
     chatHistoryUI('جاري تجهيز سجل الرسائل السابقة…',true,false);
     chatSetPlayer(slug,false);chatLoadLocalArchive(slug,true);
     chatActiveMeta=(chatMetaCache[slug] || (chatFindCatalogEntry(slug)||{}).meta || null);
@@ -7121,6 +7384,7 @@ async function runTokenCheck(){
     var reply=$('chatReplyCompose'); if(reply)reply.classList.remove('show');
     chatSetEmpty('جاري الاتصال بالقناة وجلب بيانات البث…'); chatMarkNetwork('wait','جاري تجهيز الاتصال…');
     var generation=++chatConnectGeneration;
+    if(chatRoomProbeKeys.size>80)chatRoomProbeKeys.clear();
     var existing=chatFindCatalogEntry(slug), cid=(existing && existing.chatroomId) || (chatActiveMeta && chatActiveMeta.chatroomId) || null;
     var initialCid=cid;
     try{
@@ -7128,7 +7392,7 @@ async function runTokenCheck(){
       if(cid) chatConnectSocket(cid,slug,generation);
       // سجل الرسائل يستخدم chatroom_id، وليس channel_id أو broadcaster_user_id.
       if(cid){chatLoadHistory(true,String(cid));chatStartHistoryPolling(String(cid),slug,generation);}
-      var meta=await chatFetchMeta(slug,false);
+      var meta=await chatFetchMeta(slug,true);
       if(generation!==chatConnectGeneration || slug!==chatActiveSlug)return;
       chatActiveMeta=meta;chatRenderRoomHeader();chatReclassifyStreamMessages();chatRenderCatalog();
       cid=meta.chatroomId || cid;
@@ -7138,36 +7402,75 @@ async function runTokenCheck(){
         if(!chatSocket || chatSocket.readyState===WebSocket.CLOSED || String(cid)!==String(initialCid))chatConnectSocket(String(cid),slug,generation);
         if(String(cid)!==String(chatHistoryChannelId)||!chatHistoryStarted)chatLoadHistory(true,String(cid));
         chatStartHistoryPolling(String(cid),slug,generation);
-      }else{chatMarkNetwork('error','تعذر العثور على معرّف غرفة الشات');chatSetEmpty('Kick لم يرجع معرّف غرفة الشات لهذه القناة. جرّب التحديث، أو افتح صفحة القناة على Kick للتحقق من إتاحة الشات.');}
+      }else{chatMarkNetwork('error','تعذر فتح القناة الآن.');chatSetEmpty('المحادثة مش متاحة دلوقتي. جرّب تحديث القناة بعد شوية.');}
     }catch(e){
       if(generation!==chatConnectGeneration || slug!==chatActiveSlug)return;
-      if(cid){chatConnectSocket(cid,slug,generation);chatLoadHistory(true,String(cid));chatStartHistoryPolling(String(cid),slug,generation);chatSetEmpty('تعذّر تحديث التفاصيل، لكن يجري محاولة الاتصال بالشات باستخدام المعرّف المحفوظ.');}
-      else{chatMarkNetwork('error','تعذر تحميل معلومات القناة');chatSetEmpty('تعذر جلب بيانات هذه القناة من Kick الآن. جرّب إعادة الاتصال أو تحديث القنوات.');}
+      if(cid){chatConnectSocket(cid,slug,generation);chatLoadHistory(true,String(cid));chatStartHistoryPolling(String(cid),slug,generation);chatSetEmpty('جاري محاولة استعادة المحادثة…');}
+      else{chatMarkNetwork('error','تعذر فتح القناة الآن.');chatSetEmpty('تعذر جلب بيانات هذه القناة من Kick الآن. جرّب إعادة الاتصال أو تحديث القنوات.');}
     }
     if(window.innerWidth<691){var workspace=document.querySelector('.chat-workspace');if(workspace)workspace.scrollIntoView({behavior:'smooth',block:'start'});}
   };
   window.chatReconnectActive=function(){if(!chatActiveSlug){toast('اختار قناة الأول.','i');return;}openChatChannel(chatActiveSlug);};
   window.chatSetReplyByIndex=function(index){
-    var m=chatMessageItems[index]; if(!m || !m.id || String(m.id).indexOf('session-')===0){toast('معرّف الرسالة غير متاح من Kick، لذلك لا يمكن إنشاء رد حقيقي عليها.','e');return;}
+    var m=chatMessageItems[index]; if(!m || !m.id || /^(session-|confirmed-local-|confirmed-legacy-)/.test(String(m.id))){toast('Kick لم يزوّدنا بمعرّف رسالة حقيقي لهذه الرسالة بعد؛ انتظر ظهور نسختها القادمة من الشات الحي قبل الرد.','e');return;}
     chatReplyTarget=m;
-    var sendAs=$('chatSendAccount');if(sendAs && sessionStorage.getItem('kick_access_token'))sendAs.value='oauth';
+    var sendAs=$('chatSendAccount');if(sendAs && sessionStorage.getItem('kick_access_token'))sendAs.value=kickActiveOAuthId()?'oauth:'+kickActiveOAuthId():'oauth';
     var box=$('chatReplyCompose'),txt=$('chatReplyComposeText');
     if(txt)txt.innerHTML='<b>الرد على '+escH(m.author)+'</b>'+escH(m.text.slice(0,240));
     if(box)box.classList.add('show');
     var inp=$('chatComposerInput');if(inp)inp.focus();
   };
   window.chatCancelReply=function(){chatReplyTarget=null;var b=$('chatReplyCompose');if(b)b.classList.remove('show');};
-  async function chatPostOfficial(content, reply){
-    var token=sessionStorage.getItem('kick_access_token');
-    if(!token)throw new Error('الإرسال الرسمي يحتاج تسجيل دخول Kick بصلاحية chat:write. اضغط «اتصال Kick الرسمي».');
-    try{token=await kickRefreshOfficialToken(false);}catch(refreshError){throw new Error('تعذّر تجديد جلسة Kick. سجّل الدخول الرسمي مرة أخرى. '+String(refreshError.message||''));}
-    if(!chatActiveMeta || !chatActiveMeta.broadcasterUserId) throw new Error('لم يتم العثور على broadcaster_user_id للقناة من بيانات Kick. حدّث معلومات القناة.');
+  function chatShowConfirmedEcho(content, reply, account, responseData, responseMessage){
+    account=account||{};
+    var localAuthor=String(account.username||sessionStorage.getItem('kick_username')||'حسابي');
+    var serverId=(responseData&&responseData.data&&(responseData.data.message_id||responseData.data.id))||(responseData&&(responseData.message_id||responseData.id));
+    var localId=serverId?String(serverId):('confirmed-local-'+String(account.id||'kick')+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,8));
+    if(serverId){var already=Array.from(document.querySelectorAll('.chat-message[data-chat-message-id]')).some(function(n){return String(n.dataset.chatMessageId)===String(serverId);});if(already){var liveArea=$('chatMessages');if(liveArea){liveArea.scrollTop=liveArea.scrollHeight;chatAutoScroll=true;}return;}}
+    var localSender={user_id:account.user_id||null,username:localAuthor,slug:account.slug||account.username||'',channel_slug:account.slug||account.username||'',profile_picture:account.profile_picture||'',identity:{badges:[]}};
+    var raw={id:localId,created_at:new Date().toISOString(),content:String(content),sender:localSender,
+      replies_to:reply?{message_id:String(reply.id),content:reply.text||'',sender:{username:reply.author||''}}:null};
+    if(responseMessage&&typeof responseMessage==='object'){
+      var candidate=chatRawMessageDetails(responseMessage).data;
+      if(candidate&&typeof candidate==='object'){
+        raw=Object.assign({},candidate,raw);
+        raw.id=String(serverId||candidate.id||candidate.message_id||localId);
+        raw.content=String(candidate.content!=null?candidate.content:(typeof candidate.message==='string'?candidate.message:content));
+        raw.created_at=candidate.created_at||candidate.timestamp||new Date().toISOString();
+        raw.sender=candidate.sender||candidate.user||localSender;
+        if(reply&&!raw.replies_to&&!raw.reply_to)raw.replies_to={message_id:String(reply.id),content:reply.text||'',sender:{username:reply.author||''}};
+      }
+    }
+    var info=chatRawMessageDetails(raw),messageId=info.id||localId;
+    var exists=Array.from(document.querySelectorAll('.chat-message[data-chat-message-id]')).some(function(n){return String(n.dataset.chatMessageId)===String(messageId);});
+    if(exists)return;
+    // In case a live packet marked this ID seen but its DOM node was not inserted, clear only that stale marker.
+    chatSeenIds.delete(String(messageId));
+    var added=chatAppendMessage(raw,'confirmed-send',true);
+    if(!added){
+      raw.id='confirmed-local-ui-'+Date.now()+'-'+Math.random().toString(36).slice(2,9);
+      chatSeenIds.delete(String(raw.id));
+      added=chatAppendMessage(raw,'confirmed-send',true);
+    }
+    var area=$('chatMessages');if(area&&added){area.scrollTop=area.scrollHeight;chatAutoScroll=true;}
+    if(!added)console.error('Kick accepted the chat send, but the local chat renderer could not insert the confirmation row.');
+  }
+  async function chatPostOfficial(content, reply, accountId){
+    var token;
+    try{token=await kickGetTokenForAccount(accountId||kickActiveOAuthId());}catch(e){throw new Error('اتصل بحسابك قبل الإرسال.');}
+    if(!token)throw new Error('سجّل الدخول بحساب يسمح له بإرسال الرسائل.');
+    if(!chatActiveMeta || !chatActiveMeta.broadcasterUserId) throw new Error('تعذر إرسال الرسالة إلى القناة الآن. حدّث معلومات القناة وحاول مرة أخرى.');
     var body={type:'user',broadcaster_user_id:Number(chatActiveMeta.broadcasterUserId),content:content};
     if(reply)body.reply_to_message_id=String(reply.id);
     var res=await fetch('/api/kick/chat',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
     var data=await res.json().catch(function(){return {};});
-    if(!res.ok) throw new Error((res.status===401?'توكن Kick الرسمي غير صالح أو انتهى.':res.status===403?'Kick رفض الإرسال؛ تأكد من صلاحية chat:write.':res.status===429?'Kick حدّد معدل الإرسال مؤقتًا.':'فشل إرسال الرسالة عبر Kick API (HTTP '+res.status+').')+(data.message?' '+String(data.message):''));
-    if(data && data.data && data.data.is_sent===false)throw new Error('Kick لم يؤكد إرسال الرسالة.');
+    if(res.status===401){try{token=await kickRefreshOfficialToken(true,accountId||kickActiveOAuthId());res=await fetch('/api/kick/chat',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});data=await res.json().catch(function(){return {};});}catch(refreshError){throw new Error('انتهت جلسة الحساب. سجّل الدخول مرة أخرى.');}}
+    if(!res.ok){var sendErr=new Error(res.status===401?'انتهت جلسة الحساب. سجّل الدخول مرة أخرى.':res.status===403?'الحساب الحالي غير مسموح له بإرسال الرسالة.':res.status===429?'حاول الإرسال بعد قليل.':'تعذر إرسال الرسالة. حاول مرة أخرى.');sendErr.status=res.status;throw sendErr;}
+    if(data && data.data && data.data.is_sent===false)throw new Error('تعذر تأكيد إرسال الرسالة.');
+    // The API success is authoritative. Render immediately, then reconcile the later live event by ID/text.
+    var account=kickGetOAuthAccount(accountId||kickActiveOAuthId())||{};
+    var responseMessage=data&&data.data&&data.data.message&&typeof data.data.message==='object'?data.data.message:(data&&data.message&&typeof data.message==='object'?data.message:null);
+    chatShowConfirmedEcho(content,reply,account,data,responseMessage);
     return data;
   }
   window.chatSendComposer=async function(){
@@ -7177,35 +7480,46 @@ async function runTokenCheck(){
     if(!content){toast('اكتب رسالة الأول.','i');return;}
     if(Array.from(content).length>500){toast('الحد الأقصى للرسالة 500 حرف.','e');return;}
     if(!chatActiveMeta || !chatActiveMeta.chatroomId){toast('غرفة الشات لسه مش جاهزة. أعد الاتصال بالقناة.','e');return;}
-    var selected=select?select.value:'';
-    var oauth=!!sessionStorage.getItem('kick_access_token');
-    if(chatReplyTarget && (!oauth || selected!=='oauth')){
-      toast('لإرسال رد مرتبط بالرسالة فعليًا، اختار «حساب Kick الرسمي» واتصل بتوكن chat:write. لن تتحول الرسالة إلى رسالة عادية تلقائيًا.','e');return;
+    var selected=select?select.value:'', officialId='';
+    var officialSelected=selected==='oauth'||selected.indexOf('oauth:')===0;
+    if(selected.indexOf('oauth:')===0)officialId=selected.slice(6);else if(officialSelected)officialId=kickActiveOAuthId();
+    var oauthAccount=officialSelected?(kickGetOAuthAccount(officialId)||null):null;
+    var oauth=!!oauthAccount||(!officialId&&!!sessionStorage.getItem('kick_access_token'));
+    if(chatReplyTarget && (!oauth || !officialSelected)){
+      toast('اختار حسابًا متصلًا من القائمة لإرسال رد على الرسالة.','e');return;
     }
     var account=null;
     if(!chatReplyTarget && selected.indexOf('account:')===0){var accountId=Number(selected.slice(8));account=Array.isArray(accounts)?accounts.find(function(a){return a&&Number(a.id)===accountId;}):null;}
-    if(!chatReplyTarget && selected==='oauth' && !oauth){toast('اتصال Kick الرسمي غير موجود.','e');return;}
-    if(!chatReplyTarget && selected!=='oauth' && !account){toast('أضف حسابًا صالحًا أو اتصل بحساب Kick الرسمي.','e');return;}
+    if(!chatReplyTarget && officialSelected && !oauth){toast('اختار حسابًا متصلًا من القائمة.','e');return;}
+    if(!chatReplyTarget && !officialSelected && !account){toast('أضف حسابًا صالحًا أو اتصل بحساب Kick متصل.','e');return;}
     var replySnapshot=chatReplyTarget;
     btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span> جاري الإرسال';
     if(input)input.disabled=true;
     try{
-      if(selected==='oauth' || replySnapshot){
-        await chatPostOfficial(content,replySnapshot);
+      if(officialSelected || replySnapshot){
+        var activityId=officialId||kickActiveOAuthId();if(activityId&&window.kickSetOAuthActivity)window.kickSetOAuthActivity(activityId,'sending','');
+        await chatPostOfficial(content,replySnapshot,activityId||undefined);
+        if(activityId&&window.kickSetOAuthActivity)window.kickSetOAuthActivity(activityId,'idle','');
       }else{
         await sendMessage(String(chatActiveMeta.chatroomId),content,account.token,account.workingSendProxy);
+        // Legacy token sender has no official message echo; render only after sendMessage succeeds.
+        var legacyMsg={id:'confirmed-legacy-'+String(account.id)+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),created_at:new Date().toISOString(),content:content,sender:{username:account.username||'حسابي',channel_slug:account.username||''}};
+        chatAppendMessage(legacyMsg,'confirmed-send',true);
       }
       if(input)input.value='';chatUpdateChars();window.chatCancelReply();
-      toast(replySnapshot?'تم إرسال الرد عبر Kick API.':'تم إرسال الرسالة إلى شات Kick.','s');
-      // ما بنضيفش رسالة وهمية؛ الرسالة تظهر لما تصل من اتصال الشات الحقيقي.
-    }catch(e){toast(String(e&&e.message||'فشل الإرسال'),'e');}
+      toast(replySnapshot?'تم إرسال الرد وتسجيله في الشات.':'تم إرسال الرسالة وإظهارها في الشات.','s');
+      if(window.BBKTools)window.BBKTools.markQueueSendSuccess(content,chatActiveSlug,selected);
+    }catch(e){
+      if(officialSelected){var failedId=officialId||kickActiveOAuthId();if(failedId&&window.kickSetOAuthActivity)window.kickSetOAuthActivity(failedId,'error',String(e&&e.message||'فشل الإرسال'));}
+      if(window.BBKTools)window.BBKTools.offerQueueOnFailure({content:content,slug:chatActiveSlug,accountValue:selected,reply:replySnapshot||null,status:Number(e&&e.status||0),message:String(e&&e.message||'فشل الإرسال')});
+      toast(String(e&&e.message||'فشل الإرسال'),'e');
+    }
     finally{btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> إرسال';if(input){input.disabled=false;input.focus();}}
   };
   window.chatConnectOAuth=function(){
-    if(sessionStorage.getItem('kick_access_token')){toast('حساب Kick الرسمي متصل بالفعل.','s');chatRenderOAuthStatus();return;}
     if(typeof kickOfficialLogin==='function'){
-      try{kickOfficialLogin();}catch(e){toast('تعذر بدء اتصال Kick الرسمي. راجع إعدادات OAuth وRedirect URI.','e');}
-    }else toast('ميزة OAuth الرسمية غير جاهزة في هذا الإصدار.','e');
+      try{kickOfficialLogin(true);}catch(e){toast('تعذر بدء تسجيل الدخول. حاول مرة أخرى.','e');}
+    }else toast('الاتصال بحساب Kick غير متاح الآن.','e');
   };
 
   // مؤشر القراءة يبقى في آخر الرسائل فقط عندما يكون المستخدم بالفعل عند نهاية الشات.
@@ -7218,10 +7532,14 @@ async function runTokenCheck(){
       if(area.scrollTop<24 && (chatHistoryCanLoadMore||chatArchiveHasMore||chatHistoryFailed) && !chatHistoryLoading && !chatArchiveLoadingChannels.has(chatActiveSlug) && !chatHistoryAutoLatch){chatHistoryAutoLatch=true;chatLoadOlderHistory();}
     });
     var input=$('chatComposerInput');if(input){input.addEventListener('input',chatUpdateChars);input.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();chatSendComposer();}});}
+    var pickerMenu=$('chatAccountPickerMenu');if(pickerMenu)pickerMenu.addEventListener('click',function(e){var choice=e.target.closest('[data-account-value]');if(choice)window.chatChooseSendAccount(choice.getAttribute('data-account-value'));});
+    var pickerSelect=$('chatSendAccount');if(pickerSelect)pickerSelect.addEventListener('change',chatUpdateAccountPicker);
+    document.addEventListener('click',function(e){var picker=$('chatAccountPicker');if(picker&&!picker.contains(e.target)){var menu=$('chatAccountPickerMenu'),button=$('chatAccountPickerButton');if(menu)menu.classList.remove('open');if(button)button.setAttribute('aria-expanded','false');}});
     if($('chatAddSlug'))$('chatAddSlug').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chatAddChannelFromInput();}});
     chatRenderAccountOptions();chatRenderCatalog();chatUpdateChars();
-    // مزامنة هوية OAuth الرسمية بعد أن ينتهي سكريبت OAuth الأصلي من فحص التوكن.
+    // مزامنة هوية حساب Kickة بعد أن ينتهي سكريبت OAuth الأصلي من فحص التوكن.
     setTimeout(function(){chatRenderAccountOptions();chatRenderCatalog();},500);
+    window.chatRenderAccountOptions=chatRenderAccountOptions;
   });
   window.addEventListener('beforeunload',function(){chatStopSocket(true);});
   // السماح لسكربت OAuth الحالي بتحديث اسم حساب Kick في تمييز الرسائل الخاصة بالمستخدم.
@@ -7229,4 +7547,194 @@ async function runTokenCheck(){
 })();
 </script>
 
+
+<style>
+
+/* v3: unified accounts, visible sender avatars, meaningful live status indicators */
+.bot-list .bot-card{align-items:center;min-width:0}
+.bot-list .bot-card .bot-avatar,.bot-list .bot-card .account-list-avatar{width:42px;height:42px;border-radius:12px;object-fit:cover;flex-shrink:0;background:#172218;border:1px solid rgba(255,255,255,.1)}
+.bot-list .bot-card .account-list-avatar.fallback{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:15px;font-weight:900}
+.bot-list .account-type-label{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#9bb39c;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:2px 5px;margin-inline-start:5px}
+.bot-list .account-state-dot-btn{appearance:none;border:0;background:transparent;padding:2px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;min-width:17px;min-height:17px}
+.bot-list .bot-status .dot.idle{background:#4eabff;box-shadow:0 0 6px rgba(78,171,255,.42)}
+.bot-list .bot-status .dot.failed{background:#ff4d5d;box-shadow:0 0 7px rgba(255,77,93,.55)}
+.bot-list .bot-status .dot.sending{background:#53fc18;box-shadow:0 0 7px rgba(83,252,24,.6)}
+.kick-account-card{position:relative}
+.kick-account-state{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#a2b5a2;margin-top:4px}
+.kick-account-state .dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:#4eabff}
+.kick-account-state .dot.sending{background:#53fc18;box-shadow:0 0 7px rgba(83,252,24,.5)}
+.kick-account-state .dot.failed{background:#ff4d5d;box-shadow:0 0 7px rgba(255,77,93,.5)}
+.chat-account-select-native{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;left:-9999px!important}
+.chat-account-picker{position:relative;min-width:180px;max-width:280px;flex:0 1 240px;z-index:12}
+.chat-account-picker-button{display:flex;align-items:center;gap:8px;width:100%;min-width:0;padding:7px 9px;background:rgba(255,255,255,.04);border:1px solid rgba(83,252,24,.25);border-radius:10px;color:var(--fg);font:inherit;cursor:pointer;text-align:right}
+.chat-picker-avatar{width:28px;height:28px;flex:0 0 28px;object-fit:cover;border-radius:8px;background:#172218;border:1px solid rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;color:var(--accent);font-size:11px;font-weight:900}
+.chat-picker-avatar.fallback{display:inline-flex;align-items:center;justify-content:center}
+.chat-picker-selected-label{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;font-weight:800}
+.chat-picker-chevron{font-size:9px;color:var(--muted)}
+.chat-account-picker-menu{display:none;position:absolute;top:auto;bottom:calc(100% + 6px);right:0;left:0;max-height:min(245px,calc(100dvh - 150px));overflow:auto;padding:5px;background:#0b130d;border:1px solid rgba(83,252,24,.3);border-radius:12px;box-shadow:0 -15px 35px rgba(0,0,0,.45);overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transform-origin:bottom center}
+.chat-account-picker-menu.open{display:block} .chat-composer,.chat-composer-top{overflow:visible!important} .chat-account-picker:has(.chat-account-picker-menu.open) .chat-picker-chevron{transform:rotate(180deg)}
+.chat-account-choice{display:flex;width:100%;gap:8px;align-items:center;text-align:right;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--fg);padding:7px;cursor:pointer;font:inherit;min-width:0}
+.chat-account-choice:hover,.chat-account-choice.selected{background:rgba(83,252,24,.08);border-color:rgba(83,252,24,.28)}
+.chat-account-choice-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.chat-account-choice-copy b{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chat-account-choice-copy small{font-size:9px;color:var(--muted)}
+.chat-account-choice-status{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#4eabff}
+.chat-account-choice-status.sending{background:#53fc18;box-shadow:0 0 5px rgba(83,252,24,.55)}
+.chat-account-choice-status.failed{background:#ff4d5d;box-shadow:0 0 5px rgba(255,77,93,.55)}
+.chat-account-choice-empty{font-size:11px;color:var(--muted);padding:12px;text-align:center}
+.chat-role-badge.accepted{color:#b4d5ff;border-color:rgba(86,169,255,.38);background:rgba(86,169,255,.09)}
+.chat-send-status-note{font-size:9px;color:#a9ceff;margin-top:3px}
+@media(max-width:430px){.chat-account-picker{min-width:125px;flex:1}.chat-account-picker-button{padding:5px;gap:5px}.chat-picker-avatar{width:24px;height:24px;flex-basis:24px}.chat-picker-selected-label{font-size:9px}.bot-list .bot-card .account-list-avatar,.bot-list .bot-card .bot-avatar{width:35px;height:35px}}
+
+/* Account/profile workspace added in this release */
+.chat-author-profile{border:0!important;background:transparent!important;padding:0!important;margin:0!important;font:inherit!important;font-weight:800!important;cursor:pointer!important;text-decoration:underline;text-decoration-color:rgba(255,255,255,.22);text-underline-offset:3px}
+.chat-author-profile:hover{color:var(--accent)!important}
+.chat-channel-profile-link{background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;font-weight:900;cursor:pointer;text-align:inherit}.chat-channel-profile-link:hover{color:var(--accent)}
+.chat-message.is-confirmed-send{border-inline-start:3px solid #56a9ff;background:linear-gradient(90deg,rgba(86,169,255,.10),transparent 70%)}
+.kick-account-overlay{position:fixed;inset:0;z-index:16000;display:none;background:rgba(3,8,4,.88);backdrop-filter:blur(10px);padding:12px;align-items:center;justify-content:center}
+.kick-account-overlay.open{display:flex}
+.kick-account-window{width:min(980px,100%);max-height:min(92dvh,900px);overflow:auto;background:#0c140e;border:1px solid rgba(83,252,24,.35);border-radius:20px;box-shadow:0 25px 100px #000b;color:#eafbe0}
+.kick-account-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(8,15,9,.96);border-bottom:1px solid rgba(255,255,255,.1)}
+.kick-account-head h2{font-size:18px;margin:0;flex:1}.kick-account-body{padding:16px;display:grid;grid-template-columns:minmax(230px,.85fr) minmax(0,1.3fr);gap:14px}
+.kick-profile-lookup-bar{grid-column:1/-1;display:flex;gap:8px;align-items:center;min-width:0}.kick-profile-lookup-bar input{flex:1;min-width:0;background:#101a12;border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:11px 12px;color:#eafbe0;font:inherit;outline:none}.kick-profile-lookup-bar input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(83,252,24,.12)}.kick-profile-lookup-bar button{white-space:nowrap}@media(max-width:420px){.kick-profile-lookup-bar{align-items:stretch;flex-direction:column}.kick-profile-lookup-bar button{width:100%}}
+.kick-account-list{display:flex;flex-direction:column;gap:9px}.kick-account-card{display:grid;grid-template-columns:46px minmax(0,1fr);gap:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);border-radius:13px;padding:10px}
+.kick-account-card.active{border-color:var(--accent);background:rgba(83,252,24,.09)}.account-panel-group-label{font-size:10px;font-weight:900;color:var(--accent);padding:5px 2px;border-bottom:1px solid rgba(83,252,24,.16);margin:3px 0 0}.kick-account-card .kick-account-state{appearance:none;border:0;background:transparent;cursor:pointer;font:inherit;text-align:right}.kick-account-card .kick-account-state .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-left:5px;background:#4eabff}.kick-account-card .kick-account-state .dot.sending{background:#53fc18}.kick-account-card .kick-account-state .dot.failed{background:#ff4d5d}.kick-account-avatar{width:46px;height:46px;border-radius:12px;object-fit:cover;background:#202b22}.kick-account-info{min-width:0}.kick-account-name{font-weight:900;overflow-wrap:anywhere}.kick-account-sub{font-size:11px;color:#91a994;margin-top:3px;overflow-wrap:anywhere}.kick-account-actions{display:flex;flex-wrap:wrap;gap:5px;grid-column:1/-1}.kick-account-actions button,.kick-account-actions a{font:inherit;font-size:11px;padding:7px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:inherit;text-decoration:none;cursor:pointer}
+.kick-profile-pane{min-width:0;border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.025)}.kick-profile-banner{height:118px;background:linear-gradient(130deg,rgba(83,252,24,.18),#111d14);overflow:hidden}.kick-profile-banner img{width:100%;height:100%;object-fit:cover}.kick-profile-summary{padding:15px}.kick-profile-avatar{width:76px;height:76px;border:3px solid #0c140e;border-radius:20px;object-fit:cover;background:#243027;margin-top:-52px;position:relative}.kick-profile-title{font-size:21px;font-weight:900;overflow-wrap:anywhere}.kick-profile-slug{font-size:12px;color:#9db39f;margin-top:2px}.kick-profile-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.kick-profile-stat{padding:10px;border:1px solid rgba(255,255,255,.09);border-radius:10px;background:rgba(255,255,255,.025)}.kick-profile-stat small{display:block;color:#91a994;font-size:10px}.kick-profile-stat b{display:block;margin-top:4px;overflow-wrap:anywhere}.kick-profile-actions{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.kick-profile-actions button,.kick-profile-actions a{font:inherit;font-size:12px;padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;text-decoration:none;cursor:pointer}.kick-profile-actions .primary{background:linear-gradient(135deg,#53fc18,#9dff6b);color:#000;border-color:#fff;font-weight:900}.kick-profile-note{font-size:11px;line-height:1.7;color:#9db39f;border-top:1px solid rgba(255,255,255,.1);padding-top:10px;margin-top:12px}.kick-profile-empty{padding:20px;color:#9db39f;font-size:13px;line-height:1.7}.kick-profile-error{color:#ffb1b1}.kick-profile-live{display:inline-flex;align-items:center;gap:6px;color:#ff8585;font-size:11px;font-weight:900}.kick-profile-live .dot{width:7px;height:7px;border-radius:100%;background:#ff5252}
+.kick-live-heading{font-size:13px;margin:14px 0 8px;color:#eafbe0}.kick-live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:12px}.kick-live-card{display:block;min-width:0;border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;color:inherit;text-decoration:none;background:rgba(255,255,255,.035)}.kick-live-card>img,.kick-live-thumb{display:flex;width:100%;height:105px;object-fit:cover;align-items:center;justify-content:center;background:#162218;color:#76e457}.kick-live-thumb{font-size:24px}.kick-live-card-copy{padding:8px;display:flex;flex-direction:column;gap:5px}.kick-live-card-copy b{font-size:12px;line-height:1.45}.kick-live-card-copy span{font-size:10px;color:#9db39f}
+@media(max-width:680px){.kick-account-body{grid-template-columns:1fr;padding:10px}.kick-account-head h2{font-size:15px}.kick-account-window{max-height:95dvh;border-radius:15px}.kick-profile-banner{height:90px}.kick-account-overlay{padding:6px}}
+</style>
+<div class="kick-account-overlay" id="kickAccountOverlay" role="dialog" aria-modal="true" aria-labelledby="kickAccountOverlayTitle">
+  <div class="kick-account-window">
+    <div class="kick-account-head"><i class="fas fa-id-card" style="color:var(--accent)"></i><h2 id="kickAccountOverlayTitle">الحسابات والملفات</h2><button class="btn btn-ghost btn-xs" type="button" onclick="kickCloseAccountsPanel()" aria-label="إغلاق"><i class="fas fa-xmark"></i> إغلاق</button></div>
+    <div class="kick-account-body">
+      <div class="kick-profile-lookup-bar"><input id="kickPublicProfileSlug" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="اكتب اسم مستخدم Kick لعرض ملفه"><button class="btn btn-fire btn-xs" type="button" onclick="kickLookupPublicProfile()"><i class="fas fa-magnifying-glass"></i> عرض الملف</button></div>
+      <section><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><b style="flex:1">الحسابات المضافة</b><button class="btn btn-fire btn-xs" onclick="chatConnectOAuth()"><i class="fas fa-plus"></i> إضافة</button></div><div id="kickAccountsList" class="kick-account-list"></div><div class="kick-profile-note">اختار حسابًا من القائمة، أو ابحث عن أي مستخدم لعرض ملفه العام.</div></section>
+      <section class="kick-profile-pane" id="kickProfilePane"><div class="kick-profile-empty">اختار حسابًا من القائمة لعرض ملفه، أو افتح ملف شخص من الشات.</div></section>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var paneUser=null, paneAccountId=null, paneContextBroadcaster=null;
+  function esc(v){return typeof escH==='function'?escH(String(v==null?'':v)):String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function fmt(v){if(v===null||v===undefined||v==='')return 'غير متاح';return String(v);}
+  function first(o,keys){for(var i=0;i<keys.length;i++){var x=o;var ks=keys[i].split('.');for(var j=0;j<ks.length;j++)x=x&&x[ks[j]];if(x!==null&&x!==undefined&&x!=='')return x;}return null;}
+  function getList(){return typeof kickReadOAuthAccounts==='function'?kickReadOAuthAccounts():[];}
+  window.kickOpenAccountsPanel=function(){var overlay=document.getElementById('kickAccountOverlay');if(overlay)overlay.classList.add('open');kickRenderAccountsPanel();var active=kickGetOAuthAccount(kickActiveOAuthId());if(active)kickViewAccountProfile(active.id);};
+  window.kickCloseAccountsPanel=function(){var overlay=document.getElementById('kickAccountOverlay');if(overlay)overlay.classList.remove('open');};
+  window.kickViewPublicProfileBySlug=async function(rawSlug, contextBroadcaster){
+    var slug=String(rawSlug||'').trim().replace(/^@+/, '').replace(/^https?:\/\/(www\.)?kick\.com\//i,'').replace(/[?#].*$/,'').replace(/\/+$/,'').toLowerCase();
+    if(!/^[a-z0-9_-]{1,50}$/.test(slug)){if(typeof toast==='function')toast('اكتب اسم مستخدم Kick صحيح.','e');return;}
+    var overlay=document.getElementById('kickAccountOverlay'),pane=document.getElementById('kickProfilePane'),search=document.getElementById('kickPublicProfileSlug');
+    if(overlay)overlay.classList.add('open');if(search)search.value=slug;
+    if(pane)pane.innerHTML='<div class="kick-profile-empty"><span class="spinner-sm"></span> جاري تحميل الملف الشخصي…</div>';
+    paneAccountId=kickActiveOAuthId()||null;paneContextBroadcaster=contextBroadcaster||null;
+    try{var d=await loadProfile(slug,null);renderProfile(d,slug,slug,kickActiveOAuthId()||null,contextBroadcaster||null);}
+    catch(e){if(pane)pane.innerHTML='<div class="kick-profile-empty kick-profile-error">تعذر تحميل الملف دلوقتي. جرّب مرة أخرى.<div class="kick-profile-actions"><a class="primary" href="https://kick.com/'+encodeURIComponent(slug)+'" target="_blank" rel="noopener noreferrer">فتح الملف على Kick</a></div></div>';}
+  };
+  window.kickLookupPublicProfile=function(){var input=document.getElementById('kickPublicProfileSlug');return window.kickViewPublicProfileBySlug(input&&input.value||'');};
+  window.kickOpenActiveChannelProfile=async function(){var slug=window.__badboyActiveChannelSlug||'';if(!slug){if(typeof toast==='function')toast('اختار قناة الأول.','i');return;}return window.kickViewPublicProfileBySlug(slug,window.__badboyActiveBroadcasterId||null);};
+  window.kickRenderAccountsPanel=function(){
+    var listEl=document.getElementById('kickAccountsList'),count=document.getElementById('kickAccountsCount'),list=getList(),legacy=Array.isArray(accounts)?accounts:[];
+    if(count)count.textContent=String(list.length+legacy.length);if(!listEl)return;
+    if(!list.length&&!legacy.length){listEl.innerHTML='<div class="kick-profile-empty">مفيش حسابات مضافة لسه. أضف توكنًا أو اضغط «إضافة» للاتصال بحساب Kick رسمي، ويمكنك إضافة أكثر من حساب.</div>';return;}
+    var active=kickActiveOAuthId(),html='';
+    if(list.length){html+='<div class="account-panel-group-label">حسابات متصلة</div>';html+=list.map(function(a,i){var status=a.last_error?'failed':a.activity_state==='sending'?'sending':'idle';var statusText=a.last_error?'خطأ: اضغط الدائرة لمعرفة السبب':a.activity_state==='sending'?'يرسل الآن':'خامل / غير مجدول';var avatar=a.profile_picture?'<img class="kick-account-avatar" src="'+esc(a.profile_picture)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<div class="kick-account-avatar fallback" style="display:grid;place-items:center">'+esc(String(a.username||'K').charAt(0).toUpperCase())+'</div>';return '<article class="kick-account-card '+(String(a.id)===String(active)?'active':'')+'">'+avatar+'<div class="kick-account-info"><div class="kick-account-name">'+esc(a.username||('حساب '+(i+1)))+'</div><div class="kick-account-sub">@'+esc(a.slug||a.username||'')+'</div><button class="kick-account-state" type="button" onclick="showAccountStatus(\'oauth\',\''+esc(a.id)+'\')" title="اضغط لعرض السبب"><span class="dot '+status+'"></span>'+esc(statusText)+'</button></div><div class="kick-account-actions"><button type="button" onclick="kickActivateAndViewAccount(\''+esc(a.id)+'\')">استخدام الحساب</button><button type="button" onclick="kickViewAccountProfile(\''+esc(a.id)+'\')">ملفي</button><button type="button" onclick="kickDisconnectAccount(\''+esc(a.id)+'\')">فصل</button></div></article>';}).join('');}
+    if(legacy.length){html+='<div class="account-panel-group-label">حسابات مضافة يدويًا</div>';html+=legacy.map(function(b){var state=b.lastError?'failed':(b.isSending||b.activityState==='sending')?'sending':'idle';var text=b.lastError?'خطأ: اضغط الدائرة لمعرفة السبب':(b.isSending||b.activityState==='sending')?'يرسل الآن':'خامل / غير مجدول';var avatar=b.profile_picture||b.profilePicture?'<img class="kick-account-avatar" src="'+esc(b.profile_picture||b.profilePicture)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<div class="kick-account-avatar fallback" style="display:grid;place-items:center">'+esc(String(b.username||'K').charAt(0).toUpperCase())+'</div>';return '<article class="kick-account-card">'+avatar+'<div class="kick-account-info"><div class="kick-account-name">'+esc(b.username||('حساب '+b.id))+'</div><div class="kick-account-sub">توكن مضاف يدويًا<br>'+((b.channels||[]).length)+' قناة في الإعدادات</div><button class="kick-account-state" type="button" onclick="showAccountStatus(\'token\',\''+esc(b.id)+'\')"><span class="dot '+state+'"></span>'+esc(text)+'</button></div><div class="kick-account-actions"><button type="button" onclick="kickUseLegacyAccount('+Number(b.id)+')">استخدام للإرسال</button><button type="button" onclick="kickViewLegacyAccountProfile('+Number(b.id)+')">ملفي</button><button type="button" onclick="openSettings('+Number(b.id)+')">الإعدادات</button></div></article>';}).join('');}
+    listEl.innerHTML=html;
+    if(typeof renderBotList==='function')renderBotList();
+  };
+  window.kickActivateAndViewAccount=function(id){if(kickActivateOAuthAccount(id)){paneAccountId=String(id);paneUser=null;kickRenderAccountsPanel();kickViewAccountProfile(id);var sel=document.getElementById('chatSendAccount');if(sel&&Array.from(sel.options).some(function(o){return o.value==='oauth:'+String(id);}))sel.value='oauth:'+String(id);if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();if(typeof toast==='function')toast('تم اختيار الحساب للإرسال.','s');}};
+  window.kickDisconnectAccount=function(id){if(!confirm('تفصل الحساب ده من جلسة التطبيق؟'))return;kickRemoveOAuthAccount(id);if(String(paneAccountId)===String(id)){paneAccountId=null;paneUser=null;document.getElementById('kickProfilePane').innerHTML='<div class="kick-profile-empty">تم فصل الحساب. اختار حسابًا آخر.</div>';}kickRenderAccountsPanel();};
+  async function loadProfile(slug, accountId){
+    var headers={Accept:'application/json'};
+    if(!slug){var token=await kickGetTokenForAccount(accountId||kickActiveOAuthId());headers.Authorization='Bearer '+token;}
+    var url='/api/kick/profile'+(slug?'?slug='+encodeURIComponent(slug):'');
+    var r=await fetch(url,{headers:headers,cache:'no-store',credentials:'same-origin'});
+    var d=await r.json().catch(function(){return {};});
+    if(!r.ok)throw new Error(d.message||'تعذر تحميل الملف الشخصي الآن.');
+    return d;
+  }
+  function renderProfile(data, label, slug, accountId, contextBroadcaster){
+    paneUser={slug:slug||'',user:first(data,['user'])||{},channel:first(data,['channel'])||{},targetUserId:first(data,['target_user_id'])||first(first(data,['channel'])||{},['broadcaster_user_id','user_id','user.user_id','user.id'])||null,livestreams:Array.isArray(data.livestreams)?data.livestreams:[]};
+    paneAccountId=accountId||kickActiveOAuthId();paneContextBroadcaster=contextBroadcaster||null;
+    var u=paneUser.user,c=paneUser.channel,streams=paneUser.livestreams.slice(0,12),l=streams[0]||null;
+    var username=first(u,['username','slug','name'])||first(c,['slug','user.username'])||slug||label||'حساب Kick';
+    var userSlug=first(u,['username','slug','channel_slug'])||first(c,['slug'])||slug||'';
+    var pfp=first(u,['profile_picture','profile_pic','avatar'])||first(c,['user.profile_picture','profile_picture'])||'';
+    var banner=first(c,['banner_picture','banner_image','cover_picture'])||'';
+    var channelStream=first(c,['stream'])||{};
+    var live=!!l || channelStream.is_live===true;
+    var title=first(l,['stream_title','session_title','title','name'])||first(c,['stream_title'])||'لا يوجد بث مباشر';
+    var category=first(l,['category.name','category.title','category'])||first(c,['category.name','category.title'])||'';
+    var viewers=first(l,['viewer_count','viewers'])||first(channelStream,['viewer_count'])||0;
+    var bio=first(u,['bio','description'])||first(c,['channel_description','description'])||'';
+    var id=paneUser.targetUserId||first(c,['broadcaster_user_id','user_id','user.user_id','user.id'])||first(u,['user_id','id','streamer_id'])||'';
+    var streamCards=streams.map(function(st){
+      var thumb=first(st,['thumbnail','thumbnail_url','thumbnail.url','cover.url'])||'';
+      var stTitle=first(st,['stream_title','session_title','title'])||'بث مباشر';
+      var stCategory=first(st,['category.name','category.title','category'])||'';
+      var stViewers=first(st,['viewer_count','viewers']);
+      var stSlug=first(st,['slug','channel.slug'])||userSlug;
+      return '<a class="kick-live-card" href="https://kick.com/'+encodeURIComponent(stSlug)+'" target="_blank" rel="noopener noreferrer">'+(thumb?'<img src="'+esc(thumb)+'" loading="lazy" alt="" referrerpolicy="no-referrer">':'<div class="kick-live-thumb"><i class="fas fa-tower-broadcast"></i></div>')+'<div class="kick-live-card-copy"><b>'+esc(stTitle)+'</b><span>'+esc(stCategory||'تصنيف غير متاح')+' · '+esc(stViewers==null?'—':Number(stViewers).toLocaleString())+' مشاهدة</span></div></a>';
+    }).join('');
+    var actions='<a class="primary" href="https://kick.com/'+encodeURIComponent(userSlug||slug||'')+'" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> فتح على Kick</a><button type="button" onclick="kickFollowOnOfficialSite()"><i class="fas fa-user-plus"></i> فتح المتابعة على Kick</button>';
+    if(contextBroadcaster&&id&&String(contextBroadcaster)!==String(id)) actions+='<button type="button" onclick="kickModerateProfile(\'timeout\')"><i class="fas fa-volume-xmark"></i> إسكات مؤقت (Timeout)</button><button type="button" onclick="kickModerateProfile(\'ban\')"><i class="fas fa-ban"></i> حظر من الشات</button><button type="button" onclick="kickModerateProfile(\'unban\')"><i class="fas fa-user-check"></i> إلغاء الحظر</button>';
+    var content='<div class="kick-profile-banner">'+(banner?'<img src="'+esc(banner)+'" alt="" referrerpolicy="no-referrer">':'')+'</div><div class="kick-profile-summary">'+(pfp?'<img class="kick-profile-avatar" src="'+esc(pfp)+'" alt="" referrerpolicy="no-referrer">':'<div class="kick-profile-avatar" style="display:grid;place-items:center;margin-top:-52px;position:relative"><i class="fas fa-user"></i></div>')+'<div class="kick-profile-title">'+esc(username)+'</div><div class="kick-profile-slug">@'+esc(userSlug||'غير متاح')+'</div>'+(live?'<div class="kick-profile-live"><span class="dot"></span> يبث الآن</div>':'<div class="kick-account-sub">غير مباشر حاليًا</div>')+'<div class="kick-profile-stats"><div class="kick-profile-stat"><small>عنوان البث</small><b>'+esc(title)+'</b></div><div class="kick-profile-stat"><small>التصنيف</small><b>'+esc(category||'غير متاح')+'</b></div><div class="kick-profile-stat"><small>المشاهدون</small><b>'+esc(live?viewers:'غير مباشر')+'</b></div><div class="kick-profile-stat"><small>القناة</small><b>'+esc(first(c,['slug'])||userSlug||'غير متاح')+'</b></div><div class="kick-profile-stat"><small>وصف القناة</small><b>'+esc(bio||'غير متاح')+'</b></div><div class="kick-profile-stat"><small>لغة البث</small><b>'+esc(first(l,['language','language_code'])||first(channelStream,['language'])||first(c,['language'])||'غير متاح')+'</b></div></div><div class="kick-profile-actions">'+actions+'</div>'+(streamCards?'<h3 class="kick-live-heading">البثوث المباشرة المتاحة</h3><div class="kick-live-grid">'+streamCards+'</div>':'<div class="kick-profile-note">لا توجد بثوث مباشرة متاحة حاليًا. تقدر تفتح صفحة القناة لمشاهدة المحتوى الآخر.</div>')+'<div class="kick-profile-note">بعض التفاصيل والإجراءات بتختلف حسب حالة القناة وحسابك.</div></div>';
+    var pane=document.getElementById('kickProfilePane');if(pane)pane.innerHTML=content;
+  }
+  window.kickViewAccountProfile=async function(id){var a=kickGetOAuthAccount(id);if(!a)return;if(!document.getElementById('kickAccountOverlay').classList.contains('open'))document.getElementById('kickAccountOverlay').classList.add('open');var pane=document.getElementById('kickProfilePane');pane.innerHTML='<div class="kick-profile-empty">جاري تحميل ملفك…</div>';try{var d=await loadProfile('',a.id);renderProfile(d,a.username,a.slug,a.id,null);}catch(e){pane.innerHTML='<div class="kick-profile-empty kick-profile-error">تعذر تحميل ملفك الآن. جرّب مرة أخرى.</div>';}};
+  window.kickViewLegacyAccountProfile=async function(id){var b=Array.isArray(accounts)?accounts.find(function(x){return x&&Number(x.id)===Number(id);}):null;if(!b)return;var overlay=document.getElementById('kickAccountOverlay'),pane=document.getElementById('kickProfilePane');if(overlay)overlay.classList.add('open');if(pane)pane.innerHTML='<div class="kick-profile-empty">جاري تحميل الملف…</div>';paneAccountId=null;paneUser={slug:b.username||'',user:{username:b.username||'حساب توكن'},channel:{},livestreams:[]};paneContextBroadcaster=null;try{var r=await fetch('/api/kick/profile',{headers:{Authorization:'Bearer '+b.token,Accept:'application/json'},cache:'no-store'});var d=await r.json().catch(function(){return {};});if(!r.ok)throw new Error('تعذر تحميل بيانات الحساب الآن.');renderProfile(d,b.username,b.username,null,null);}catch(e){if(pane)pane.innerHTML='<div class="kick-profile-empty kick-profile-error"><b>'+esc(b.username||'حساب التوكن')+'</b><p>تعذر جلب بيانات الحساب الرسمية بهذا التوكن؛ لن أعرض بيانات مخمّنة.</p><div class="kick-profile-actions"><a class="primary" href="https://kick.com/'+encodeURIComponent(b.username||'')+'" target="_blank" rel="noopener noreferrer">فتح ملف الحساب الحقيقي على Kick</a></div><div class="kick-profile-note">جرّب فتح الملف مرة أخرى.</div></div>';}};
+  window.chatOpenUserProfileByIndex=async function(index){var item=null;try{item=window.__badboyChatItems&&window.__badboyChatItems[Number(index)];}catch(e){}var raw=item&&item.raw||null;var sender=raw&&(raw.sender||raw.user)||{};var slug=sender.channel_slug||sender.slug||sender.username||sender.name||'';if(!slug){alert('Kick لم يرسل اسم قناة صالحًا لهذا المستخدم.');return;}if(typeof window.kickViewPublicProfileBySlug==='function')return window.kickViewPublicProfileBySlug(slug);window.open('https://kick.com/'+encodeURIComponent(slug),'_blank','noopener,noreferrer')};
+  window.kickFollowOnOfficialSite=function(){var slug=paneUser&&(paneUser.slug||first(paneUser.user,['username','slug']))||'';if(!slug)return;if(typeof toast==='function')toast('هتفتح صفحة القناة على Kick؛ اضغط متابعة من هناك.','i');window.open('https://kick.com/'+encodeURIComponent(slug),'_blank','noopener,noreferrer');};
+  window.kickModerateProfile=async function(action){if(!paneUser)return;var userId=paneUser.targetUserId||first(paneUser.channel,['broadcaster_user_id','user_id','user.user_id','user.id'])||first(paneUser.user,['user_id','id','streamer_id']);var broadcasterId=paneContextBroadcaster||window.__badboyActiveBroadcasterId;if(!userId||!broadcasterId){alert('لا يتوفر معرّف المستخدم أو القناة الحالية.');return;}var reason=prompt('سبب الإجراء (اختياري):','');if(reason===null)return;var duration=600;if(action==='timeout'){var mins=prompt('مدة الإسكات بالدقائق (من 1 إلى 10080):','10');if(mins===null)return;duration=Number(mins);if(!Number.isInteger(duration)||duration<1||duration>10080){alert('المدة غير صحيحة.');return;}}var token;try{token=await kickGetTokenForAccount(paneAccountId||kickActiveOAuthId());}catch(e){alert('اتصل بحسابك أولًا ثم حاول مرة أخرى.');return;}if(!confirm(action==='ban'?'تأكيد حظر المستخدم من هذه القناة؟':action==='unban'?'تأكيد إلغاء الحظر عن المستخدم في هذه القناة؟':'تأكيد إسكات المستخدم مؤقتًا من هذه القناة؟'))return;try{var r=await fetch('/api/kick/moderation',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({action:action,broadcaster_user_id:Number(broadcasterId),user_id:Number(userId),duration:duration,reason:reason||''})});var d=await r.json().catch(function(){return {};});if(!r.ok)throw new Error('تعذر تنفيذ الإجراء. تأكد من صلاحيات الحساب وحاول مرة أخرى.');if(typeof toast==='function')toast(action==='ban'?'تم تأكيد الحظر من Kick.':action==='unban'?'تم تأكيد إلغاء الحظر من Kick.':'تم تأكيد الإسكات المؤقت من Kick.','s');}catch(e){alert('تعذر تنفيذ الإجراء. تأكد من صلاحيات الحساب وحاول مرة أخرى.');}};
+  document.addEventListener('click',function(e){var overlay=document.getElementById('kickAccountOverlay');if(e.target===overlay)kickCloseAccountsPanel();});
+  document.addEventListener('DOMContentLoaded',function(){var lookup=document.getElementById('kickPublicProfileSlug');if(lookup)lookup.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();kickLookupPublicProfile();}});if(typeof kickEnsureAccountStore==='function')kickEnsureAccountStore().then(function(){kickRenderAccountsPanel();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();});});
+  // Active channel and message list are exposed through read-only getters defined by the chat module.
+})();
+</script>
+
+
+<script>
+(function(){
+  'use strict';
+  function escape(v){return typeof escH==='function'?escH(String(v==null?'':v)):String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function avatarHTML(a,cls){var src=a&&(a.profile_picture||a.profilePicture||a.avatar||'');if(src&&/^https:\/\//i.test(String(src))&&!(window.BBKDataSaver&&window.BBKDataSaver.on('hideUserImages')))return '<img class="'+cls+'" src="'+escape(src)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">';var initial=String(a&&(a.username||a.slug)||'K').trim().charAt(0).toUpperCase()||'K';return '<span class="'+cls+' fallback">'+escape(initial)+'</span>';}
+  window.kickSetOAuthActivity=function(id,state,error){try{var key='badboykick_oauth_accounts_v2',list=JSON.parse(sessionStorage.getItem(key)||'[]');var ix=list.findIndex(function(a){return String(a.id)===String(id);});if(ix<0)return;list[ix].activity_state=state==='sending'?'sending':state==='error'?'error':'idle';list[ix].last_error=state==='error'?String(error||'حدث خطأ غير محدد'):'';list[ix].activity_updated_at=Date.now();sessionStorage.setItem(key,JSON.stringify(list));if(typeof kickRenderAccountsPanel==='function')kickRenderAccountsPanel();if(typeof renderBotList==='function')renderBotList();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();}catch(e){console.warn('Account status update failed',e);}};
+  window.kickSetLegacyActivity=function(id,state,error){try{var b=Array.isArray(accounts)&&accounts.find(function(a){return a&&String(a.id)===String(id);});if(!b)return;b.activityState=state==='sending'?'sending':state==='error'?'error':'idle';b.lastError=state==='error'?String(error||'حدث خطأ غير محدد'):'';b.activityUpdatedAt=Date.now();if(typeof persist==='function')persist();if(typeof renderBotList==='function')renderBotList();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();}catch(e){console.warn('Token account status update failed',e);}};
+  window.showAccountStatus=function(kind,id){var message='الحالة: خامل / غير مجدول';if(kind==='oauth'){var list=[];try{list=JSON.parse(sessionStorage.getItem('badboykick_oauth_accounts_v2')||'[]');}catch(e){}var a=list.find(function(x){return String(x.id)===String(id);});if(!a){alert('الحساب غير موجود في الجلسة الحالية.');return;}if(a.last_error)message='فيه مشكلة في الحساب\nالحساب: '+(a.username||id)+'\nالتفاصيل: '+a.last_error;else if(a.activity_state==='sending')message='الحالة: يرسل الآن\nالحساب: '+(a.username||id);else message='الحالة: خامل / غير مجدول\nالحساب: '+(a.username||id)+'\nآخر نشاط: '+(a.activity_updated_at?new Date(a.activity_updated_at).toLocaleString():'لا يوجد');}else{var b=Array.isArray(accounts)&&accounts.find(function(x){return String(x.id)===String(id);});if(!b){alert('الحساب غير موجود.');return;}if(b.lastError)message='فيه مشكلة في الحساب\nالحساب: '+(b.username||id)+'\nالتفاصيل: '+b.lastError;else if(b.isSending||b.activityState==='sending')message='الحالة: يرسل الآن\nالحساب: '+(b.username||id);else message='الحالة: خامل / غير مجدول\nالحساب: '+(b.username||id)+'\nعدد الرسائل المرسلة سابقًا: '+(b.sent||0);}alert(message);};
+  function oauthAccounts(){try{return JSON.parse(sessionStorage.getItem('badboykick_oauth_accounts_v2')||'[]').filter(function(a){return a&&a.id&&a.access_token;});}catch(e){return [];}}
+  // The home screen now shows both legacy token accounts and official OAuth accounts in one list.
+  window.renderBotList=function(){
+    var box=document.getElementById('botList');if(!box)return;
+    var tokens=Array.isArray(accounts)?accounts:[],oauth=oauthAccounts();
+    if(!tokens.length&&!oauth.length){box.innerHTML='<div class="bot-empty"><i class="fas fa-user-group"></i>لا توجد حسابات مضافة<br><span style="font-size:11px">أضف توكنًا أو اتصل بحساب Kick متصل</span></div>';if(typeof updateBulkUI==='function')updateBulkUI();return;}
+    var html='';
+    tokens.forEach(function(b){
+      var isSelected=!!selectedBots[b.id],state=b.lastError?'failed':(b.isSending||b.activityState==='sending')?'sending':'idle';
+      var statusText=b.lastError?'حدث خطأ':(b.isSending||b.activityState==='sending')?'يرسل الآن':('خامل / غير مجدول'+(b.sent>0?' • آخر إرسال '+b.sent:''));
+      var avatar=avatarHTML(b,'account-list-avatar');
+      var enabledCount=(b.channels||[]).filter(function(c){return c&&c.enabled!==false;}).length;
+      html+='<article class="bot-card '+(isSelected?'selected':'')+'" data-account-kind="token">';
+      html+='<div class="bot-checkbox '+(isSelected?'checked':'')+'" onclick="toggleSelect('+Number(b.id)+')" title="تحديد الحساب" role="checkbox" aria-checked="'+isSelected+'"></div>';
+      html+=avatar+'<div class="bot-info"><div class="bot-name">'+escape(b.username||('حساب '+b.id))+'<span class="account-type-label">توكن</span></div><div class="bot-status"><button type="button" class="account-state-dot-btn" onclick="showAccountStatus(\'token\',\''+escape(b.id)+'\')" aria-label="عرض حالة الحساب" title="اضغط لمعرفة حالة الحساب"><span class="dot '+state+'"></span></button><span>'+escape(statusText)+'</span> • '+enabledCount+' قناة مفعلة</div></div>';
+      html+='<div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="kickUseLegacyAccount('+Number(b.id)+')" title="استخدام في الشات"><i class="fas fa-paper-plane"></i></button><button class="btn btn-ghost btn-xxs" onclick="kickViewLegacyAccountProfile('+Number(b.id)+')" title="ملف الحساب"><i class="fas fa-id-card"></i></button><button class="btn btn-ghost btn-xxs" onclick="openRenewToken('+Number(b.id)+')" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings('+Number(b.id)+')" title="إعدادات الحساب"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot('+Number(b.id)+')" title="حذف"><i class="fas fa-trash"></i></button></div></article>';
+    });
+    oauth.forEach(function(a){
+      var state=a.last_error?'failed':a.activity_state==='sending'?'sending':'idle';
+      var statusText=a.last_error?'حدث خطأ':a.activity_state==='sending'?'يرسل الآن':'خامل / غير مجدول';
+      html+='<article class="bot-card '+(String(a.id)===String(sessionStorage.getItem('badboykick_active_oauth_account_v2')||'')?'selected':'')+'" data-account-kind="oauth">';
+      html+=avatarHTML(a,'account-list-avatar')+'<div class="bot-info"><div class="bot-name">'+escape(a.username||('حساب Kick '+a.id))+'<span class="account-type-label">حساب متصل</span></div><div class="bot-status"><button type="button" class="account-state-dot-btn" onclick="showAccountStatus(\'oauth\',\''+escape(a.id)+'\')" aria-label="عرض حالة الحساب" title="اضغط لمعرفة حالة الحساب"><span class="dot '+state+'"></span></button><span>'+escape(statusText)+'</span> • @'+escape(a.slug||a.username||'')+'</div></div>';
+      html+='<div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="kickActivateAndViewAccount(\''+escape(a.id)+'\')" title="استخدام الحساب"><i class="fas fa-check"></i></button><button class="btn btn-ghost btn-xxs" onclick="kickViewAccountProfile(\''+escape(a.id)+'\')" title="ملف الحساب"><i class="fas fa-id-card"></i></button><button class="btn btn-ghost btn-xxs" onclick="kickDisconnectAccount(\''+escape(a.id)+'\')" title="فصل الحساب"><i class="fas fa-link-slash"></i></button></div></article>';
+    });
+    box.innerHTML=html;if(typeof capBotListHeight==='function')capBotListHeight();if(typeof updateBulkUI==='function')updateBulkUI();
+  };
+  window.kickUseLegacyAccount=function(id){if(typeof openChatPage==='function')openChatPage();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();var select=document.getElementById('chatSendAccount'),value='account:'+String(id);if(select&&Array.from(select.options).some(function(o){return o.value===value;})){select.value=value;if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();if(typeof chatUpdateAccountPicker==='function')chatUpdateAccountPicker();if(typeof toast==='function')toast('تم اختيار حساب التوكن للإرسال. افتح قناة من قائمة الشات ثم أرسل الرسالة.','s');}else if(typeof toast==='function')toast('الحساب موجود، لكن تعذّر تحميله في قائمة الإرسال. حدّث الصفحة وحاول مرة أخرى.','e');};
+  window.kickEnrichLegacyAccountProfiles=async function(){if(!Array.isArray(accounts))return;for(var i=0;i<accounts.length;i++){var b=accounts[i];if(!b||!b.token||b.profile_picture||b.profilePicture)continue;try{var r=await fetch('/api/kick/me',{headers:{Authorization:'Bearer '+b.token,Accept:'application/json'},cache:'no-store'});if(!r.ok)continue;var d=await r.json();var u=Array.isArray(d.data)?d.data[0]:(d.data||d.user||d);if(u&&typeof u==='object'){b.profile_picture=u.profile_picture||u.profile_pic||b.profile_picture||'';b.user_id=u.user_id||u.id||b.user_id;b.username=u.username||b.username;if(typeof persist==='function')persist();if(typeof renderBotList==='function')renderBotList();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();}}catch(e){/* token may be legacy/web-session token, so no fake profile is shown */}}};
+  document.addEventListener('DOMContentLoaded',function(){var tagline=document.querySelector('#ph-main .app-tagline');if(tagline)tagline.textContent='الحسابات والملفات';var botLabel=document.querySelector('#ph-main .app-name');if(botLabel)botLabel.setAttribute('aria-label','BadBoy Kick — الحسابات والملفات');setTimeout(function(){if(typeof renderBotList==='function')renderBotList();window.kickEnrichLegacyAccountProfiles();},600);});
+})();
+</script>
+
+<script src="/badboy-kick-v7.js" defer></script>
 </body></html>
