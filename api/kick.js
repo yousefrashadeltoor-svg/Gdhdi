@@ -170,6 +170,395 @@ function graphemeCount(text) {
   return Array.from(text).length;
 }
 
+
+function firstRecord(payload) {
+  if (!payload || typeof payload !== 'object') return null;
+  const d = payload.data !== undefined ? payload.data : payload;
+  if (Array.isArray(d)) return d[0] || null;
+  if (d && Array.isArray(d.data)) return d.data[0] || null;
+  if (d && Array.isArray(d.users)) return d.users[0] || null;
+  if (d && Array.isArray(d.channels)) return d.channels[0] || null;
+  if (d && Array.isArray(d.livestreams)) return d.livestreams[0] || null;
+  return d && typeof d === 'object' ? d : null;
+}
+
+function records(payload) {
+  if (!payload || typeof payload !== 'object') return [];
+  let value = payload.data !== undefined ? payload.data : payload;
+  if (value && !Array.isArray(value) && Array.isArray(value.data)) value = value.data;
+  if (Array.isArray(value)) return value;
+  if (value && Array.isArray(value.livestreams)) return value.livestreams;
+  if (value && Array.isArray(value.channels)) return value.channels;
+  if (value && Array.isArray(value.users)) return value.users;
+  return value && typeof value === 'object' ? [value] : [];
+}
+
+let appAccessToken = '';
+let appAccessTokenExpiresAt = 0;
+let appAccessTokenPromise = null;
+
+async function getAppAccessToken() {
+  if (appAccessToken && Date.now() < appAccessTokenExpiresAt - 60000) return appAccessToken;
+  if (appAccessTokenPromise) return appAccessTokenPromise;
+  const c = getConfig();
+  if (!c.clientId || !c.clientSecret) throw new Error('إعدادات التطبيق غير مكتملة.');
+  appAccessTokenPromise = (async () => {
+    const form = new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: c.clientId,
+      client_secret: c.clientSecret
+    });
+    const result = await kickRequest(`${OAUTH_BASE}/oauth/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: form.toString()
+    });
+    if (result.status < 200 || result.status >= 300 || !result.data?.access_token) {
+      throw new Error('تعذر تحميل بيانات القناة الآن.');
+    }
+    appAccessToken = String(result.data.access_token);
+    const lifetime = Math.max(120, Number(result.data.expires_in) || 3600);
+    appAccessTokenExpiresAt = Date.now() + lifetime * 1000;
+    return appAccessToken;
+  })();
+  try { return await appAccessTokenPromise; }
+  finally { appAccessTokenPromise = null; }
+}
+
+async function tryGetInternalChannel(slug) {
+  // Supplement the official channel data with the chat-room identifier used by Kick's web client.
+  // This is optional: public profile rendering still works if this secondary source changes.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5500);
+  try {
+    const response = await fetch(`https://kick.com/api/v2/channels/${encodeURIComponent(slug)}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Referer: `https://kick.com/${encodeURIComponent(slug)}`,
+        Origin: 'https://kick.com'
+      },
+      signal: controller.signal
+    });
+    if (!response.ok) return null;
+    const payload = await readResponse(response);
+    const root = payload?.data || payload;
+    return root && typeof root === 'object' ? root : null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function extractChatRoomId(value) {
+  const seen = new Set();
+  const stack = [value];
+  while (stack.length) {
+    const item = stack.pop();
+    if (!item || typeof item !== 'object' || seen.has(item)) continue;
+    seen.add(item);
+    if (item.chatroom_id != null && String(item.chatroom_id).trim()) return String(item.chatroom_id);
+    if (item.chatroomId != null && String(item.chatroomId).trim()) return String(item.chatroomId);
+    if (item.chatroom && typeof item.chatroom === 'object') {
+      const id = item.chatroom.id || item.chatroom.chatroom_id;
+      if (id != null && String(id).trim()) return String(id);
+    }
+    for (const key of ['data', 'channel', 'user', 'broadcaster_user', 'creator', 'livestream', 'live_stream']) {
+      if (item[key] && typeof item[key] === 'object') stack.push(item[key]);
+    }
+  }
+  return null;
+}
+
+async function buildProfileBySlug(slug, auth) {
+  const headers = { Authorization: auth };
+  const [channelResult, internal] = await Promise.all([
+    kickRequest(`${API_BASE}/channels?slug=${encodeURIComponent(slug)}`, { method: 'GET', headers }),
+    tryGetInternalChannel(slug)
+  ]);
+  if (channelResult.status < 200 || channelResult.status >= 300) {
+    return { status: channelResult.status, data: channelResult.data };
+  }
+  const channel = firstRecord(channelResult.data);
+  if (!channel) return { status: 404, data: { message: 'لم يتم العثور على هذا الحساب.' } };
+
+  const userId = channel.broadcaster_user_id || channel.user_id || channel.user?.id || channel.broadcaster_user?.id || channel.creator?.id;
+  let user = channel.user || channel.broadcaster_user || channel.creator || null;
+  let livestreams = [];
+  const tasks = [];
+  if (userId != null) {
+    tasks.push(kickRequest(`${API_BASE}/users?id=${encodeURIComponent(String(userId))}`, { method: 'GET', headers }).then(r => ({ kind: 'user', result: r })));
+    tasks.push(kickRequest(`${API_BASE}/users/livestreams?user_id=${encodeURIComponent(String(userId))}`, { method: 'GET', headers }).then(r => ({ kind: 'livestreams', result: r })));
+  }
+  const results = await Promise.allSettled(tasks);
+  for (const item of results) {
+    if (item.status !== 'fulfilled') continue;
+    const { kind, result } = item.value;
+    if (result.status < 200 || result.status >= 300) continue;
+    if (kind === 'user') {
+      const candidate = firstRecord(result.data);
+      const candidateId = candidate && (candidate.user_id || candidate.id || candidate.streamer_id);
+      if (candidate && (userId == null || candidateId == null || String(candidateId) === String(userId))) user = candidate;
+    } else if (kind === 'livestreams') {
+      livestreams = records(result.data);
+    }
+  }
+  if (!user) user = {};
+  const slugName = String(channel.slug || slug);
+  user = {
+    ...user,
+    user_id: user.user_id || user.id || userId || null,
+    id: user.id || user.user_id || userId || null,
+    username: user.username || user.name || slugName,
+    slug: user.slug || slugName,
+    profile_picture: user.profile_picture || channel.profile_picture || channel.user?.profile_picture || '',
+    bio: user.bio || channel.channel_description || ''
+  };
+  const mappedStreams = livestreams.map(stream => ({
+    ...stream,
+    slug: stream?.channel?.slug || stream?.slug || slugName,
+    stream_title: stream?.title || stream?.stream_title || channel.stream_title || '',
+    category: stream?.category || channel.category || null,
+    language: stream?.language_code || stream?.language || channel.language || '',
+    thumbnail: stream?.thumbnail || stream?.thumbnail_url || '',
+    started_at: stream?.started_at || stream?.start_time || null,
+    viewer_count: stream?.viewer_count ?? 0
+  }));
+  const liveStream = mappedStreams[0] || null;
+  const internalRoomId = extractChatRoomId(internal);
+  const channelForProfile = {
+    ...channel,
+    slug: channel.slug || slugName,
+    profile_picture: user.profile_picture || channel.profile_picture || '',
+    user,
+    stream: liveStream ? {
+      ...(channel.stream && typeof channel.stream === 'object' ? channel.stream : {}),
+      is_live: true,
+      viewer_count: liveStream.viewer_count,
+      started_at: liveStream.started_at,
+      thumbnail: liveStream.thumbnail
+    } : (channel.stream || null)
+  };
+  if (internalRoomId) {
+    channelForProfile.chatroom_id = internalRoomId;
+    channelForProfile.chatroom = { id: internalRoomId };
+  }
+  const chatMeta = {
+    ...channelForProfile,
+    id: channelForProfile.id || channelForProfile.broadcaster_user_id || user.user_id,
+    broadcaster_user_id: channelForProfile.broadcaster_user_id || user.user_id,
+    profile_pic: user.profile_picture,
+    profile_picture: user.profile_picture,
+    is_live: !!liveStream || !!(channel.stream && channel.stream.is_live === true),
+    livestream: liveStream ? {
+      ...liveStream,
+      is_live: true,
+      title: liveStream.stream_title || liveStream.title || channel.stream_title || '',
+      category: liveStream.category || channel.category || null
+    } : (channel.stream && channel.stream.is_live === true ? { ...channel.stream, is_live: true } : null),
+    chatroom_id: internalRoomId || null,
+    playback_url: String(internal?.playback_url || internal?.livestream?.playback_url || internal?.live_stream?.playback_url || liveStream?.playback_url || '')
+  };
+  return {
+    status: 200,
+    data: {
+      data: chatMeta,
+      user,
+      channel: channelForProfile,
+      livestreams: mappedStreams,
+      target_user_id: user.user_id || channelForProfile.broadcaster_user_id || null,
+      errors: []
+    }
+  };
+}
+
+async function handleProfile(req, res) {
+  if (!methodOnly(req, res, ['GET'])) return;
+  if (!originAllowed(req, res)) return;
+  const slug = String(req.query?.slug || '').trim().replace(/^@+/, '').replace(/^https?:\/\/(www\.)?kick\.com\//i, '').replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
+  if (slug && !/^[a-z0-9_-]{1,50}$/.test(slug)) return sendJson(res, 400, { message: 'اسم المستخدم غير صالح.' });
+  const authHeader = req.headers.authorization;
+  let auth = authHeader && /^Bearer\s+\S+$/i.test(authHeader) ? authHeader : '';
+  try {
+    if (slug) {
+      // Public profiles do not require the visitor to connect their own account.
+      if (!auth) auth = `Bearer ${await getAppAccessToken()}`;
+      const result = await buildProfileBySlug(slug, auth);
+      return sendJson(res, result.status, result.data);
+    }
+    if (!auth) return sendJson(res, 401, { message: 'سجّل الدخول لعرض حسابك.' });
+    const ownUserResult = await kickRequest(`${API_BASE}/users`, { method: 'GET', headers: { Authorization: auth } });
+    if (ownUserResult.status < 200 || ownUserResult.status >= 300) return sendJson(res, ownUserResult.status, ownUserResult.data);
+    const ownUser = firstRecord(ownUserResult.data);
+    const userId = ownUser && (ownUser.user_id || ownUser.id || ownUser.streamer_id);
+    const ownSlug = ownUser && (ownUser.username || ownUser.slug);
+    if (!userId && !ownSlug) return sendJson(res, 502, { message: 'تعذر تحديد الحساب الحالي.' });
+    const result = ownSlug ? await buildProfileBySlug(String(ownSlug), auth) : null;
+    if (result && result.status >= 200 && result.status < 300) {
+      result.data.user = { ...result.data.user, ...ownUser };
+      result.data.data.user = result.data.user;
+      return sendJson(res, 200, result.data);
+    }
+    const channelResult = await kickRequest(`${API_BASE}/channels?broadcaster_user_id=${encodeURIComponent(String(userId))}`, { method: 'GET', headers: { Authorization: auth } });
+    const channel = firstRecord(channelResult.data);
+    if (channelResult.status < 200 || channelResult.status >= 300 || !channel) return sendJson(res, channelResult.status || 502, channelResult.data || { message: 'تعذر تحميل ملف الحساب.' });
+    return sendJson(res, 200, { user: ownUser, channel, livestreams: [], target_user_id: userId, data: { ...channel, user: ownUser, is_live: false, livestream: null } });
+  } catch (error) {
+    return sendJson(res, 502, { message: String(error?.message || 'تعذر تحميل الملف الشخصي الآن.') });
+  }
+}
+
+
+async function handleChatRoom(req, res) {
+  if (!methodOnly(req, res, ['GET'])) return;
+  if (!originAllowed(req, res)) return;
+  const slug = String(req.query?.slug || '').trim().replace(/^@+/, '').replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
+  if (!/^[a-z0-9_-]{1,50}$/.test(slug)) return sendJson(res, 400, { message: 'اسم القناة غير صالح.' });
+  try {
+    const channel = await tryGetInternalChannel(slug);
+    const roomId = extractChatRoomId(channel);
+    if (!channel || !roomId) return sendJson(res, 404, { message: 'المحادثة غير متاحة الآن.' });
+    const live = channel.livestream || channel.live_stream || null;
+    return sendJson(res, 200, {
+      chatroom_id: String(roomId),
+      slug: String(channel.slug || slug),
+      is_live: channel.is_live === true || !!(live && live.is_live === true),
+      title: String(channel.stream_title || channel.session_title || (live && (live.title || live.session_title)) || ''),
+      profile_picture: String(channel.profile_pic || channel.profile_picture || ''),
+      started_at: channel.started_at || (live && (live.started_at || live.start_time)) || null
+    });
+  } catch {
+    return sendJson(res, 502, { message: 'تعذر فتح المحادثة الآن.' });
+  }
+}
+
+function historyMessageCount(payload) {
+  const candidates = [payload, payload?.data, payload?.result, payload?.history, payload?.data?.data];
+  for (const root of candidates) {
+    if (Array.isArray(root)) return root.length;
+    if (!root || typeof root !== 'object') continue;
+    for (const key of ['messages', 'history', 'items', 'data']) {
+      const rows = root[key];
+      if (Array.isArray(rows)) return rows.length;
+      if (rows && Array.isArray(rows.data)) return rows.data.length;
+    }
+  }
+  return -1;
+}
+
+function historyWithSource(payload, source) {
+  if (Array.isArray(payload)) return { messages: payload, __bbkHistorySource: source };
+  if (payload && typeof payload === 'object') return { ...payload, __bbkHistorySource: source };
+  return { messages: [], __bbkHistorySource: source };
+}
+
+async function fetchLegacyChannelHistory(channelId, cursor) {
+  const url = new URL(`https://kick.com/api/v2/channels/${encodeURIComponent(String(channelId))}/messages`);
+  if (cursor) url.searchParams.set('cursor', cursor);
+  return kickRequest(url.toString(), {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Referer: `https://kick.com/`,
+      Origin: 'https://kick.com'
+    },
+    signal: AbortSignal.timeout(8500)
+  });
+}
+
+async function handleHistory(req, res) {
+  if (!methodOnly(req, res, ['GET'])) return;
+  if (!originAllowed(req, res)) return;
+  const roomId = String(req.query?.chatroom_id || req.query?.room_id || '').trim();
+  if (!/^\d{1,24}$/.test(roomId)) return sendJson(res, 400, { message: 'تعذر تحديد المحادثة المطلوبة.' });
+  const cursor = String(req.query?.cursor || '').trim();
+  if (cursor.length > 500) return sendJson(res, 400, { message: 'تعذر تحميل المزيد من الرسائل.' });
+  const channelIdInput = String(req.query?.channel_id || '').trim();
+  const slug = String(req.query?.slug || '').trim().toLowerCase();
+  const requestedSource = String(req.query?.source || 'auto').trim().toLowerCase();
+  if (!['auto', 'current', 'legacy'].includes(requestedSource)) return sendJson(res, 400, { message: 'مصدر سجل الرسائل غير صالح.' });
+
+  let currentResult = null;
+  if (requestedSource !== 'legacy') {
+    const url = new URL(`https://web.kick.com/api/v1/chat/${encodeURIComponent(roomId)}/history`);
+    if (cursor) url.searchParams.set('cursor', cursor);
+    try {
+      currentResult = await kickRequest(url.toString(), {
+        method: 'GET',
+        headers: { Accept: 'application/json', Referer: 'https://kick.com/', Origin: 'https://kick.com' },
+        signal: AbortSignal.timeout(8500)
+      });
+      if (currentResult.status >= 200 && currentResult.status < 300) {
+        const count = historyMessageCount(currentResult.data);
+        if (requestedSource === 'current' || count > 0 || (currentResult.data?.cursor || currentResult.data?.next_cursor)) {
+          return sendJson(res, 200, historyWithSource(currentResult.data, 'current'));
+        }
+      }
+    } catch { /* proceed to the legacy history fallback */ }
+  }
+
+  if (requestedSource !== 'current') {
+    let channelId = /^\d{1,24}$/.test(channelIdInput) ? channelIdInput : '';
+    if (!channelId && slug && /^[a-z0-9_-]{1,60}$/.test(slug)) {
+      const internal = await tryGetInternalChannel(slug);
+      const candidate = internal && (internal.id || internal.channel_id || internal.channel?.id);
+      if (candidate != null && /^\d{1,24}$/.test(String(candidate))) channelId = String(candidate);
+    }
+    if (channelId) {
+      try {
+        const legacy = await fetchLegacyChannelHistory(channelId, requestedSource === 'legacy' ? cursor : cursor);
+        if (legacy.status >= 200 && legacy.status < 300) {
+          const count = historyMessageCount(legacy.data);
+          if (requestedSource === 'legacy' || count > 0 || legacy.data?.cursor || legacy.data?.next_cursor) {
+            return sendJson(res, 200, historyWithSource(legacy.data, 'legacy'));
+          }
+        }
+      } catch { /* retain the result from the current history endpoint below */ }
+    }
+  }
+
+  if (currentResult && currentResult.status >= 200 && currentResult.status < 300) {
+    return sendJson(res, 200, historyWithSource(currentResult.data, 'current'));
+  }
+  return sendJson(res, 502, { message: 'تعذر تحميل الرسائل السابقة الآن.' });
+}
+
+async function handleModeration(req, res) {
+  if (!methodOnly(req, res, ['POST'])) return;
+  if (!originAllowed(req, res)) return;
+  const auth = req.headers.authorization;
+  if (!auth || !/^Bearer\s+\S+$/i.test(auth)) return sendJson(res, 401, { message: 'سجّل الدخول بحساب لديه صلاحية الإشراف أولًا.' });
+  const b = bodyObject(req);
+  const action = String(b.action || '');
+  const broadcasterId = Number(b.broadcaster_user_id);
+  const userId = Number(b.user_id);
+  if (!['ban','timeout','unban'].includes(action)) return sendJson(res, 400, { message: 'إجراء الإشراف غير معروف.' });
+  if (!Number.isSafeInteger(broadcasterId) || broadcasterId <= 0 || !Number.isSafeInteger(userId) || userId <= 0) {
+    return sendJson(res, 400, { message: 'معرّف القناة ومعرّف المستخدم مطلوبان.' });
+  }
+  const reason = typeof b.reason === 'string' ? b.reason.trim().slice(0, 500) : '';
+  if (action === 'timeout') {
+    const duration = Number(b.duration);
+    if (!Number.isInteger(duration) || duration < 1 || duration > 10080) return sendJson(res, 400, { message: 'مدة الـTimeout يجب أن تكون من 1 إلى 10080 دقيقة.' });
+  }
+  const payload = { broadcaster_user_id: broadcasterId, user_id: userId };
+  if (reason) payload.reason = reason;
+  if (action === 'timeout') payload.duration = Number(b.duration);
+  try {
+    let upstream;
+    if (action === 'unban') {
+      const q = new URLSearchParams({ broadcaster_user_id: String(broadcasterId), user_id: String(userId) });
+      upstream = await kickRequest(`${API_BASE}/moderation/bans?${q.toString()}`, { method: 'DELETE', headers: { Authorization: auth } });
+    } else {
+      upstream = await kickRequest(`${API_BASE}/moderation/bans`, { method: 'POST', headers: { Authorization: auth, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    }
+    return sendJson(res, upstream.status, upstream.data);
+  } catch (error) {
+    return sendJson(res, 502, { message: 'تعذر الاتصال بواجهة الإشراف في Kick.', details: String(error?.message || 'upstream request failed') });
+  }
+}
+
 async function handleChat(req, res) {
   if (!methodOnly(req, res, ['POST'])) return;
   if (!originAllowed(req, res)) return;
@@ -211,6 +600,10 @@ export default async function handler(req, res) {
       case 'kick/oauth/token': return await handleToken(req, res);
       case 'kick/oauth/refresh': return await handleRefresh(req, res);
       case 'kick/me': return await handleMe(req, res);
+      case 'kick/profile': return await handleProfile(req, res);
+      case 'kick/room': return await handleChatRoom(req, res);
+      case 'kick/history': return await handleHistory(req, res);
+      case 'kick/moderation': return await handleModeration(req, res);
       case 'kick/chat': return await handleChat(req, res);
       default: return sendJson(res, 404, { message: 'Unknown API route.' });
     }
