@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/api/health", "destination": "/api/kick?route=health" },
+    { "source": "/api/kick/config", "destination": "/api/kick?route=kick/config" },
+    { "source": "/api/kick/oauth/token", "destination": "/api/kick?route=kick/oauth/token" },
+    { "source": "/api/kick/oauth/refresh", "destination": "/api/kick?route=kick/oauth/refresh" },
+    { "source": "/api/kick/me", "destination": "/api/kick?route=kick/me" },
+    { "source": "/api/kick/chat", "destination": "/api/kick?route=kick/chat" }
+  ]
+}

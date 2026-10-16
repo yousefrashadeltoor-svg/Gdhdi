@@ -1,0 +1,10 @@
+يا صاحبي: دي ملفات مشروع Vercel مش ملف HTML منفرد.
+
+1) فك ضغط ZIP على الموبايل.
+2) في جذر مستودع GitHub: استبدل index.html وارفع package.json وvercel.json و.env.example.
+3) أنشئ مجلد api وارفع داخله kick.js.
+4) في Vercel أضف KICK_CLIENT_ID وKICK_CLIENT_SECRET وKICK_REDIRECT_URI، ثم Redeploy.
+5) سجّل نفس KICK_REDIRECT_URI حرفيًا في إعدادات Kick Developer.
+6) اختبر /api/health. لا تشارك Client Secret أو أي Access Token.
+
+GitHub Pages لا يشغّل وظائف الخادم. افتح رابط Vercel لاختبار تسجيل الدخول.

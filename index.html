@@ -927,6 +927,94 @@ body {
 @media(max-width:690px){.chat-player-frame-wrap{min-height:170px}.chat-player-toolbar{gap:5px}.chat-player-title{width:100%;margin-bottom:2px}.chat-archive-divider,.chat-live-divider{font-size:9px;padding:6px}}
 </style>
 
+
+<style id="chat-viewport-and-scroll-fix">
+html,body{min-height:100%;overscroll-behavior-y:none}
+.app-container:not(.chat-wide){width:100%;max-width:1180px;align-items:stretch;justify-content:flex-start;margin-inline:auto}
+.app-container:not(.chat-wide) .phase.active{width:100%}
+.app-container.chat-wide{height:100vh;height:100dvh;min-height:0;width:100%;max-width:none;margin:0;padding:9px clamp(7px,1.2vw,18px) 9px;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0}
+.app-container.chat-wide #ph-chat.phase.active{display:flex;flex:1 1 auto;flex-direction:column;min-height:0;width:100%;overflow:hidden;animation:none}
+.app-container.chat-wide .chat-page-header{flex:0 0 auto;margin-bottom:7px;gap:9px}
+.app-container.chat-wide .chat-add-channel{flex:0 0 auto;margin-bottom:7px;padding:8px 10px}
+.app-container.chat-wide .chat-page-stats{flex:0 0 auto;margin-bottom:7px;gap:6px}
+.app-container.chat-wide .chat-layout{flex:1 1 0;min-height:0;height:auto;overflow:hidden;align-items:stretch}
+.app-container.chat-wide .chat-library,.app-container.chat-wide .chat-workspace{height:100%;min-height:0;max-height:100%;min-width:0}
+.app-container.chat-wide .chat-library{padding:11px}
+.app-container.chat-wide .chat-channel-list{max-height:none;min-height:0;flex:1 1 auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+.app-container.chat-wide .chat-workspace{overflow:hidden;min-height:0}
+.app-container.chat-wide .chat-player-panel{flex:0 0 auto;margin:6px 8px 7px}
+.app-container.chat-wide .chat-player-frame-wrap{height:clamp(120px,22vh,245px);min-height:0;max-height:245px;aspect-ratio:auto;flex:0 0 auto}
+.app-container.chat-wide .chat-player-help{display:none}
+.app-container.chat-wide .chat-room-extra{max-height:46px;overflow:auto;flex:0 0 auto}
+.app-container.chat-wide .chat-legend{flex:0 0 auto;padding:6px 10px;gap:5px}
+.app-container.chat-wide .chat-history-toolbar{flex:0 0 auto;min-height:34px;padding:5px 10px}
+.app-container.chat-wide .chat-message-area{flex:1 1 0;min-height:0;height:auto;max-height:none;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}
+.app-container.chat-wide .chat-composer{flex:0 0 auto;padding:8px 10px}
+.app-container.chat-wide .chat-composer-footer{margin-top:4px}
+.app-container.chat-wide .chat-page-note{display:none}
+.chat-mobile-picker-btn{display:none}
+body.chat-page-open{height:100%;overflow:hidden;overscroll-behavior:none}
+@media(max-width:690px){
+  .app-container.chat-wide{padding:7px 7px 7px}
+  .app-container.chat-wide .chat-page-header{gap:6px;margin-bottom:6px}
+  .app-container.chat-wide .chat-page-title{font-size:clamp(17px,5vw,23px)}
+  .app-container.chat-wide .chat-page-subtitle{font-size:10px;line-height:1.45}
+  .app-container.chat-wide .chat-page-header-actions{width:auto;margin:0;gap:5px;flex-wrap:nowrap}
+  .app-container.chat-wide .chat-page-header-actions .btn{padding:7px 8px;font-size:10px}
+  .app-container.chat-wide .chat-mobile-picker-btn{display:inline-flex}
+  .app-container.chat-wide .chat-add-channel{padding:6px;margin-bottom:6px;gap:6px}
+  .app-container.chat-wide .chat-add-channel input{padding:9px 10px;font-size:12px}
+  .app-container.chat-wide .chat-add-channel .btn{padding:9px 10px;font-size:10px}
+  .app-container.chat-wide .chat-page-stats{display:none}
+  .app-container.chat-wide .chat-layout{grid-template-columns:minmax(0,1fr);gap:0}
+  .app-container.chat-wide .chat-library{padding:8px;height:100%;min-height:0}
+  .app-container.chat-wide .chat-channel-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-height:none;min-height:0;gap:7px}
+  .app-container.chat-wide .chat-channel-cover{aspect-ratio:16/7}
+  .app-container.chat-wide .chat-channel-card-body{padding:7px}
+  .app-container.chat-wide .chat-channel-stream-title{font-size:10px;margin-top:5px}
+  .app-container.chat-wide .chat-channel-meta{gap:5px;margin-top:5px}
+  .app-container.chat-wide .chat-channel-avatar{width:29px;height:29px}
+  .app-container.chat-wide .chat-workspace{height:100%;min-height:0}
+  .app-container.chat-wide .chat-room-header{padding:7px 9px;gap:8px}
+  .app-container.chat-wide .chat-room-avatar{width:37px;height:37px}
+  .app-container.chat-wide .chat-room-title{font-size:12px}
+  .app-container.chat-wide .chat-room-subtitle{font-size:10px;line-height:1.4}
+  .app-container.chat-wide .chat-room-details{gap:4px 8px;margin-top:3px;font-size:9px}
+  .app-container.chat-wide .chat-room-header-actions{display:none}
+  .app-container.chat-wide .chat-player-panel{margin:4px 5px 5px}
+  .app-container.chat-wide .chat-player-toolbar{padding:5px;gap:4px}
+  .app-container.chat-wide .chat-player-title{width:100%;font-size:10px;margin-bottom:0}
+  .app-container.chat-wide .chat-player-toolbar .btn{padding:5px 6px;font-size:9px}
+  .app-container.chat-wide .chat-player-frame-wrap{height:clamp(90px,18vh,160px);max-height:160px}
+  .app-container.chat-wide .chat-legend{padding:4px 7px;gap:4px;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap}
+  .app-container.chat-wide .chat-legend-item{font-size:8px;padding:3px 5px}
+  .app-container.chat-wide .chat-history-toolbar{font-size:9px;gap:4px;min-height:30px;padding:4px 7px}
+  .app-container.chat-wide .chat-history-toolbar .btn{font-size:9px;padding:5px 7px}
+  .app-container.chat-wide .chat-message-area{padding:7px;gap:5px;min-height:0}
+  .app-container.chat-wide .chat-message{padding:7px 8px}
+  .app-container.chat-wide .chat-message-author{font-size:11px}
+  .app-container.chat-wide .chat-message-text{font-size:12px;line-height:1.65}
+  .app-container.chat-wide .chat-composer{padding:6px 7px}
+  .app-container.chat-wide .chat-composer-top{gap:5px;margin-bottom:5px}
+  .app-container.chat-wide .chat-composer-top label,.app-container.chat-wide .chat-auth-state{font-size:9px}
+  .app-container.chat-wide .chat-account-select{min-width:110px;padding:6px 7px;font-size:10px}
+  .app-container.chat-wide .chat-composer-main textarea{min-height:38px;max-height:76px;padding:7px 9px;font-size:12px}
+  .app-container.chat-wide .chat-send-btn{min-height:38px;min-width:62px;padding:7px 9px;font-size:10px}
+  .app-container.chat-wide .chat-composer-footer{display:none}
+  .app-container.chat-wide:not(.has-active-chat-channel) .chat-workspace{display:none}
+  .app-container.chat-wide.has-active-chat-channel:not(.chat-picker-open) .chat-library{display:none}
+  .app-container.chat-wide.has-active-chat-channel:not(.chat-picker-open) .chat-workspace{display:flex}
+  .app-container.chat-wide.chat-picker-open .chat-library{display:flex}
+  .app-container.chat-wide.chat-picker-open .chat-workspace{display:none}
+}
+@media(max-width:390px){
+  .app-container.chat-wide .chat-page-header .back-btn{padding:6px 7px;gap:4px;font-size:10px}
+  .app-container.chat-wide .chat-page-header-actions .btn{padding:6px;font-size:9px}
+  .app-container.chat-wide .chat-channel-list{grid-template-columns:minmax(0,1fr)}
+  .app-container.chat-wide .chat-player-frame-wrap{height:clamp(84px,16vh,128px)}
+}
+</style>
+
 </head>
 <body>
 
@@ -1519,8 +1607,9 @@ body {
             </div>
             <div class="chat-page-header-actions">
                 <span class="chat-online-indicator" id="chatNetworkState"><span class="dot"></span><span id="chatNetworkLabel">غير متصل بالشات</span></span>
+                <button class="btn btn-ghost btn-sm chat-mobile-picker-btn" onclick="chatToggleChannelPicker()" title="فتح قائمة القنوات"><i class="fas fa-list"></i> القنوات</button>
                 <button class="btn btn-ghost btn-sm" onclick="chatRefreshCatalog()" title="تحديث معلومات القنوات"><i class="fas fa-rotate"></i> تحديث القنوات</button>
-                <button class="btn btn-fire btn-sm" id="chatOAuthBtn" onclick="chatConnectOAuth()" title="اتصال Kick الرسمي لإرسال الردود الحقيقية"><i class="fas fa-link"></i> <span id="chatOAuthBtnLabel">اتصال Kick الرسمي</span></button>
+                <button class="btn btn-fire btn-sm" id="chatOAuthBtn" onclick="chatConnectOAuth()" title="تسجيل الدخول الرسمي من خلال OAuth آمن"><i class="fas fa-link"></i> <span id="chatOAuthBtnLabel">اتصال Kick الرسمي</span></button>
             </div>
         </div>
 
@@ -1602,6 +1691,7 @@ body {
                         <label for="chatSendAccount"><i class="fas fa-user-shield"></i> الإرسال باسم</label>
                         <select id="chatSendAccount" class="chat-account-select" aria-label="الحساب المستخدم للإرسال"></select>
                         <span class="chat-auth-state" id="chatAuthState"><i class="fas fa-circle-info"></i> اختر حسابًا للإرسال</span>
+                        <button class="btn btn-ghost btn-xs" id="chatCopyTokenBtn" type="button" onclick="kickCopyOfficialToken()" style="display:none" title="نسخ توكن الوصول لحسابك الرسمي إلى الحافظة"><i class="fas fa-copy"></i> نسخ التوكن</button>
                     </div>
                     <div class="chat-composer-main">
                         <textarea id="chatComposerInput" maxlength="500" rows="1" placeholder="اكتب رسالتك للشات…" aria-label="نص رسالة الشات"></textarea>
@@ -5914,86 +6004,92 @@ setInterval(() => {
 
 
 <script>
-/* GitHub Pages only — Kick OAuth 2.1 + PKCE */
-const KICK_CLIENT_ID = '01M2AMAR9T1V35NBG8472W6HCT';
-const KICK_CLIENT_SECRET = '3736873f99d17e20ac826acc09d7dc27527b4df737c8436631c4840053f45e67';
-const KICK_REDIRECT_URI = window.location.origin + window.location.pathname;
-
-function kickRandomString(bytes){
-  const a=new Uint8Array(bytes); crypto.getRandomValues(a);
-  return Array.from(a,x=>x.toString(16).padStart(2,'0')).join('');
-}
-function kickB64(buffer){
-  let s=''; for(const b of new Uint8Array(buffer)) s+=String.fromCharCode(b);
-  return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-}
-async function kickChallenge(v){
-  return kickB64(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)));
+/* Kick OAuth 2.1 + PKCE. Client Secret exchange is handled by the local server, never by this HTML. */
+let KICK_REDIRECT_URI = location.origin + '/';
+let KICK_CLIENT_ID = '';
+let kickOAuthConfigLoaded = false;
+function kickRandomString(bytes){const a=new Uint8Array(bytes);crypto.getRandomValues(a);return Array.from(a,x=>x.toString(16).padStart(2,'0')).join('');}
+function kickB64(buffer){let s='';for(const b of new Uint8Array(buffer))s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+async function kickChallenge(v){return kickB64(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)));}
+function kickAuthMessage(message, kind){if(typeof toast==='function')toast(message,kind||'i');else alert(message);}
+async function kickLoadOAuthConfig(){
+  try{const r=await fetch('/api/kick/config',{cache:'no-store'});if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.message||'Vercel API is not configured');}const d=await r.json();KICK_CLIENT_ID=String(d.client_id||'');KICK_REDIRECT_URI=String(d.redirect_uri|| (location.origin+'/'));kickOAuthConfigLoaded=!!KICK_CLIENT_ID&&!!KICK_REDIRECT_URI;return kickOAuthConfigLoaded;}
+  catch(e){kickOAuthConfigLoaded=false;return false;}
 }
 async function kickOfficialLogin(){
-  if(KICK_CLIENT_ID==='PUT_YOUR_CLIENT_ID_HERE'){alert('ضع Client ID أولاً.');return;}
-  const state=kickRandomString(24), verifier=kickRandomString(32);
-  sessionStorage.setItem('kick_oauth_state',state);
-  sessionStorage.setItem('kick_oauth_verifier',verifier);
-  const p=new URLSearchParams({
-    response_type:'code', client_id:KICK_CLIENT_ID,
-    redirect_uri:KICK_REDIRECT_URI, scope:'user:read channel:read chat:write',
-    state, code_challenge:await kickChallenge(verifier),
-    code_challenge_method:'S256'
-  });
-  location.href='https://id.kick.com/oauth/authorize?'+p;
+  if(location.protocol==='file:' || location.origin==='null'){
+    kickAuthMessage('افتح التطبيق من رابط Vercel المنشور، وليس كملف HTML محلي.', 'e');return;
+  }
+  if(!kickOAuthConfigLoaded)await kickLoadOAuthConfig();
+  if(!KICK_CLIENT_ID){kickAuthMessage('خادم Vercel غير مُعدّ بعد. أضف KICK_CLIENT_ID وKICK_CLIENT_SECRET وKICK_REDIRECT_URI في Environment Variables ثم أعد النشر.', 'e');return;}
+  let configuredOrigin='';
+  try{configuredOrigin=new URL(KICK_REDIRECT_URI).origin;}catch(e){kickAuthMessage('رابط إعادة التوجيه في إعدادات Vercel غير صالح.','e');return;}
+  if(configuredOrigin!==location.origin){kickAuthMessage('رابط إعادة التوجيه لا يطابق نطاق التطبيق الحالي. اضبط KICK_REDIRECT_URI ليطابق رابط Vercel الحالي بالكامل، ثم أعد النشر.', 'e');return;}
+  const state=kickRandomString(24),verifier=kickRandomString(32);
+  sessionStorage.setItem('kick_oauth_state',state);sessionStorage.setItem('kick_oauth_verifier',verifier);
+  const p=new URLSearchParams({response_type:'code',client_id:KICK_CLIENT_ID,redirect_uri:KICK_REDIRECT_URI,scope:'user:read channel:read chat:write',state,code_challenge:await kickChallenge(verifier),code_challenge_method:'S256'});
+  location.href='https://id.kick.com/oauth/authorize?'+p.toString();
 }
 async function kickHandleCallback(){
-  const q=new URLSearchParams(location.search), code=q.get('code');
-  if(!code)return;
-  const state=q.get('state'), saved=sessionStorage.getItem('kick_oauth_state');
-  const verifier=sessionStorage.getItem('kick_oauth_verifier');
-  if(!state||state!==saved||!verifier){alert('فشل التحقق من OAuth state.');return;}
+  const q=new URLSearchParams(location.search),code=q.get('code');if(!code)return;
+  const state=q.get('state'),saved=sessionStorage.getItem('kick_oauth_state'),verifier=sessionStorage.getItem('kick_oauth_verifier');
+  if(!state||state!==saved||!verifier){kickAuthMessage('تعذّر التحقق من طلب تسجيل الدخول. ابدأ الاتصال الرسمي مرة أخرى.','e');return;}
   try{
-    const body=new URLSearchParams({
-      grant_type:'authorization_code',code,client_id:KICK_CLIENT_ID,
-      client_secret:KICK_CLIENT_SECRET,redirect_uri:KICK_REDIRECT_URI,
-      code_verifier:verifier
-    });
-    const r=await fetch('https://id.kick.com/oauth/token',{
-      method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body
-    });
+    if(!kickOAuthConfigLoaded)await kickLoadOAuthConfig();
+    if(!kickOAuthConfigLoaded)throw new Error('خادم Vercel غير مُعدّ لتبادل رمز OAuth بأمان؛ راجع متغيرات البيئة.');
+    const r=await fetch('/api/kick/oauth/token',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({grant_type:'authorization_code',code:code,client_id:KICK_CLIENT_ID,redirect_uri:KICK_REDIRECT_URI,code_verifier:verifier})});
     const d=await r.json().catch(()=>({}));
-    if(!r.ok||!d.access_token){console.error(d);alert('Kick رفض تسجيل الدخول. راجع بيانات التطبيق وRedirect URL.');return;}
-    sessionStorage.setItem('kick_access_token',d.access_token);
-    if(d.refresh_token)sessionStorage.setItem('kick_refresh_token',d.refresh_token);
+    if(!r.ok||!d.access_token)throw new Error(d.error_description||d.message||d.error||('فشل تبادل رمز OAuth (HTTP '+r.status+'). راجع Client ID وRedirect URL وصلاحيات التطبيق.'));
+    sessionStorage.setItem('kick_access_token',d.access_token);if(d.refresh_token)sessionStorage.setItem('kick_refresh_token',d.refresh_token);
+    if(d.expires_in)sessionStorage.setItem('kick_token_expires_at',String(Date.now()+Number(d.expires_in)*1000));
     sessionStorage.removeItem('kick_oauth_state');sessionStorage.removeItem('kick_oauth_verifier');
-    history.replaceState({},document.title,KICK_REDIRECT_URI);
-  }catch(e){console.error(e);alert('تعذر الاتصال بـKick OAuth.');}
+    history.replaceState({},document.title,KICK_REDIRECT_URI);kickAuthMessage('تم تسجيل الدخول الرسمي من Kick بنجاح.','s');
+  }catch(e){console.error('Kick OAuth callback:',e);kickAuthMessage(String(e&&e.message||'تعذّر إكمال تسجيل الدخول الرسمي.'),'e');}
+}
+async function kickRefreshOfficialToken(force){
+  let token=sessionStorage.getItem('kick_access_token');
+  const refresh=sessionStorage.getItem('kick_refresh_token');
+  const expires=Number(sessionStorage.getItem('kick_token_expires_at')||0);
+  if(!refresh||(!force&&(!expires||Date.now()<expires-60000)))return token;
+  const r=await fetch('/api/kick/oauth/refresh',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({refresh_token:refresh})});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok||!d.access_token)throw new Error(d.error_description||d.message||d.error||'تعذّر تجديد جلسة Kick الرسمية. سجّل الدخول مرة أخرى.');
+  token=d.access_token;sessionStorage.setItem('kick_access_token',token);
+  if(d.refresh_token)sessionStorage.setItem('kick_refresh_token',d.refresh_token);
+  if(d.expires_in)sessionStorage.setItem('kick_token_expires_at',String(Date.now()+Number(d.expires_in)*1000));
+  return token;
+}
+function kickShowCopyTokenButton(){const b=document.getElementById('chatCopyTokenBtn');if(b)b.style.display=sessionStorage.getItem('kick_access_token')?'inline-flex':'none';}
+async function kickCopyOfficialToken(){
+  const token=sessionStorage.getItem('kick_access_token');if(!token){kickAuthMessage('سجّل الدخول الرسمي أولًا.','i');return;}
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(token);}else{window.prompt('انسخ توكن الوصول بنفسك. لا تشاركه مع أي شخص:',token);return;}kickAuthMessage('تم نسخ توكن الوصول الرسمي. خليه خاص وما تبعتوش لأي حد.','s');}
+  catch(e){window.prompt('تعذّر النسخ التلقائي. انسخ التوكن يدويًا واحفظه بأمان:',token);}
 }
 async function kickOfficialRefreshStatus(){
-  const el=document.getElementById('kickOfficialStatus'),btn=document.getElementById('kickLoginBtn');
-  const token=sessionStorage.getItem('kick_access_token');
-  if(!el||!btn)return;
-  if(!token){el.textContent='غير متصل';el.classList.remove('on','err');return;}
+  let token=sessionStorage.getItem('kick_access_token');
+  if(!token){const b=document.getElementById('chatOAuthBtnLabel');if(b)b.textContent='اتصال Kick الرسمي';kickShowCopyTokenButton();return;}
   try{
-    const r=await fetch('https://api.kick.com/public/v1/users',{headers:{Authorization:'Bearer '+token}});
+    token=await kickRefreshOfficialToken(false);
+    let r=await fetch('/api/kick/me',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store'});
+    if(r.status===401){token=await kickRefreshOfficialToken(true);r=await fetch('/api/kick/me',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store'});}
     const d=await r.json().catch(()=>({}));
-    if(!r.ok)throw Error('API error');
-    const u=Array.isArray(d.data)?d.data[0]:d.data;
-    el.textContent='متصل: '+(u?.name||u?.username||'Kick');
-    if (typeof window.chatRememberOAuthUser === 'function') window.chatRememberOAuthUser(u?.username||u?.name||'');
-    else if (u?.username) sessionStorage.setItem('kick_username',u.username);
-    el.classList.add('on');el.classList.remove('err');
-    btn.innerHTML='<i class="fab fa-kickstarter-k"></i> متصل';
-  }catch(e){
-    sessionStorage.removeItem('kick_access_token');sessionStorage.removeItem('kick_refresh_token');
-    el.textContent='انتهت الجلسة';el.classList.add('err');el.classList.remove('on');
-  }
+    if(!r.ok){if(r.status===401||r.status===403){sessionStorage.removeItem('kick_access_token');sessionStorage.removeItem('kick_refresh_token');sessionStorage.removeItem('kick_token_expires_at');}throw new Error(d.message||'تعذر التحقق من الجلسة الرسمية.');}
+    const u=Array.isArray(d.data)?d.data[0]:(d.data||d.user||d);const username=u&&(u.username||u.name||u.slug);
+    if(username&&typeof window.chatRememberOAuthUser==='function')window.chatRememberOAuthUser(username);
+    const label=document.getElementById('chatOAuthBtnLabel');if(label)label.textContent='متصل: '+String(username||'Kick');
+    const state=document.getElementById('chatAuthState');if(state){state.classList.add('ready');state.innerHTML='<i class="fas fa-circle-check"></i> حساب Kick الرسمي متصل';}
+    if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();kickShowCopyTokenButton();
+  }catch(e){console.warn('Kick auth status:',e);kickShowCopyTokenButton();}
 }
-document.addEventListener('DOMContentLoaded',async()=>{await kickHandleCallback();await kickOfficialRefreshStatus();});
+async function kickOfficialLogout(){sessionStorage.removeItem('kick_access_token');sessionStorage.removeItem('kick_refresh_token');sessionStorage.removeItem('kick_token_expires_at');sessionStorage.removeItem('kick_username');kickAuthMessage('تم فصل جلسة Kick المحلية.','i');kickShowCopyTokenButton();if(typeof chatRenderAccountOptions==='function')chatRenderAccountOptions();}
+document.addEventListener('DOMContentLoaded',async()=>{await kickLoadOAuthConfig();await kickHandleCallback();await kickOfficialRefreshStatus();});
 </script>
 
 
 <script>
 /* ================= BadBoy Kick — بوابة كلمة سر وضع رسائلي السرّية ================= */
 (function () {
-    var SECRET_PASSWORD = "01221053263#Ledo";
+    var SECRET_PASSWORD_SHA256 = "cf29964fc7a89e16b74b38b63944ca789f6aba75c6e3584740fac354e40c3621";
     var UNLOCKED = false;
 
     function ask() {
@@ -6008,16 +6104,20 @@ document.addEventListener('DOMContentLoaded',async()=>{await kickHandleCallback(
             setTimeout(install, 60);
             return;
         }
-        window.cToggleStickersOnly = function () {
+        window.cToggleStickersOnly = async function () {
             if (UNLOCKED) { return original.apply(this, arguments); }
             var pw = ask();
             if (pw === null || pw === undefined) { return; }
             pw = String(pw).trim();
-            if (pw === SECRET_PASSWORD) {
-                UNLOCKED = true;
-                try { alert("\u2705 \u062a\u0645 \u062a\u0641\u0639\u064a\u0644 \u0648\u0636\u0639 \u0631\u0633\u0627\u0626\u0644\u064a \u0627\u0644\u0633\u0631\u0651\u064a\u0629"); } catch (e) {}
-                return original.apply(this, arguments);
-            }
+            try {
+                var digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+                var hash = Array.from(new Uint8Array(digest), function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+                if (hash === SECRET_PASSWORD_SHA256) {
+                    UNLOCKED = true;
+                    try { alert("\u2705 \u062a\u0645 \u062a\u0641\u0639\u064a\u0644 \u0648\u0636\u0639 \u0631\u0633\u0627\u0626\u0644\u064a \u0627\u0644\u0633\u0631\u0651\u064a\u0629"); } catch (e) {}
+                    return original.apply(this, arguments);
+                }
+            } catch (e) {}
             try { alert("\u274c \u0643\u0644\u0645\u0629 \u0627\u0644\u0633\u0631 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d\u0629"); } catch (e) {}
         };
     }
@@ -6304,6 +6404,9 @@ async function runTokenCheck(){
   var chatSocket = null;
   var chatPingTimer = null;
   var chatReconnectTimer = null;
+  var chatHistoryPollTimer = null;
+  var chatHistoryPollBusy = false;
+  var chatLastLiveMessageAt = 0;
   var chatConnectGeneration = 0;
   var chatMessageItems = [];
   var chatSeenIds = new Set();
@@ -6589,7 +6692,7 @@ async function runTokenCheck(){
   function chatUpdateMessageScroll(){
     var area=$('chatMessages'); if(!area) return;
     var atBottom=area.scrollHeight-area.scrollTop-area.clientHeight<90;
-    if(chatAutoScroll || atBottom) area.scrollTop=area.scrollHeight;
+    if(chatAutoScroll || atBottom){area.scrollTop=area.scrollHeight;chatAutoScroll=true;}
   }
   function chatDetectRole(message){
     var sender=message.sender || message.user || {}, identity=sender.identity || {}, badges=identity.badges || sender.badges || [];
@@ -6671,6 +6774,7 @@ async function runTokenCheck(){
     return true;
   }
   function chatStopSocket(clearActive){
+    chatStopHistoryPolling();
     if(chatPingTimer){clearInterval(chatPingTimer);chatPingTimer=null;}
     if(chatReconnectTimer){clearTimeout(chatReconnectTimer);chatReconnectTimer=null;}
     if(chatSocket){
@@ -6715,13 +6819,13 @@ async function runTokenCheck(){
     var valid=Array.isArray(root.messages) || !!(payload && Array.isArray(payload.messages));
     return {messages:messages,cursor:cursor,valid:valid};
   }
-  async function chatRequestHistory(channelId,cursor){
-    var base='https://web.kick.com/api/v1/chat/'+encodeURIComponent(String(channelId))+'/history';
+  async function chatRequestHistory(chatroomId,cursor,quick){
+    var base='https://web.kick.com/api/v1/chat/'+encodeURIComponent(String(chatroomId))+'/history';
     var query=cursor?'?cursor='+encodeURIComponent(String(cursor)):''; // لا تستخدم وقت الآن كبداية؛ ذلك يستبعد كل الرسائل السابقة.
     var target=base+query, order=getProxyOrder(), targets=[{url:target,proxy:null}], controllers=[];
     // شغّل المسار المباشر والوسطاء المتاحين في سباق واحد؛ أول استجابة صحيحة تفوز.
     var added=0;
-    for(var i=0;i<order.length && added<3;i++){
+    for(var i=0;i<order.length && added<(quick?1:3);i++){
       var idx=order[i];if(idx===PROXIES.length-1)continue;
       var proxyUrl=PROXIES[idx].build(target);
       if(targets.some(function(t){return t.url===proxyUrl;}))continue;
@@ -6731,7 +6835,7 @@ async function runTokenCheck(){
     var tasks=targets.map(function(item){
       var controller=typeof AbortController!=='undefined'?new AbortController():null;controllers.push(controller);
       var timeout=controller?3000:3000, timer=null;
-      var promise=fetch(item.url,{method:'GET',headers:{Accept:'application/json'},credentials:'omit',signal:controller?controller.signal:undefined});
+      var promise=fetch(item.url,{method:'GET',cache:'no-store',headers:{Accept:'application/json','Cache-Control':'no-cache'},credentials:'omit',signal:controller?controller.signal:undefined});
       return Promise.race([promise,new Promise(function(_,reject){timer=setTimeout(function(){if(controller)controller.abort();reject(new Error('timeout'));},timeout);})])
         .then(function(res){clearTimeout(timer);if(!res.ok)throw new Error('HTTP '+res.status);return res.json();})
         .then(function(payload){if(!chatHistoryEnvelope(payload).valid)throw new Error('استجابة تاريخ الشات غير معروفة');return {payload:payload,proxy:item.proxy};})
@@ -6747,12 +6851,12 @@ async function runTokenCheck(){
       throw e || new Error('تعذر الوصول إلى سجل الشات');
     }
   }
-  async function chatLoadHistory(reset, requestedChannelId){
-    var channelId=requestedChannelId || (chatActiveMeta&&chatActiveMeta.channelId);
-    if(!chatActiveSlug || !channelId){chatHistoryUI('سجل الرسائل السابق غير متاح قبل جلب معرّف القناة.',true,false);return;}
+  async function chatLoadHistory(reset, requestedChatroomId){
+    var chatroomId=requestedChatroomId || (chatActiveMeta&&chatActiveMeta.chatroomId);
+    if(!chatActiveSlug || !chatroomId){chatHistoryUI('سجل الرسائل يحتاج معرّف غرفة الشات؛ جاري محاولة جلبه من Kick.',true,false);return;}
     if(chatHistoryLoading && !reset)return;
     if(reset){
-      chatHistoryGeneration++; chatHistoryChannelId=String(channelId); chatHistoryCursor=null;
+      chatHistoryGeneration++; chatHistoryChannelId=String(chatroomId); chatHistoryCursor=null;
       chatHistoryCanLoadMore=false; chatHistoryLoadedCount=0; chatHistoryStarted=true; chatHistoryAutoLatch=false;
       chatHistoryFailed=false;chatHistoryUI('جاري جلب سجل Kick الحقيقي…',true,true);
     }else if(!chatHistoryCanLoadMore || !chatHistoryCursor){chatHistoryUI('لا توجد رسائل أقدم متاحة من مصدر التاريخ.',true,false);return;}
@@ -6761,8 +6865,8 @@ async function runTokenCheck(){
     var area=$('chatMessages'), oldHeight=area?area.scrollHeight:0, oldTop=area?area.scrollTop:0;
     var wasBottom=area?area.scrollHeight-area.scrollTop-area.clientHeight<90:true;
     try{
-      var response=await chatRequestHistory(channelId,fetchCursor);
-      if(generation!==chatHistoryGeneration || thisSlug!==chatActiveSlug || String(channelId)!==String(chatHistoryChannelId))return;
+      var response=await chatRequestHistory(chatroomId,fetchCursor,false);
+      if(generation!==chatHistoryGeneration || thisSlug!==chatActiveSlug || String(chatroomId)!==String(chatHistoryChannelId))return;
       var page=chatHistoryEnvelope(response), messages=page.messages.filter(function(m){return m&&typeof m==='object'&&(m.id||m.message_id||m.content!=null);});
       var added=0;
       // History pages arrive newest-first; append their records oldest-first, then sort if live events arrived in parallel.
@@ -6787,7 +6891,7 @@ async function runTokenCheck(){
   }
   window.chatLoadOlderHistory=async function(){
     if(await chatLoadLocalOlder())return;
-    if(chatHistoryFailed || !chatHistoryChannelId)return chatLoadHistory(true,chatActiveMeta&&chatActiveMeta.channelId);
+    if(chatHistoryFailed || !chatHistoryChannelId)return chatLoadHistory(true,chatActiveMeta&&chatActiveMeta.chatroomId);
     return chatLoadHistory(false);
   };
 
@@ -6816,6 +6920,28 @@ async function runTokenCheck(){
     return true;
   }
 
+  function chatStopHistoryPolling(){
+    if(chatHistoryPollTimer){clearInterval(chatHistoryPollTimer);chatHistoryPollTimer=null;}
+    chatHistoryPollBusy=false;
+  }
+  function chatStartHistoryPolling(chatroomId,slug,generation){
+    chatStopHistoryPolling();if(!chatroomId)return;
+    // Kick's web chat-history endpoint is undocumented; use it as a fallback when the live feed is unavailable.
+    chatHistoryPollTimer=setInterval(function(){
+      if(generation!==chatConnectGeneration||slug!==chatActiveSlug||chatHistoryPollBusy||!chatroomId)return;
+      if(chatSocket&&chatSocket.readyState===WebSocket.OPEN&&Date.now()-chatLastLiveMessageAt<12000)return;
+      chatHistoryPollBusy=true;
+      chatRequestHistory(String(chatroomId),null,true).then(function(payload){
+        if(generation!==chatConnectGeneration||slug!==chatActiveSlug)return;
+        var page=chatHistoryEnvelope(payload),list=page.messages.filter(function(m){return m&&typeof m==='object'&&(m.id||m.message_id||m.content!=null);});
+        var added=0;for(var i=list.length-1;i>=0;i--){if(chatAppendMessage(list[i],'history',true))added++;}
+        if(added){chatSortMessageNodes();chatReclassifyStreamMessages();chatUpdateMessageScroll();chatMarkNetwork('live','الشات يتحدّث — اتصال احتياطي من سجل Kick');}
+      }).catch(function(){
+        if(generation===chatConnectGeneration&&slug===chatActiveSlug&&(!chatSocket||chatSocket.readyState!==WebSocket.OPEN))chatMarkNetwork('wait','تعذّر الوصول للشات الآن — تحقق من الاتصال ثم أعد المحاولة');
+      }).finally(function(){chatHistoryPollBusy=false;});
+    },4500);
+  }
+
   function chatConnectSocket(chatroomId, slug, generation){
     if(generation!==chatConnectGeneration || slug!==chatActiveSlug) return;
     if(!chatroomId){chatMarkNetwork('error','لم يتم العثور على معرّف غرفة الشات');return;}
@@ -6835,24 +6961,28 @@ async function runTokenCheck(){
         try{ws.send(JSON.stringify({event:'pusher:subscribe',data:{auth:'',channel:'chatrooms.'+chatroomId+'.v2'}}));}catch(e){chatMarkNetwork('error','فشل طلب الاشتراك في غرفة الشات');}
         return;
       }
-      if(packet.event==='pusher_internal:subscription_succeeded'){
+      if(packet.event==='pusher_internal:subscription_succeeded'||packet.event==='pusher:subscription_succeeded'){
         chatMarkNetwork('live','الشات متصل مباشر');
         chatRemoveEmptyPlaceholder();
         return;
       }
       if(packet.event==='pusher:ping'){try{ws.send(JSON.stringify({event:'pusher:pong',data:{}}));}catch(e){}return;}
       if(packet.event==='pusher:pong')return;
-      if(packet.event==='pusher:error' || packet.event==='pusher_internal:subscription_error'){
-        chatMarkNetwork('error','Kick رفض اتصال الشات');
-        chatSetEmpty('Kick رفض الاشتراك في غرفة الشات. جرّب إعادة الاتصال أو افتح القناة على Kick للتحقق من إتاحتها.');
+      if(packet.event==='pusher:error' || packet.event==='pusher_internal:subscription_error' || packet.event==='pusher:subscription_error'){
+        var detail=packet.data;try{if(typeof detail==='string')detail=JSON.parse(detail);}catch(e){}
+        var errCode=detail&&(detail.code||detail.status||detail.error)?' ('+String(detail.code||detail.status||detail.error).slice(0,80)+')':'';
+        console.warn('Kick chat subscription rejected:',detail||packet);
+        chatMarkNetwork('wait','اتصال الشات الحي مرفوض'+errCode+' — يجري تجربة سجل الرسائل الاحتياطي');
+        chatSetEmpty('Kick رفض اتصال الشات الحي في هذه المحاولة. التطبيق سيجرّب تحديث سجل الرسائل تلقائيًا؛ لو استمر الرفض، أعد المحاولة أو افتح القناة على Kick.');
         return;
       }
       if(String(packet.event||'').indexOf('ChatMessage')>=0){
-        try{var payload=typeof packet.data==='string'?JSON.parse(packet.data):packet.data;chatAppendMessage(payload,'live',true);}catch(e){}
+        try{var payload=typeof packet.data==='string'?JSON.parse(packet.data):packet.data;if(chatAppendMessage(payload,'live',true))chatLastLiveMessageAt=Date.now();}catch(e){console.warn('Unable to parse Kick chat event',e);}
       }
     };
-    ws.onerror=function(){if(generation===chatConnectGeneration)chatMarkNetwork('wait','مشكلة في الاتصال؛ جاري إعادة المحاولة');};
-    ws.onclose=function(){
+    var subscriptionWatch=setTimeout(function(){if(generation===chatConnectGeneration&&slug===chatActiveSlug&&(!chatSocket||chatSocket!==ws||ws.readyState!==WebSocket.OPEN))return;if(generation===chatConnectGeneration&&slug===chatActiveSlug)chatMarkNetwork('wait','الاتصال الحي لم يؤكد الاشتراك؛ يجري تحديث سجل Kick الاحتياطي');},8000);
+    ws.onerror=function(){if(generation===chatConnectGeneration)chatMarkNetwork('wait','مشكلة في اتصال الشات الحي؛ يجري الاعتماد على سجل Kick الاحتياطي');};
+    ws.onclose=function(){clearTimeout(subscriptionWatch);
       if(chatSocket===ws)chatSocket=null;
       if(chatPingTimer){clearInterval(chatPingTimer);chatPingTimer=null;}
       if(generation!==chatConnectGeneration || slug!==chatActiveSlug)return;
@@ -6932,8 +7062,10 @@ async function runTokenCheck(){
     finally{if(stream)stream.getTracks().forEach(function(t){try{t.stop();}catch(e){}});}
   };
 
+  window.chatToggleChannelPicker=function(){var app=document.querySelector('.app-container');if(!app)return;app.classList.toggle('chat-picker-open');};
   window.openChatPage=function(){
-    var app=document.querySelector('.app-container'); if(app)app.classList.add('chat-wide');
+    var app=document.querySelector('.app-container'); if(app){app.classList.add('chat-wide');app.classList.remove('chat-picker-open');if(chatActiveSlug)app.classList.add('has-active-chat-channel');else app.classList.remove('has-active-chat-channel');}
+    document.body.classList.add('chat-page-open');
     showPhase('chat'); chatRenderAccountOptions(); chatRenderCatalog();
     chatRefreshCatalog();
     if(chatActiveSlug && chatSocket && chatSocket.readyState===WebSocket.OPEN) chatMarkNetwork('live','الشات متصل مباشر');
@@ -6941,7 +7073,7 @@ async function runTokenCheck(){
   };
   window.closeChatPage=function(){
     chatStopSocket(true); chatActiveSlug=null; chatActiveMeta=null; chatReplyTarget=null;chatSetPlayer(null,false);
-    var app=document.querySelector('.app-container'); if(app)app.classList.remove('chat-wide');
+    var app=document.querySelector('.app-container'); if(app)app.classList.remove('chat-wide','has-active-chat-channel','chat-picker-open');document.body.classList.remove('chat-page-open');
     var reply=$('chatReplyCompose');if(reply)reply.classList.remove('show');
     showPhase('main'); if(typeof renderBotList==='function')renderBotList();
     chatMarkNetwork('','غير متصل بالشات');
@@ -6979,6 +7111,7 @@ async function runTokenCheck(){
   window.openChatChannel=async function(rawSlug){
     var slug=chatNormalizeSlug(rawSlug); if(!slug)return;
     chatStopSocket(true); chatActiveSlug=slug; chatReplyTarget=null; chatMessageItems=[]; chatSeenIds=new Set(); chatMessageCount=0;
+    var appContainer=document.querySelector('.app-container');if(appContainer){appContainer.classList.add('has-active-chat-channel');appContainer.classList.remove('chat-picker-open');}
     chatHistoryGeneration++;chatHistoryChannelId=null;chatHistoryCursor=null;chatHistoryLoading=false;chatHistoryStarted=false;chatHistoryCanLoadMore=false;chatHistoryLoadedCount=0;chatHistoryAutoLatch=false;chatHistoryFailed=false;chatArchiveOldestTs=null;chatArchiveHasMore=false;
     chatResetMessageArea('جاري استرجاع الأرشيف المحلي وسجل Kick المتاح…');chatAutoScroll=true;
     chatHistoryUI('جاري تجهيز سجل الرسائل السابقة…',true,false);
@@ -6993,19 +7126,22 @@ async function runTokenCheck(){
     try{
       // لو لدينا ID محفوظ، يبدأ الشات فورًا؛ تحديث البيانات يستمر بالتوازي.
       if(cid) chatConnectSocket(cid,slug,generation);
-      // لو بيانات القناة مخزّنة، ابدأ جلب التاريخ فورًا بالتوازي مع تحديث البيانات والاتصال الحي.
-      if(chatActiveMeta && chatActiveMeta.channelId && !chatHistoryStarted)chatLoadHistory(true,String(chatActiveMeta.channelId));
+      // سجل الرسائل يستخدم chatroom_id، وليس channel_id أو broadcaster_user_id.
+      if(cid){chatLoadHistory(true,String(cid));chatStartHistoryPolling(String(cid),slug,generation);}
       var meta=await chatFetchMeta(slug,false);
       if(generation!==chatConnectGeneration || slug!==chatActiveSlug)return;
       chatActiveMeta=meta;chatRenderRoomHeader();chatReclassifyStreamMessages();chatRenderCatalog();
-      if(meta.channelId && String(meta.channelId)!==String(chatHistoryChannelId))chatLoadHistory(true,String(meta.channelId));
-      cid=cid || meta.chatroomId;
+      cid=meta.chatroomId || cid;
       if(!cid){try{cid=await fetchChatroomId(slug,{workingProxy:_bestProxy});}catch(e){} }
-      if(cid){meta.chatroomId=String(cid);chatUpdateCachedData(slug,meta);if(!chatSocket || chatSocket.readyState===WebSocket.CLOSED || String(cid)!==String(initialCid))chatConnectSocket(String(cid),slug,generation);}
-      else{chatMarkNetwork('error','تعذر العثور على غرفة الشات');chatSetEmpty('Kick لم يرجع معرّف غرفة الشات لهذه القناة؛ حدّث البيانات أو جرّب لاحقًا.');}
+      if(cid){
+        meta.chatroomId=String(cid);chatUpdateCachedData(slug,meta);
+        if(!chatSocket || chatSocket.readyState===WebSocket.CLOSED || String(cid)!==String(initialCid))chatConnectSocket(String(cid),slug,generation);
+        if(String(cid)!==String(chatHistoryChannelId)||!chatHistoryStarted)chatLoadHistory(true,String(cid));
+        chatStartHistoryPolling(String(cid),slug,generation);
+      }else{chatMarkNetwork('error','تعذر العثور على معرّف غرفة الشات');chatSetEmpty('Kick لم يرجع معرّف غرفة الشات لهذه القناة. جرّب التحديث، أو افتح صفحة القناة على Kick للتحقق من إتاحة الشات.');}
     }catch(e){
       if(generation!==chatConnectGeneration || slug!==chatActiveSlug)return;
-      if(cid){chatConnectSocket(cid,slug,generation);chatSetEmpty('تعذّر تحديث التفاصيل، لكن جاري محاولة الاتصال بالشات باستخدام المعرّف المحفوظ.');}
+      if(cid){chatConnectSocket(cid,slug,generation);chatLoadHistory(true,String(cid));chatStartHistoryPolling(String(cid),slug,generation);chatSetEmpty('تعذّر تحديث التفاصيل، لكن يجري محاولة الاتصال بالشات باستخدام المعرّف المحفوظ.');}
       else{chatMarkNetwork('error','تعذر تحميل معلومات القناة');chatSetEmpty('تعذر جلب بيانات هذه القناة من Kick الآن. جرّب إعادة الاتصال أو تحديث القنوات.');}
     }
     if(window.innerWidth<691){var workspace=document.querySelector('.chat-workspace');if(workspace)workspace.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -7023,11 +7159,12 @@ async function runTokenCheck(){
   window.chatCancelReply=function(){chatReplyTarget=null;var b=$('chatReplyCompose');if(b)b.classList.remove('show');};
   async function chatPostOfficial(content, reply){
     var token=sessionStorage.getItem('kick_access_token');
-    if(!token)throw new Error('الرد الحقيقي يحتاج اتصال Kick الرسمي بصلاحية chat:write. اضغط «اتصال Kick الرسمي».');
+    if(!token)throw new Error('الإرسال الرسمي يحتاج تسجيل دخول Kick بصلاحية chat:write. اضغط «اتصال Kick الرسمي».');
+    try{token=await kickRefreshOfficialToken(false);}catch(refreshError){throw new Error('تعذّر تجديد جلسة Kick. سجّل الدخول الرسمي مرة أخرى. '+String(refreshError.message||''));}
     if(!chatActiveMeta || !chatActiveMeta.broadcasterUserId) throw new Error('لم يتم العثور على broadcaster_user_id للقناة من بيانات Kick. حدّث معلومات القناة.');
     var body={type:'user',broadcaster_user_id:Number(chatActiveMeta.broadcasterUserId),content:content};
     if(reply)body.reply_to_message_id=String(reply.id);
-    var res=await fetch('https://api.kick.com/public/v1/chat',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
+    var res=await fetch('/api/kick/chat',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
     var data=await res.json().catch(function(){return {};});
     if(!res.ok) throw new Error((res.status===401?'توكن Kick الرسمي غير صالح أو انتهى.':res.status===403?'Kick رفض الإرسال؛ تأكد من صلاحية chat:write.':res.status===429?'Kick حدّد معدل الإرسال مؤقتًا.':'فشل إرسال الرسالة عبر Kick API (HTTP '+res.status+').')+(data.message?' '+String(data.message):''));
     if(data && data.data && data.data.is_sent===false)throw new Error('Kick لم يؤكد إرسال الرسالة.');
